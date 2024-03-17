@@ -1,4 +1,4 @@
-# NVIpjsr: Tools for working with PJSdata
+# NVIpjsr: Tools for working with PJSdata <img src="man/figures/NVIpjsr_logo.png" align="right" height="138" />
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
