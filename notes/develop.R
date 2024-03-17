@@ -41,7 +41,7 @@ NVIpackager::document_NVIpkg(pkg = pkg,
                              pkg_path = pkg_path,
                              style = TRUE,
                              contributing = FALSE,
-                             readme = TRUE,
+                             readme = FALSE,
                              manual = "update",
                              scope = c("spaces", "line_breaks"))
 # filename <- "xxxx.R"
