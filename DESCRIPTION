@@ -1,6 +1,7 @@
 Package: NVIpjsr
 Title: Tools for working with PJSdata
 Version: 0.0.0.9000
+Date: 2024-##-##
 Authors@R: c(
     person("Petter", "Hopp", , "Petter.Hopp@vetinst.no", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-8695-0378")),
@@ -15,14 +16,15 @@ Depends:
     R (>= 4.0.0)
 Encoding: UTF-8
 Language: en-GB
-Roxygen: list(markdown = TRUE)
+Roxygen: list(markdown = FALSE)
 RoxygenNote: 7.3.1
-Date: 2024-##-##
 Imports: 
     checkmate (>= 2.1.0),
     NVIcheckmate (>= 0.7.3)
+    NVIdb (>= 0.11.1)
 Remotes: 
     github::NorwegianVeterinaryInstitute/NVIcheckmate,
+    github::NorwegianVeterinaryInstitute/NVIdb,
     github::NorwegianVeterinaryInstitute/NVIpackager,
     github::NorwegianVeterinaryInstitute/NVIrpackages
 Suggests: 
@@ -32,6 +34,8 @@ Suggests:
     knitr,
     NVIpackager (>= 0.5.0),
     NVIrpackages (>= 0.4.0),
+    R.rsp,
+    remotes,
     rmarkdown,
     testthat (>= 3.0.0),
     usethis
