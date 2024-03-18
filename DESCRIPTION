@@ -1,5 +1,5 @@
 Package: NVIpjsr
-Title: Tools for working with PJSdata
+Title: Tools to facilitate working with PJS data
 Version: 0.0.0.9000
 Date: 2024-##-##
 Authors@R: c(
