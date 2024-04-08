@@ -26,8 +26,7 @@ Imports:
     snakecase,
     stats,
     utils,
-    NVIcheckmate (>= 0.7.0)
-    NVIcheckmate (>= 0.7.3)
+    NVIcheckmate (>= 0.7.0),
     NVIdb (>= 0.11.2)
 Suggests: 
     covr,
@@ -51,3 +50,4 @@ VignetteBuilder:
     knitr,
     R.rsp
 Config/testthat/edition: 3
+LazyData: true
