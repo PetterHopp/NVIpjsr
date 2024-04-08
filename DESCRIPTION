@@ -8,7 +8,7 @@ Authors@R: c(
     person("Norwegian Veterinary Institute", role = "cph")
   )
 Description: Tools for retrieving, standardising, wrangling, preparing and reporting 
-    PJS data and EOS data. The package comprises functions previously included in NVIdb. 
+    PJS data and EOS data. The package is based on functions previously included in NVIdb. 
 License: BSD_3_clause + file LICENSE
 URL: https://github.com/NorwegianVeterinaryInstitute/NVIpjsr
 BugReports: https://github.com/NorwegianVeterinaryInstitute/NVIpjsr/issues
