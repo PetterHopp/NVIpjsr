@@ -4,7 +4,7 @@
 \name{NVIpjsr-package}
 \alias{NVIpjsr}
 \alias{NVIpjsr-package}
-\title{NVIpjsr: Tools for working with PJSdata}
+\title{NVIpjsr: Tools to facilitate working with PJS data}
 \description{
 Tools for retrieving, standardising, wrangling, preparing and reporting PJS data and EOS data. The package comprises functions previously included in NVIdb.
 }
