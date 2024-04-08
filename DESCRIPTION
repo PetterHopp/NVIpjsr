@@ -20,24 +20,34 @@ Roxygen: list(markdown = FALSE)
 RoxygenNote: 7.3.1
 Imports: 
     checkmate (>= 2.1.0),
+    data.table,
+    dplyr,
+    magrittr,
+    snakecase,
+    stats,
+    utils,
+    NVIcheckmate (>= 0.7.0)
     NVIcheckmate (>= 0.7.3)
-    NVIdb (>= 0.11.1)
-Remotes: 
-    github::NorwegianVeterinaryInstitute/NVIcheckmate,
-    github::NorwegianVeterinaryInstitute/NVIdb,
-    github::NorwegianVeterinaryInstitute/NVIpackager,
-    github::NorwegianVeterinaryInstitute/NVIrpackages
+    NVIdb (>= 0.11.2)
 Suggests: 
     covr,
     desc,
     devtools,
     knitr,
-    NVIpackager (>= 0.5.0),
-    NVIrpackages (>= 0.4.0),
     R.rsp,
     remotes,
     rmarkdown,
     testthat (>= 3.0.0),
-    usethis
-VignetteBuilder: knitr
+    tibble,
+    usethis,
+    NVIpackager (>= 0.5.0),
+    NVIrpackages (>= 0.4.0)
+Remotes: 
+    github::NorwegianVeterinaryInstitute/NVIcheckmate,
+    github::NorwegianVeterinaryInstitute/NVIdb,
+    github::NorwegianVeterinaryInstitute/NVIpackager,
+    github::NorwegianVeterinaryInstitute/NVIrpackages
+VignetteBuilder: 
+    knitr,
+    R.rsp
 Config/testthat/edition: 3
