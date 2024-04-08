@@ -383,4 +383,3 @@ set_name_vector <- function(colname_vector) {
 #' @noRd
 
 find_n_th_word <- function(x, position) {strsplit(x, " ")[[1]][position]}
-
