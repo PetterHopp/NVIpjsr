@@ -97,7 +97,6 @@
 #' odbcClose(journal_rapp)
 #' }
 #'
-
 login_PJS <- function(dbinterface = NULL, ...) {
 
   # ARGUMENT CHECKING ----
