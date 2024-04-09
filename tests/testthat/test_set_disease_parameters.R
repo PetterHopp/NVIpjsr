@@ -1,4 +1,4 @@
-# library(NVIdb)
+# library(NVIpjsr)
 library(testthat)
 
 test_that("set disease parameters by direct input", {
