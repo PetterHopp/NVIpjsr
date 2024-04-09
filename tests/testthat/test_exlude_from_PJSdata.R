@@ -1,4 +1,4 @@
-library(NVIdb)
+# library(NVIdb)
 library(testthat)
 
 test_that("Exlude records from abroad or quality assessment from PJS data", {

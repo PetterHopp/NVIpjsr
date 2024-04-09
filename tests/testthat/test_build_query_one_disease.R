@@ -1,8 +1,8 @@
 # test_build_query_PJS_one_disease
 
-library(NVIdb)
+# library(NVIdb)
 library(testthat)
-context("PJS query one disease")
+# context("PJS query one disease")
 
 test_that("build query PD", {
   query <- build_query_one_disease(year = 2020,
@@ -18,7 +18,7 @@ test_that("build query PD", {
                            "konkl_analyttkode = '1502010235' OR konkl_analyttkode LIKE '01220104%' OR",
                            "analyttkode_funn = '1502010235' OR analyttkode_funn LIKE '01220104%' )")
 
-  expect_equivalent(query["selection_v2_sak_m_res"], correct_result)
+  expect_equal(query["selection_v2_sak_m_res"][[1]], correct_result, ignore_attr = TRUE)
 
   correct_result <- paste("SELECT v_sakskonklusjon.*, sak.mottatt_dato, sak.uttaksdato, sak.sak_avsluttet,",
                            "sak.hensiktkode, sak.eier_lokalitetstype, sak.eier_lokalitetnr",
@@ -29,7 +29,7 @@ test_that("build query PD", {
                            "v_sakskonklusjon.innsendelsesnummer = sak.innsendelsesnummer)",
                            "WHERE sak.aar = 2020 AND ( analyttkode = '1502010235' OR analyttkode LIKE '01220104%' )")
 
-  expect_equivalent(query["selection_sakskonklusjon"], correct_result)
+  expect_equal(query["selection_sakskonklusjon"][[1]], correct_result, ignore_attr = TRUE)
 
 })
 
@@ -46,7 +46,7 @@ test_that("build query CMS", {
                            "konkl_analyttkode = '15020804' OR konkl_analyttkode LIKE '012601%' OR",
                            "analyttkode_funn = '15020804' OR analyttkode_funn LIKE '012601%' )")
 
-  expect_equivalent(query["selection_v2_sak_m_res"], correct_result)
+  expect_equal(query["selection_v2_sak_m_res"][[1]], correct_result, ignore_attr = TRUE)
 
   correct_result <- paste("SELECT v_sakskonklusjon.*, sak.mottatt_dato, sak.uttaksdato, sak.sak_avsluttet,",
                            "sak.hensiktkode, sak.eier_lokalitetstype, sak.eier_lokalitetnr",
@@ -57,7 +57,7 @@ test_that("build query CMS", {
                            "v_sakskonklusjon.innsendelsesnummer = sak.innsendelsesnummer)",
                            "WHERE sak.aar = 2020 AND ( analyttkode = '15020804' OR analyttkode LIKE '012601%' )")
 
-  expect_equivalent(query["selection_sakskonklusjon"], correct_result)
+  expect_equal(query["selection_sakskonklusjon"][[1]], correct_result, ignore_attr = TRUE)
 
 })
 
@@ -71,7 +71,7 @@ test_that("build query Vibrio anguillarum", {
                            "WHERE aar = 2020 AND",
                            "( konkl_analyttkode LIKE '0406020202%' OR analyttkode_funn LIKE '0406020202%' )")
 
-  expect_equivalent(query["selection_v2_sak_m_res"], correct_result)
+  expect_equal(query["selection_v2_sak_m_res"][[1]], correct_result, ignore_attr = TRUE)
 
   correct_result <- paste("SELECT v_sakskonklusjon.*, sak.mottatt_dato, sak.uttaksdato, sak.sak_avsluttet,",
                            "sak.hensiktkode, sak.eier_lokalitetstype, sak.eier_lokalitetnr",
@@ -82,7 +82,7 @@ test_that("build query Vibrio anguillarum", {
                            "v_sakskonklusjon.innsendelsesnummer = sak.innsendelsesnummer)",
                            "WHERE sak.aar = 2020 AND ( analyttkode LIKE '0406020202%' )")
 
-  expect_equivalent(query["selection_sakskonklusjon"], correct_result)
+  expect_equal(query["selection_sakskonklusjon"][[1]], correct_result, ignore_attr = TRUE)
 
 })
 
@@ -96,7 +96,7 @@ test_that("build query Gjellemykose", {
                            "WHERE aar = 2020 AND",
                            "( konkl_analyttkode = '0702060406' OR analyttkode_funn = '0702060406' )")
 
-  expect_equivalent(query["selection_v2_sak_m_res"], correct_result)
+  expect_equal(query["selection_v2_sak_m_res"][[1]], correct_result, ignore_attr = TRUE)
 
   correct_result <- paste("SELECT v_sakskonklusjon.*, sak.mottatt_dato, sak.uttaksdato, sak.sak_avsluttet,",
                            "sak.hensiktkode, sak.eier_lokalitetstype, sak.eier_lokalitetnr",
@@ -107,7 +107,7 @@ test_that("build query Gjellemykose", {
                            "v_sakskonklusjon.innsendelsesnummer = sak.innsendelsesnummer)",
                            "WHERE sak.aar = 2020 AND ( analyttkode = '0702060406' )")
 
-  expect_equivalent(query["selection_sakskonklusjon"], correct_result)
+  expect_equal(query["selection_sakskonklusjon"][[1]], correct_result, ignore_attr = TRUE)
 
 })
 

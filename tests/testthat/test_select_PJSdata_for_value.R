@@ -1,4 +1,4 @@
-library(NVIdb)
+# library(NVIdb)
 library(testthat)
 
 test_that("test select_PJSdata_for_value", {
@@ -111,26 +111,26 @@ test_that("Errors or warnings for select_PJSdata_for_value", {
                                         code_column = "code1",
                                         value_2_check = "01",
                                         keep_selected = TRUE),
-               regexpr = "Variable 'data': Must be of type 'data.frame', not 'character'")
+               regexp = "Variable 'data': Must be of type 'data.frame', not 'character'")
 
   expect_error(select_PJSdata_for_value(data = df,
                                         code_column = "code4",
                                         value_2_check = "01",
                                         keep_selected = TRUE),
-               regexpr = "{'saksnr','code1','code2'}, but has additional elements {'code4'}",
+               regexp = "{'saksnr','code1','code2'}, but has additional elements {'code4'}",
                fixed = TRUE)
 
   expect_error(select_PJSdata_for_value(data = df,
                                         code_column = "code1",
                                         value_2_check = TRUE,
                                         keep_selected = TRUE),
-               regexpr = "'value_2_check': Must be of type 'character'")
+               regexp = "'value_2_check': Must be of type 'character'")
 
   expect_error(select_PJSdata_for_value(data = df,
                                         code_column = "code1",
                                         value_2_check = "01",
                                         keep_selected = "TRUE"),
-               regexpr = "Variable 'keep_selected': Must be of type 'logical flag'")
+               regexp = "Variable 'keep_selected': Must be of type 'logical flag'")
 
   options(width = unlist(linewidth))
 })

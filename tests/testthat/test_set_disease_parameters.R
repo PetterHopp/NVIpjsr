@@ -1,4 +1,4 @@
-library(NVIdb)
+# library(NVIdb)
 library(testthat)
 
 test_that("set disease parameters by direct input", {
@@ -105,7 +105,8 @@ test_that("set disease parameters by direct input", {
                     "art2select" = c("01%"),
                     "include_missing_art" = "for_selected_hensikt",
                     "FUN" = NULL,
-                    "select_statement" = NULL))
+                    "select_statement" = NULL),
+               ignore_attr = TRUE)
 
   parameters <- set_disease_parameters(hensikt2select = c("0100108018", "0100109003", "0100111003"),
                                        hensikt2delete = c("0800109"),
@@ -183,7 +184,8 @@ test_that("set disease parameters using parameter file", {
                     "art2select" = NULL,
                     "include_missing_art" = "never",
                     "FUN" = NULL,
-                    "select_statement" = NULL))
+                    "select_statement" = NULL),
+               ignore_attr = TRUE)
 
   parameters <- set_disease_parameters(selection_parameters = file.path(tempdir(), "PD.R"))
   expect_equal(parameters,

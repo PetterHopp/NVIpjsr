@@ -1,4 +1,4 @@
-library(NVIdb)
+# library(NVIdb)
 library(testthat)
 
 test_that("build query ND outbreak", {
@@ -22,7 +22,7 @@ test_that("build query ND outbreak", {
                           "konkl_analyttkode LIKE '01130301%' OR",
                           "analyttkode_funn LIKE '01130301%')")
 
-  expect_equivalent(query["selection_v2_sak_m_res"], correct_result)
+  expect_equal(query["selection_v2_sak_m_res"][[1]], correct_result, ignore_attr = TRUE)
 
   correct_result <- paste("SELECT v_sakskonklusjon.*, sak.mottatt_dato, sak.uttaksdato, sak.sak_avsluttet,",
                           "sak.hensiktkode, sak.eier_lokalitetstype, sak.eier_lokalitetnr",
@@ -33,7 +33,7 @@ test_that("build query ND outbreak", {
                           "v_sakskonklusjon.innsendelsesnummer = sak.innsendelsesnummer)",
                           "WHERE sak.aar = 2022 AND (analyttkode LIKE '01130301%')")
 
-  expect_equivalent(query["selection_sakskonklusjon"], correct_result)
+  expect_equal(query["selection_sakskonklusjon"][[1]], correct_result, ignore_attr = TRUE)
 
 })
 
@@ -63,7 +63,7 @@ test_that("build query HPAI outbreak", {
                           "konkl_analyttkode LIKE '01150101%' OR",
                           "analyttkode_funn LIKE '01150101%')")
 
-  expect_equivalent(query["selection_v2_sak_m_res"], correct_result)
+  expect_equal(query["selection_v2_sak_m_res"][[1]], correct_result, ignore_attr = TRUE)
 
   correct_result <- paste("SELECT v_sakskonklusjon.*, sak.mottatt_dato, sak.uttaksdato, sak.sak_avsluttet,",
                           "sak.hensiktkode, sak.eier_lokalitetstype, sak.eier_lokalitetnr",
@@ -74,7 +74,7 @@ test_that("build query HPAI outbreak", {
                           "v_sakskonklusjon.innsendelsesnummer = sak.innsendelsesnummer)",
                           "WHERE sak.aar >= 2020 AND sak.aar <= 2022 AND (analyttkode LIKE '01150101%')")
 
-  expect_equivalent(query["selection_sakskonklusjon"], correct_result)
+  expect_equal(query["selection_sakskonklusjon"][[1]], correct_result, ignore_attr = TRUE)
 
 })
 
@@ -92,7 +92,7 @@ test_that("build query P. ovis outbreak", {
                                             "'0100103007', '0100103', '0200152', '0200147') OR",
                           "konkl_analyttkode LIKE '0302060104050102%' OR analyttkode_funn LIKE '0302060104050102%')")
 
-  expect_equivalent(query["selection_v2_sak_m_res"], correct_result)
+  expect_equal(query["selection_v2_sak_m_res"][[1]], correct_result, ignore_attr = TRUE)
 
   correct_result <- paste("SELECT v_sakskonklusjon.*, sak.mottatt_dato, sak.uttaksdato, sak.sak_avsluttet,",
                           "sak.hensiktkode, sak.eier_lokalitetstype, sak.eier_lokalitetnr",
@@ -103,7 +103,7 @@ test_that("build query P. ovis outbreak", {
                           "v_sakskonklusjon.innsendelsesnummer = sak.innsendelsesnummer)",
                           "WHERE sak.aar >= 2019 AND sak.aar <= 2022 AND (analyttkode LIKE '0302060104050102%')")
 
-  expect_equivalent(query["selection_sakskonklusjon"], correct_result)
+  expect_equal(query["selection_sakskonklusjon"][[1]], correct_result, ignore_attr = TRUE)
 
 })
 
@@ -119,7 +119,7 @@ test_that("build query maedi outbreak", {
                           "(hensiktkode IN ('0100104020', '0100104054', '0100105007', '0100105008', '0100106007',",
                           "'0700605', '0400101', '0400109001', '0200113', '0200135', '0200141', '0200163'))")
 
-  expect_equivalent(query["selection_v2_sak_m_res"], correct_result)
+  expect_equal(query["selection_v2_sak_m_res"][[1]], correct_result, ignore_attr = TRUE)
 
   correct_result <- paste("SELECT v_sakskonklusjon.*, sak.mottatt_dato, sak.uttaksdato, sak.sak_avsluttet,",
                           "sak.hensiktkode, sak.eier_lokalitetstype, sak.eier_lokalitetnr",
@@ -130,7 +130,7 @@ test_that("build query maedi outbreak", {
                           "v_sakskonklusjon.innsendelsesnummer = sak.innsendelsesnummer)",
                           "WHERE sak.aar >= 2019 AND sak.aar <= 2022")
 
-  expect_equivalent(query["selection_sakskonklusjon"], correct_result)
+  expect_equal(query["selection_sakskonklusjon"][[1]], correct_result, ignore_attr = TRUE)
 
 })
 
