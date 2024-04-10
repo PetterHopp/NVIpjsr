@@ -305,4 +305,3 @@ test_that("errors for set_disease_parameters", {
 
   options(width = unlist(linewidth))
 })
-
