@@ -2,7 +2,7 @@
 #' @rdname add_PJS_code_description
 
 copy_PJS_codes_2_text <- function(filename = "PJS_codes_2_text.csv",
-                                  from_path = paste0(set_dir_NVI("Provedata_Rapportering"), "FormaterteData/"),
+                                  from_path = paste0(NVIdb::set_dir_NVI("Provedata_Rapportering"), "FormaterteData/"),
                                   to_path = NULL) {
 
   # PREPARE ARGUMENT ----
