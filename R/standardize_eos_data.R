@@ -90,7 +90,7 @@ standardize_eos_data <- function(data,
   # STANDARDISE DATA ----
   # Standardise column names
   if (isTRUE(standardize_colnames)) {
-    data <- standardize_columns(data = data,
+    data <- NVIdb::standardize_columns(data = data,
                                 dbsource = dbsource,
                                 standards = standards,
                                 property = "colnames",
