@@ -3,7 +3,7 @@ library(testthat)
 
 test_that("Test Standardize PJSdata and column change column names and class", {
   # skip if no connection to 'FAG' have been established
-  skip_if_not(dir.exists(set_dir_NVI("FAG")))
+  skip_if_not(dir.exists(NVIdb::set_dir_NVI("FAG")))
 
   PJStest <- readRDS(file.path(".", "PJS_testdata.rds"))
   # PJStest <- readRDS("./tests/testthat/PJS_testdata.rds")

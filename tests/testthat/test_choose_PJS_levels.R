@@ -3,13 +3,13 @@ library(testthat)
 
 test_that("Choose variables from PJS levels", {
   # skip if no connection to 'FAG' have been established
-  skip_if_not(dir.exists(set_dir_NVI("FAG")))
+  skip_if_not(dir.exists(NVIdb::set_dir_NVI("FAG")))
 
   PJStest <- readRDS(file.path(".", "PJS_testdata.rds"))
   # PJStest <- readRDS("./tests/testthat/PJS_testdata.rds")
 
   # Standardisere kolonnenavn
-  PJStest <- standardize_columns(data = PJStest, property = "colnames")
+  PJStest <- NVIdb::standardize_columns(data = PJStest, property = "colnames")
   # Removes vet_distriktnr and konkl_provenr
   PJStest$vet_distriktnr <- NULL
   PJStest$konkl_provenr <- NULL
@@ -99,13 +99,13 @@ test_that("Choose variables from PJS levels", {
 
 test_that("Choose variables from PJS levels subundersokelse og subresultat", {
   # skip if no connection to 'FAG' have been established
-  skip_if_not(dir.exists(set_dir_NVI("FAG")))
+  skip_if_not(dir.exists(NVIdb::set_dir_NVI("FAG")))
 
   PJStest <- readRDS(file.path(".", "PJS_testdata2.rds"))
   # PJStest <- readRDS("./tests/testthat/PJS_testdata2.rds")
 
   # Standardisere kolonnenavn
-  PJStest <- standardize_columns(data = PJStest, property = "colnames")
+  PJStest <- NVIdb::standardize_columns(data = PJStest, property = "colnames")
   # Removes vet_distriktnr and konkl_provenr
   PJStest$vet_distriktnr <- NULL
   PJStest$konkl_provenr <- NULL
@@ -128,13 +128,13 @@ test_that("Choose variables from PJS levels subundersokelse og subresultat", {
 
 test_that("Choose variables from PJS levels subundersokelse og subresultat", {
   # skip if no connection to 'FAG' have been established
-  skip_if_not(dir.exists(set_dir_NVI("FAG")))
+  skip_if_not(dir.exists(NVIdb::set_dir_NVI("FAG")))
 
   PJStest <- readRDS(file.path(".", "PJS_testdata.rds"))
   # PJStest <- readRDS("./tests/testthat/PJS_testdata.rds")
 
   # Standardisere kolonnenavn
-  PJStest <- standardize_columns(data = PJStest, property = "colnames")
+  PJStest <- NVIdb::standardize_columns(data = PJStest, property = "colnames")
   # Removes vet_distriktnr and konkl_provenr
   PJStest$vet_distriktnr <- NULL
   PJStest$konkl_provenr <- NULL

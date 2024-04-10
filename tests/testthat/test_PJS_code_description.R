@@ -11,7 +11,7 @@ td <- tempdir()
 
 test_that("Copy PJS_codes_2_text", {
   # skip if no connection to 'FAG' have been established
-  skip_if_not(dir.exists(set_dir_NVI("FAG")))
+  skip_if_not(dir.exists(NVIdb::set_dir_NVI("FAG")))
 
   # copy_PJS_codes_2_text
   copy_PJS_codes_2_text(to_path = td)
@@ -22,7 +22,7 @@ test_that("Copy PJS_codes_2_text", {
 
 test_that("read PJS_codes_2_text", {
   # skip if no connection to 'FAG' have been established
-  skip_if_not(dir.exists(set_dir_NVI("FAG")))
+  skip_if_not(dir.exists(NVIdb::set_dir_NVI("FAG")))
 
   # Reads translation table for PJS-codes
   PJS_codes_2_text <- read_PJS_codes_2_text()
@@ -42,7 +42,7 @@ test_that("If translation table is updated", {
   skip_if(journal_rapp < 1)
 
   # skip if no connection to 'FAG' have been established
-  skip_if_not(dir.exists(set_dir_NVI("FAG")))
+  skip_if_not(dir.exists(NVIdb::set_dir_NVI("FAG")))
 
   # Reads translation table for PJS-codes
   PJS_codes_2_text <- read_PJS_codes_2_text()
@@ -93,7 +93,7 @@ test_that("If translation table is updated", {
 test_that("Translate codes in PJS-data", {
 
   # skip if no connection to 'FAG' have been established
-  skip_if_not(dir.exists(set_dir_NVI("FAG")))
+  skip_if_not(dir.exists(NVIdb::set_dir_NVI("FAG")))
 
   # Reads translation table for PJS-codes
   PJS_codes_2_text <- read_PJS_codes_2_text()
@@ -145,7 +145,7 @@ test_that("Translate codes in PJS-data", {
 test_that("Translate codes using 'auto'", {
 
   # skip if no connection to 'FAG' have been established
-  skip_if_not(dir.exists(set_dir_NVI("FAG")))
+  skip_if_not(dir.exists(NVIdb::set_dir_NVI("FAG")))
 
   # Reads translation table for PJS-codes
   PJS_codes_2_text <- read_PJS_codes_2_text()
@@ -175,7 +175,7 @@ test_that("Translate codes using 'auto'", {
 test_that("Backward translation from description to code", {
 
   # skip if no connection to 'FAG' have been established
-  skip_if_not(dir.exists(set_dir_NVI("FAG")))
+  skip_if_not(dir.exists(NVIdb::set_dir_NVI("FAG")))
 
   # Reads translation table for PJS-codes
   PJS_codes_2_text <- read_PJS_codes_2_text()
@@ -251,7 +251,7 @@ test_that("errors for add_PJS_code_description", {
   options(width = 80)
 
   # skip if no connection to 'FAG' have been established
-  skip_if_not(dir.exists(set_dir_NVI("FAG")))
+  skip_if_not(dir.exists(NVIdb::set_dir_NVI("FAG")))
 
   # Reads translation table for PJS-codes
   PJS_codes_2_text <- read_PJS_codes_2_text()
