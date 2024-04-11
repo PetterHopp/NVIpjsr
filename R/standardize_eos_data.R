@@ -56,6 +56,7 @@
 #' @return \code{data.frame} with standardized EOS-data.
 #'
 #' @author Petter Hopp Petter.Hopp@@vetinst.no
+#' @importFrom magrittr %>%
 #' @export
 #' @examples
 #' \dontrun{

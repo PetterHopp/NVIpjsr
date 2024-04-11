@@ -25,6 +25,7 @@
 #'
 #' @author Petter Hopp Petter.Hopp@@vetinst.no
 #' @md
+#' @importFrom magrittr %>%
 #' @export
 
 select_PJSdata_for_value <- function(data,
