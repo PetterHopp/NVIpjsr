@@ -5,7 +5,7 @@
 Tools for retrieving, standardising, wrangling, preparing and reporting PJS data
 and EOS data. The following functions are copied from NVIdb v0.11.3:
 
-- `add_PJS_code_description` Manage translation of PJS codes to descriptive text
+- `add_PJS_code_description` Translates PJS codes to descriptive text
 
 - `build_query_hensikt` Builds query for selecting data for hensikt from PJS
 
