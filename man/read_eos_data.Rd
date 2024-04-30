@@ -6,7 +6,7 @@
 \usage{
 read_eos_data(
   eos_table,
-  from_path = paste0(set_dir_NVI("EOS"), "RaData"),
+  from_path = paste0(NVIdb::set_dir_NVI("EOS"), "RaData"),
   year = NULL,
   colClasses = "character",
   encoding = "UTF-8",
