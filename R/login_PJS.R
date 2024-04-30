@@ -1,5 +1,5 @@
 #' @title Log in to data base services
-#' @description  Log in to NVI's data base services, in particular journal_rapp/PJS.
+#' @description  Log in to NVI's data base services; journal_rapp/PJS.
 #' @details The NVI has access to several database services. These functions log
 #'     in to such services. The functions provides methods to either log in using
 #'     credentials set in the user profile by \code{\link{set_credentials}} or use
@@ -56,29 +56,11 @@
 #'     \code{RODBC} for "SQL server" and \code{RPostgreSQL} for "PostgreSQL".
 #'
 #'     When the session is finished, the script shall close the ODBC-channel by
-#'     \code{odbcClose("myodbcchannel")} or \code{odbcCloseAll} when using RODBC.
+#'     \code{odbcClose("myodbcchannel")} or \code{odbcCloseAll} when using \code{RODBC}.
 #'
-#' @param dbservice [\code{character(1)}]\cr
-#' Name of the database service, for example "PJS" or "EOS".
-#'     For database services where one don't use the premade wrappers, the name
-#'     can be chosen freely, but must be the same as used in \code{\link{set_credentials}}.
-#' @param dbdriver [\code{character(1)}]\cr
-#' Name of database engine. Defaults to \code{NULL}.
-#' @param db [\code{character(1)}]\cr
-#' Name of database. Defaults to \code{NULL}.
-#' @param dbserver [\code{character(1)}]\cr
-#' Name of database server. Defaults to \code{NULL}.
-#' @param dbport [\code{character(1)}]\cr
-#' Port. Defaults to \code{NULL}.
-#' @param dbprotocol [\code{character(1)}]\cr
-#' Protocol to be used. Defaults to \code{NULL}.
 #' @param dbinterface [\code{character(1)}]\cr
 #' The R-package that is used for interface towards the data
 #'     base. Defaults to \code{NULL}.
-#' @param dbtext [\code{character(1)}]\cr
-#' Gives the possibility of showing another name than the dbservice
-#'     in the windows asking for username and password when using
-#'     \code{login_by_input}. Defaults to \code{NULL}.
 #' @param \dots Other arguments to be passed from the wrappers to
 #'     \code{login_by_credentials} or \code{login_by_input}.
 #' @return An open ODBC-channel to the database service.
