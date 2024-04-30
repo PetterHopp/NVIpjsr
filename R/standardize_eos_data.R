@@ -90,11 +90,11 @@ standardize_eos_data <- function(data,
   # STANDARDISE DATA ----
   # Standardise column names
   if (isTRUE(standardize_colnames)) {
-    data <- standardize_columns(data = data,
-                                dbsource = dbsource,
-                                standards = standards,
-                                property = "colnames",
-                                ...)
+    data <- NVIdb::standardize_columns(data = data,
+                                       dbsource = dbsource,
+                                       standards = standards,
+                                       property = "colnames",
+                                       ...)
   }
 
   if (isTRUE(delete_redundant)) {
