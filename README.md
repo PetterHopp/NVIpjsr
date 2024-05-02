@@ -1,4 +1,4 @@
-# NVIpjsr: Tools for working with PJSdata <img src="man/figures/NVIpjsr_logo.png" align="right" height="138" />
+# NVIpjsr: Tools to facilitate working with PJS data <img src="man/figures/NVIpjsr_logo.png" align="right" height="138" />
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -11,15 +11,16 @@
 ## Overview
 
 `NVIpjsr`tools for retrieving, standardising, wrangling, preparing and
-reporting PJS data and EOS data. The package comprises functions
-previously included in NVIdb.
+reporting PJS data and EOS data. NVIpjsr was created by separating out
+PJS-functions from NVIdb. Further development of and creation of new
+PJS-functions will take place within NVIpjsr.
 
 `NVIpjsr` is part of `NVIverse`, a collection of R-packages with tools
 to facilitate data management and data reporting at the Norwegian
 Veterinary Institute (NVI). The `NVIverse` consists of the following
-packages: `NVIconfig`, `NVIdb`, `NVIspatial`, `NVIpretty`, `NVIbatch`,
-`OKplan`, `OKcheck`, `NVIcheckmate`, `NVIpackager`, `NVIrpackages`. See
-[Contribute to
+packages: `NVIconfig`, `NVIdb`, `NVIpjsr`, `NVIspatial`, `NVIpretty`,
+`NVIbatch`, `OKplan`, `OKcheck`, `NVIcheckmate`, `NVIpackager`,
+`NVIrpackages`. See [Contribute to
 NVIpjsr](https://github.com/NorwegianVeterinaryInstitute/NVIpjsr/blob/main/CONTRIBUTING.md)
 for more information.
 
@@ -66,8 +67,9 @@ The `NVIpjsr` package needs to be attached.
     library(NVIpjsr)
 
 `NVIpjsr` tools for retrieving, standardising, wrangling, preparing and
-reporting PJS data and EOS data. The package comprises functions
-previously included in NVIdb.
+reporting PJS data and EOS data. NVIpjsr was created by separating out
+PJS-functions from NVIdb. Further development of and creation of new
+PJS-functions will take place within NVIpjsr.
 
 #### Further documentation
 
@@ -86,7 +88,9 @@ Consult the vignettes for task-oriented help.
 
 Vignettes in package `NVIpjsr`:
 
--   Contribute to NVIpjsr (html)
+-   Contribute to NVIpjsr (html)  
+-   NVIpjsr reference manual (pdf)  
+-   Retrieve and standardise PJS-data (html)
 
 ##### NEWS
 
