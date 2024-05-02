@@ -1,17 +1,15 @@
 # generate_PJS_testdata
 # read PJSdata and save as testdata
 
-library(RODBC)
+library(DBI)
 library(dplyr)
 library(NVIdb)
 
 # Retrieve PJS data as template for testdata
-journal_rapp <- login_PJS()
-PJS_testdata <- sqlQuery(journal_rapp,
-                         "select * from v2_sak_m_res where aar = 2020 and innsendelsesnummer <= 3000",
-                         as.is = TRUE,
-                         stringsAsFactors = FALSE)
-odbcClose(journal_rapp)
+journal_rapp <- login_PJS(dbinterface = "odbc")
+PJS_testdata <- DBI::dbGetQuery(con = journal_rapp,
+                                statement = "select * from v2_sak_m_res where aar = 2020 and innsendelsesnummer <= 3000")
+DBI::dbDisconnect(journal_rapp)
 
 # Count number of samples per sak. Used to exclude saker depending on number of samples
 sak <- PJS_testdata %>%
