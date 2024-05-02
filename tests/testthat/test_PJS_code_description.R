@@ -1,10 +1,11 @@
 # library(NVIdb)
-library(RODBC)
+library(DBI)
 library(testthat)
+# library(NVIcheckmate)
 
 # Login to PJS
 # Suppress warnings to avoid warnings if not on NVI network
-journal_rapp <- suppressWarnings(login_by_credentials_PJS())
+journal_rapp <- suppressWarnings(NVIdb::login_by_credentials("PJS", dbinterface = "odbc"))
 
 # Assigns temporary dir to td
 td <- tempdir()
@@ -39,7 +40,7 @@ test_that("read PJS_codes_2_text", {
 
 test_that("If translation table is updated", {
   # skip if no connection to PJS have been established
-  skip_if(journal_rapp < 1)
+  skip_if_not(isTRUE(NVIcheckmate::check_odbc_channel(journal_rapp)))
 
   # skip if no connection to 'FAG' have been established
   skip_if_not(dir.exists(NVIdb::set_dir_NVI("FAG")))
@@ -49,10 +50,8 @@ test_that("If translation table is updated", {
 
   # Test if hensikter is correctly translated
   # Read hensikter from PJS
-  hensikter <- RODBC::sqlQuery(journal_rapp,
-                               "select * from v_hensikt",
-                               as.is = TRUE,
-                               stringsAsFactors = FALSE)
+  hensikter <- DBI::dbGetQuery(con = journal_rapp,
+                               statement = "select * from v_hensikt")
   hensikter$hensiktnavn <- trimws(hensikter$hensiktnavn)
 
   # Add new description based on NVIdb
@@ -70,10 +69,8 @@ test_that("If translation table is updated", {
 
   # Test if driftsform is correctly translated
   # Read driftsform from PJS
-  driftsform <- RODBC::sqlQuery(journal_rapp,
-                                "select * from driftsform",
-                                as.is = TRUE,
-                                stringsAsFactors = FALSE)
+  driftsform <- DBI::dbGetQuery(con = journal_rapp,
+                                statement = "select * from driftsform")
   driftsform$driftsformnavn <- trimws(driftsform$driftsformnavn)
 
   # Add new description based on NVIdb
@@ -295,4 +292,4 @@ test_that("errors for add_PJS_code_description", {
   options(width = unlist(linewidth))
 })
 
-RODBC::odbcCloseAll()
+DBI::dbDisconnect(journal_rapp)
