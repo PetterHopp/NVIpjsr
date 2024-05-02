@@ -3,7 +3,8 @@
 ## First release
 
 Tools for retrieving, standardising, wrangling, preparing and reporting PJS data
-and EOS data. The following functions are copied from NVIdb v0.11.3:
+and EOS data. `NVIpjsr` was created by separating out PJS-functions from `NVIdb`. 
+The following functions were copied from `NVIdb v0.11.3`:
 
 - `add_PJS_code_description` Translates PJS codes to descriptive text
 
@@ -24,10 +25,6 @@ and EOS data. The following functions are copied from NVIdb v0.11.3:
 - `exclude_from_PJSdata` Exclude rows from PJS-data
 
 - `login_by_credentials_PJS` Log in to PJS using stored credentials
-
-- `login_by_input_PJS` Log in to PJS using manual input of credentials
-
-- `login_PJS` Log in to PJS
 
 - `read_eos_data` Read EOS data from RaData
 
