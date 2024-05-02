@@ -56,13 +56,11 @@ Should missing art be included. Must be one of c("never", "always", "for_selecte
     Defaults to \code{NULL}.}
 
 \item{FUN}{[\code{function}]\cr
-Function to build the selection statement, see
-    \ifelse{html}{\code{\link{retrieve_PJSdata}}}{\code{retrieve_PJSdata}}).
+Function to build the selection statement, see \code{\link{retrieve_PJSdata}}.
     Defaults to \code{NULL}.}
 
 \item{select_statement}{[\code{character(1)}]\cr
-A written select statement, see
-    \ifelse{html}{\code{\link{retrieve_PJSdata}}}{\code{retrieve_PJSdata}}.
+A written select statement, see \code{\link{retrieve_PJSdata}}.
     Defaults to \code{NULL}.}
 
 \item{selection_parameters}{[\code{character(1)}]\cr
@@ -80,10 +78,8 @@ A named list with selection parameters that can be used to generate
 Sets the disease selection parameters and store them in a list
     object. The list follows a standardised named format and the elements can
     be used as input to
-    \ifelse{html}{\code{\link{build_query_hensikt}}}{\code{build_query_hensikt}},
-    \ifelse{html}{\code{\link{build_query_one_disease}}}{\code{build_query_one_disease}}
-    or
-    \ifelse{html}{\code{\link{build_query_outbreak}}}{\code{build_query_outbreak}}.
+    \code{\link{build_query_hensikt}}, \code{\link{build_query_one_disease}}
+    or \code{\link{build_query_outbreak}}.
 }
 \details{
 Saker in PJS that concern one infection / disease can be characterised

@@ -2,10 +2,8 @@
 #' @description Sets the disease selection parameters and store them in a list
 #'     object. The list follows a standardised named format and the elements can
 #'     be used as input to
-#'     \ifelse{html}{\code{\link{build_query_hensikt}}}{\code{build_query_hensikt}},
-#'     \ifelse{html}{\code{\link{build_query_one_disease}}}{\code{build_query_one_disease}}
-#'     or
-#'     \ifelse{html}{\code{\link{build_query_outbreak}}}{\code{build_query_outbreak}}.
+#'     \code{\link{build_query_hensikt}}, \code{\link{build_query_one_disease}}
+#'     or \code{\link{build_query_outbreak}}.
 #'
 #' @details Saker in PJS that concern one infection / disease can be characterised
 #'     by the "analytt" (at "konklusjon" and/or "resultat" level), specific "hensikter",
@@ -76,12 +74,10 @@
 #'     sets the selection parameters or a named list with the selection parameters
 #'     (i.e. equal to the output of this function). Defaults to \code{NULL}.
 #' @param FUN [\code{function}]\cr
-#' Function to build the selection statement, see
-#'     \ifelse{html}{\code{\link{retrieve_PJSdata}}}{\code{retrieve_PJSdata}}).
+#' Function to build the selection statement, see \code{\link{retrieve_PJSdata}}.
 #'     Defaults to \code{NULL}.
 #' @param select_statement [\code{character(1)}]\cr
-#' A written select statement, see
-#'     \ifelse{html}{\code{\link{retrieve_PJSdata}}}{\code{retrieve_PJSdata}}.
+#' A written select statement, see \code{\link{retrieve_PJSdata}}.
 #'     Defaults to \code{NULL}.
 #' @param \dots Other arguments to be passed to \code{set_disease_parameters}.
 #'
