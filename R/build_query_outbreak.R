@@ -4,8 +4,17 @@
 #'     infectious agent and/or disease, and metodekoder specific for the
 #'     infection and/or disease. The the query is written in T-SQL as used by MS-SQL.
 #'
-#' @details The function builds the SQL syntax to select all PJS-saker
-#'     regarding a disease outbreak from PJS. This is based on a outbreak being
+#' @details The function builds select statements with SQL syntax to
+#'     select all PJS-saker regarding a disease outbreak from PJS.
+#'     The select statements can thereafter be used to query
+#'     journal_rapp/PJS using
+#'     \ifelse{html}{\code{\link[DBI:dbGetQuery]{DBI::dbGetQuery}}}{\code{DBI::dbGetQuery}}
+#'     when using \code{odbc} or
+#'     \ifelse{html}{\code{\link[RODBC:sqlQuery]{RODBC::sqlQuery}}}{\code{RODBC::sqlQuery}}
+#'     when using \code{RODBC}.
+#'
+#'     The select statements are build to
+#'     select all journals within an outbreak where an outbreak being
 #'     defined by an utbruddsid, hensiktkoder and/or analyttkoder for the
 #'     infectious agent and/or disease. At least one of these must be given as
 #'     input to the function.
