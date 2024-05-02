@@ -11,7 +11,8 @@ read_csv_file(filename, from_path, options = NULL, ...)
 
 \item{from_path}{Path for the source file}
 
-\item{\dots}{Other arguments to be passed to \code{data.table::fread}.}
+\item{\dots}{Other arguments to be passed to
+\ifelse{html}{\code{\link[data.table:fread]{data.table::fread}}}{\code{data.table::fread}}.}
 
 \item{columnclasses}{Predefine format (numeric or character) of the variables}
 
