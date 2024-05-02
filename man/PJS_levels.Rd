@@ -7,7 +7,8 @@
 \format{
 A data frame with 9 variables:
 \describe{
-  \item{variable}{column name for variables read from PJS and standardized using \code{NVIdb::standardize_columns}}
+  \item{variable}{column name for variables read from PJS and standardized using
+    \ifelse{html}{\code{\link[NVIdb:standardize_columns]{NVIdb::standardize_columns}}}{\code{NVIdb::standardize_columns}}}
   \item{sak}{columns at sak-level are given value 1}
   \item{prove}{columns at prove-level are given value 1}
   \item{delprove}{columns at delprove-level are given value 1}
@@ -19,16 +20,17 @@ A data frame with 9 variables:
 }
 }
 \source{
-"./data-raw/PJS_levels.xlsx" in package \code{NVIdb}
+"./data-raw/PJS_levels.xlsx" in package \code{NVIpjsr}
 }
 \usage{
 PJS_levels
 }
 \description{
 A data frame with the variable names (column names) in PJS and their corresponding PJS-level. The column names
-   are the standardized column names, i.e. after running \code{NVIdb::standardize_columns}.
+   are the standardized column names, i.e. after running
+    \ifelse{html}{\code{\link[NVIdb:standardize_columns]{NVIdb::standardize_columns}}}{\code{NVIdb::standardize_columns}}.
    The raw data can be edited in the "./data-raw/PJS_levels.xlsx" and the the code for preparing of the data frame is written in
-  "./data-raw/generate_PJS_levels.R". The \code{PJS_levels} is used as input for \code{NVIdb::select_PJS_levels}.
+  "./data-raw/generate_PJS_levels.R". The \code{PJS_levels} is used as input for \code{\link{choose_PJS_levels}}.
 }
 \details{
 The variables included into a specific level is given the value 1, if not included they are given the value 0. To
