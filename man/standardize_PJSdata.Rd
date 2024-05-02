@@ -13,7 +13,7 @@ Data retrieved from PJS.}
 \item{dbsource}{[\code{character(1)}]\cr
 The table that is the source of data. This will be used for fetching
     standard column names by
-    \ifelse{html}{\code{\link{standardize_columns}}}{\code{standardize_columns}}
+    \ifelse{html}{\code{\link[NVIdb:standardize_columns]{NVIdb::standardize_columns}}}{\code{NVIdb::standardize_columns}}
     and should be the name of the data source as registered in the
     "column_standards" table. Defaults to "v2_sak_m_res".}
 }
@@ -23,9 +23,7 @@ The table that is the source of data. This will be used for fetching
 \description{
 Standardizing PJS-data. This standardizing should always be performed.
     Other functions used for further preparation of PJSdata, like
-    \ifelse{html}{\code{\link{choose_PJS_levels}}}{\code{choose_PJS_levels}}
-    , and
-    \ifelse{html}{\code{\link{exclude_from_PJSdata}}}{\code{exclude_from_PJSdata}}
+    \code{\link{choose_PJS_levels}}, and \code{\link{exclude_from_PJSdata}}
     will not work as intended unless the column names are standardized.
 }
 \details{
@@ -33,7 +31,7 @@ The function performs the following standardizing of data extracted from PJS:
 \itemize{
   \item The unnecessary columns konkl_provenr and vet_distriktnr are removed.
   \item The column names are standardized using
-    \ifelse{html}{\code{\link{standardize_columns}}}{\code{standardize_columns}}.
+    \ifelse{html}{\code{\link[NVIdb:standardize_columns]{NVIdb::standardize_columns}}}{\code{NVIdb::standardize_columns}}.
   \item Numeric variables are transformed to numbers.
   \item Date variables are transformed to date format.
   \item Character variables are trimmed for leading and trailing spaces.
