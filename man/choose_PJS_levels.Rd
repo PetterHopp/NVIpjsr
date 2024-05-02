@@ -31,31 +31,36 @@ A data frame with columns from the chosen levels in PJS.
 Fast way to specify the variables from specific PJS-levels.
 }
 \details{
-When reading PJS-data through certain views, data from more levels that needed may have been read. Some views will also
-    generate so-called Cartesian product increasing the number of rows considerably. By choosing columns from only specified
+When reading PJS-data through certain views, data from more
+    levels that needed may have been read. Some views will also
+    generate so-called Cartesian product increasing the number of
+    rows considerably. By choosing columns from only specified
     levels the number of unique rows may be reduced considerably.
 
-    The function will include columns with colnames that follows the conventional column names as given after using \code{standardize_columns}.
-    In addition, column names that are the same as the standardized names but without the suffix "kode", will be included into the
+    The function will include columns with colnames that follows
+    the conventional column names as given after using
+    \ifelse{html}{\code{\link[NVIdb:standardize_columns]{NVIdb::standardize_columns}}}{\code{NVIdb::standardize_columns}}.
+    In addition, column names that are the same as the standardized
+    names but without the suffix "kode", will be included into the
     specified levels.
 
-    As standard, only unique (distinct) rows are output. This can be changed by specifying \code{unique = FALSE}.
+    As standard, only unique (distinct) rows are output. This can
+    be changed by specifying \code{unique = FALSE}.
 }
 \examples{
 \dontrun{
 # Attach packages
-library(RODBC)
+library(DBI)
 library(NVIdb)
 
 # Read from PJS
-journal_rapp <- login_by_credentials_PJS()
-PJSdata <- sqlQuery(journal_rapp,
-                  "select *
-                   from V2_SAK_M_RES
-                   where aar = 2020 and ansvarlig_seksjon = '01' and innsendelsesnummer = 1",
-                  as.is = TRUE,
-                  stringsAsFactors = FALSE)
-odbcClose(journal_rapp)
+journal_rapp <- NVIdb::login_by_credentials("PJS", dbinterface = "odbc")
+PJSdata <- DBI::dbGetQuery(
+  con = journal_rapp,
+  statement = paste("select *",
+                    "from V2_SAK_M_RES",
+                    "where aar = 2020 and ansvarlig_seksjon = '01' and innsendelsesnummer = 1"))
+DBI::dbDisconnect(journal_rapp)
 
 # Generate two data frames,
 #  generates data frame with sak, prove, konklusjon
