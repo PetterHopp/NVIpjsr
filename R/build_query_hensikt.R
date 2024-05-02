@@ -4,7 +4,13 @@
 #'     in T-SQL as used by MS-SQL.
 #'
 #' @details The function builds the SQL syntax to select all
-#'     PJS-journals concerning the hensiktkoder from PJS.
+#'     PJS-journals concerning the hensiktkoder from PJS. The
+#'     select statements can thereafter be used to query
+#'     journal_rapp/PJS using
+#'     \ifelse{html}{\code{\link[DBI:dbGetQuery]{DBI::dbGetQuery}}}{\code{DBI::dbGetQuery}}
+#'     when using \code{odbc} or
+#'     \ifelse{html}{\code{\link[RODBC:sqlQuery]{RODBC::sqlQuery}}}{\code{RODBC::sqlQuery}}
+#'     when using \code{RODBC}.
 #'
 #' @template build_query_year
 #' @param hensikt [\code{character}]\cr
@@ -12,9 +18,8 @@
 #'     should be included, end the code with \%.
 #' @template build_query_db
 #'
-#' @return A list with select-statements for "v2_sak_m_res" and "v_sakskonklusjon",
-#'     respectively. The statements can thereafter be included in a
-#'     \ifelse{html}{\code{\link[RODBC:sqlQuery]{RODBC::sqlQuery}}}{\code{RODBC::sqlQuery}}.
+#' @return A list with select statements for "v2_sak_m_res" and "v_sakskonklusjon",
+#'     respectively.
 #'
 #' @author Petter Hopp Petter.Hopp@@vetinst.no
 #'

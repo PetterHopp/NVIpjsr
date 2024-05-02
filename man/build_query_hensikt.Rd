@@ -20,9 +20,8 @@ The database for which the query is built. Defaults to "PJS" that currently
 is the only valid value.}
 }
 \value{
-A list with select-statements for "v2_sak_m_res" and "v_sakskonklusjon",
-    respectively. The statements can thereafter be included in a
-    \ifelse{html}{\code{\link[RODBC:sqlQuery]{RODBC::sqlQuery}}}{\code{RODBC::sqlQuery}}.
+A list with select statements for "v2_sak_m_res" and "v_sakskonklusjon",
+    respectively.
 }
 \description{
 Builds the query for selecting all data for one or
@@ -31,7 +30,13 @@ Builds the query for selecting all data for one or
 }
 \details{
 The function builds the SQL syntax to select all
-    PJS-journals concerning the hensiktkoder from PJS.
+    PJS-journals concerning the hensiktkoder from PJS. The
+    select statements can thereafter be used to query
+    journal_rapp/PJS using
+    \ifelse{html}{\code{\link[DBI:dbGetQuery]{DBI::dbGetQuery}}}{\code{DBI::dbGetQuery}}
+    when using \code{odbc} or
+    \ifelse{html}{\code{\link[RODBC:sqlQuery]{RODBC::sqlQuery}}}{\code{RODBC::sqlQuery}}
+    when using \code{RODBC}.
 }
 \examples{
 # SQL-select query for Pancreatic disease (PD)
