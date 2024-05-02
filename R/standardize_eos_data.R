@@ -4,7 +4,8 @@
 #'
 #' @details The function performs the following standardising of data extracted from EOS:
 #' \itemize{
-#'   \item The column names are standardised using \code{\link{standardize_columns}}.
+#'   \item The column names are standardised using
+#'     \ifelse{html}{\code{\link[NVIdb:standardize_columns]{NVIdb::standardize_columns}}}{\code{NVIdb::standardize_columns}}.
 #'   \item Numeric variables are transformed to numbers.
 #'   \item Datetime variables are transformed to dates.
 #'   \item Double registrations of a "Sak" due to the municipality being divided
@@ -32,14 +33,15 @@
 #' There are a few reduntant varibles in some data sets. In CWD data both "sist_overfort"
 #'     and "sist_endret" keeps the same information. "sist_endret" is deleted. In
 #'     Salmonella and Campylobacter data, "prove_identitet" is always \code{NULL} and
-#'     "prove_id" is \code{NULL} for salmonella data and equal ti "id_nr" for Campylobacter
+#'     "prove_id" is \code{NULL} for salmonella data and equal to "id_nr" for Campylobacter
 #'     data. Both are deleted. Set \code{delete_redundant = FALSE} to keep them.
 #'
 #' @param data [\code{data.frame}]\cr
 #'     The data retrieved from EOS.
 #' @param dbsource [\code{character(1)}]\cr
 #'     If specified, this will be used for fetching standard column names by
-#'    \code{\link{standardize_columns}}. Defaults to the name of the input data.
+#'     \ifelse{html}{\code{\link[NVIdb:standardize_columns]{NVIdb::standardize_columns}}}{\code{NVIdb::standardize_columns}}.
+#'     Defaults to the name of the input data.
 #' @param standards [\code{data.frame}]\cr
 #'     The translation table to standard column names. Defaults to \code{NULL}.
 #' @param standardize_colnames [\code{logical(1)}]\cr
@@ -51,7 +53,8 @@
 #'     the number of received samples. Defaults to \code{TRUE}.
 #' @param delete_redundant [\code{logical(1)}]\cr
 #'     If \code{TRUE}, redundant variables in the data is deleted. Defaults to \code{TRUE}.
-#' @param \dots Other arguments to be passed to \code{\link{standardize_columns}}.
+#' @param \dots Other arguments to be passed to
+#'     \ifelse{html}{\code{\link[NVIdb:standardize_columns]{NVIdb::standardize_columns}}}{\code{NVIdb::standardize_columns}}.
 #'
 #' @return \code{data.frame} with standardized EOS-data.
 #'

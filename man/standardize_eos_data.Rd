@@ -20,8 +20,9 @@ standardize_eos_data(
 The data retrieved from EOS.}
 
 \item{dbsource}{[\code{character(1)}]\cr
- If specified, this will be used for fetching standard column names by
-\code{\link{standardize_columns}}. Defaults to the name of the input data.}
+If specified, this will be used for fetching standard column names by
+\ifelse{html}{\code{\link[NVIdb:standardize_columns]{NVIdb::standardize_columns}}}{\code{NVIdb::standardize_columns}}.
+Defaults to the name of the input data.}
 
 \item{standards}{[\code{data.frame}]\cr
 The translation table to standard column names. Defaults to \code{NULL}.}
@@ -39,7 +40,8 @@ the number of received samples. Defaults to \code{TRUE}.}
 \item{delete_redundant}{[\code{logical(1)}]\cr
 If \code{TRUE}, redundant variables in the data is deleted. Defaults to \code{TRUE}.}
 
-\item{\dots}{Other arguments to be passed to \code{\link{standardize_columns}}.}
+\item{\dots}{Other arguments to be passed to
+\ifelse{html}{\code{\link[NVIdb:standardize_columns]{NVIdb::standardize_columns}}}{\code{NVIdb::standardize_columns}}.}
 }
 \value{
 \code{data.frame} with standardized EOS-data.
@@ -51,7 +53,8 @@ Standardising EOS-data. This standardising should always be performed.
 \details{
 The function performs the following standardising of data extracted from EOS:
 \itemize{
-  \item The column names are standardised using \code{\link{standardize_columns}}.
+  \item The column names are standardised using
+    \ifelse{html}{\code{\link[NVIdb:standardize_columns]{NVIdb::standardize_columns}}}{\code{NVIdb::standardize_columns}}.
   \item Numeric variables are transformed to numbers.
   \item Datetime variables are transformed to dates.
   \item Double registrations of a "Sak" due to the municipality being divided
@@ -79,7 +82,7 @@ Correction of number of tested samples is only done when both number of received
 There are a few reduntant varibles in some data sets. In CWD data both "sist_overfort"
     and "sist_endret" keeps the same information. "sist_endret" is deleted. In
     Salmonella and Campylobacter data, "prove_identitet" is always \code{NULL} and
-    "prove_id" is \code{NULL} for salmonella data and equal ti "id_nr" for Campylobacter
+    "prove_id" is \code{NULL} for salmonella data and equal to "id_nr" for Campylobacter
     data. Both are deleted. Set \code{delete_redundant = FALSE} to keep them.
 }
 \examples{
