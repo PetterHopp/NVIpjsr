@@ -21,7 +21,7 @@ One year or a vector giving the first and last years that should be selected.
 Either the path and file name for an R script that can be sourced and that
     sets the selection parameters or a named list with the selection parameters
     (i.e. of the same format as the output of
-    \ifelse{html}{\code{\link{set_disease_parameters}}}{\code{set_disease_parameters}}).
+    \code{\link{set_disease_parameters}}).
     Defaults to \code{NULL}.}
 
 \item{FUN}{\code{deprecated}\cr
@@ -33,16 +33,15 @@ Either the path and file name for an R script that can be sourced and that
     \code{selection_parameters}. Defaults to \code{NULL}.}
 
 \item{\dots}{Other arguments to be passed to the underlying functions:
-\ifelse{html}{\code{\link{login_PJS}}}{\code{login_PJS}}
-and
-\ifelse{html}{\code{\link{exclude_from_PJSdata}}}{\code{exclude_from_PJSdata}}.}
+\ifelse{html}{\code{\link[NVIdb:login]{NVIdb::login("PJS")}}}{\code{NVIdb::login("PJS")}}
+ and \code{\link{exclude_from_PJSdata}}.}
 }
 \value{
 A named list with PJS data.
 }
 \description{
 Retrieves and standardises PJS data. \code{retrieve_PJSdata} is
-    a wrapper for several \code{NVIdb}-functions and the intention of
+    a wrapper for several \code{NVIdb} - and \code{NVIpjsr} - functions and the intention of
     \code{retrieve_PJSdata} is to shorten code and to ensure that a standard
     procedure is followed when retrieving PJS data, see details. It can only
     be used for retrieving case data from PJS where the columns "aar",
@@ -51,33 +50,32 @@ Retrieves and standardises PJS data. \code{retrieve_PJSdata} is
     "journal_rapp".
 }
 \details{
-\code{retrieve_PJSdata} is a wrapper for the following \code{NVIdb}-functions:
+\code{retrieve_PJSdata} is a wrapper for the following \code{NVIdb} -
+    and \code{NVIpjsr} - functions:
 \itemize{
   \item Constructs the select statement by a build_query-function (see details)
     and selection parameters.
   \item Creates an open ODBC-channel using
-    \ifelse{html}{\code{\link{login_PJS}}}{\code{login_PJS}}.
+    \ifelse{html}{\code{\link[NVIdb:login]{NVIdb::login("PJS")}}}{\code{NVIdb::login("PJS")}}.
   \item Retrieves the data using the select statement constructed above.
   \item Standardises the data using
-    \ifelse{html}{\code{\link{standardize_PJSdata}}}{\code{standardize_PJSdata}}.
-  \item Excludes unwanted cases using
-    \ifelse{html}{\code{\link{exclude_from_PJSdata}}}{\code{exclude_from_PJSdata}}.
+    \ifelse{html}{\code{\link[NVIdb:standardize_columns]{NVIdb::standardize_columns}}}{\code{NVIdb::standardize_columns}}.
+  \item Excludes unwanted cases using \code{\link{exclude_from_PJSdata}}.
   }
 
 For the function to run automatically without having to enter PJS user
-    credentials, it is dependent that PJS user credentials have been saved using
-    \ifelse{html}{\code{\link{set_credentials_PJS}}}{\code{set_credentials_PJS}}.
+    credentials, it is dependent that PJS user credentials have been saved
+    in the user profile at the current computer using
+    \ifelse{html}{\code{\link[NVIdb:set_credentials]{NVIdb::set_credentials("PJS")}}}{\code{NVIdb::set_credentials("PJS")}}.
     Otherwise, the credentials must be input manually to establish an open
     ODBC channel.
 
 The select statement for PJS can be built giving the selection parameters and
     input to one of the build_query-functions, i.e.
-    \ifelse{html}{\code{\link{build_query_hensikt}}}{\code{build_query_hensikt}},
-    \ifelse{html}{\code{\link{build_query_one_disease}}}{\code{build_query_one_disease}}
-    and
-    \ifelse{html}{\code{\link{build_query_outbreak}}}{\code{build_query_outbreak}}.
+   \code{\link{build_query_hensikt}}, \code{\link{build_query_one_disease}}
+    and \code{\link{build_query_outbreak}}.
     The selection parameters can be set by using
-    \ifelse{html}{\code{\link{set_disease_parameters}}}{\code{set_disease_parameters}}.
+    \code{\link{set_disease_parameters}}.
     or by giving a list of similar format for input to
     \code{selection_parameters}, see the build_query-functions for necessary
     input.

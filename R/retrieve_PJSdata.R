@@ -1,6 +1,6 @@
 #' @title Retrieves data from PJS
 #' @description Retrieves and standardises PJS data. \code{retrieve_PJSdata} is
-#'     a wrapper for several \code{NVIdb}-functions and the intention of
+#'     a wrapper for several \code{NVIdb} - and \code{NVIpjsr} - functions and the intention of
 #'     \code{retrieve_PJSdata} is to shorten code and to ensure that a standard
 #'     procedure is followed when retrieving PJS data, see details. It can only
 #'     be used for retrieving case data from PJS where the columns "aar",
@@ -8,33 +8,32 @@
 #'     cannot be used for retrieving data from other tables available in
 #'     "journal_rapp".
 #'
-#' @details \code{retrieve_PJSdata} is a wrapper for the following \code{NVIdb}-functions:
+#' @details \code{retrieve_PJSdata} is a wrapper for the following \code{NVIdb} -
+#'     and \code{NVIpjsr} - functions:
 #' \itemize{
 #'   \item Constructs the select statement by a build_query-function (see details)
 #'     and selection parameters.
 #'   \item Creates an open ODBC-channel using
-#'     \ifelse{html}{\code{\link{login_PJS}}}{\code{login_PJS}}.
+#'     \ifelse{html}{\code{\link[NVIdb:login]{NVIdb::login("PJS")}}}{\code{NVIdb::login("PJS")}}.
 #'   \item Retrieves the data using the select statement constructed above.
 #'   \item Standardises the data using
-#'     \ifelse{html}{\code{\link{standardize_PJSdata}}}{\code{standardize_PJSdata}}.
-#'   \item Excludes unwanted cases using
-#'     \ifelse{html}{\code{\link{exclude_from_PJSdata}}}{\code{exclude_from_PJSdata}}.
+#'     \ifelse{html}{\code{\link[NVIdb:standardize_columns]{NVIdb::standardize_columns}}}{\code{NVIdb::standardize_columns}}.
+#'   \item Excludes unwanted cases using \code{\link{exclude_from_PJSdata}}.
 #'   }
 #'
 #' For the function to run automatically without having to enter PJS user
-#'     credentials, it is dependent that PJS user credentials have been saved using
-#'     \ifelse{html}{\code{\link{set_credentials_PJS}}}{\code{set_credentials_PJS}}.
+#'     credentials, it is dependent that PJS user credentials have been saved
+#'     in the user profile at the current computer using
+#'     \ifelse{html}{\code{\link[NVIdb:set_credentials]{NVIdb::set_credentials("PJS")}}}{\code{NVIdb::set_credentials("PJS")}}.
 #'     Otherwise, the credentials must be input manually to establish an open
 #'     ODBC channel.
 #'
 #' The select statement for PJS can be built giving the selection parameters and
 #'     input to one of the build_query-functions, i.e.
-#'     \ifelse{html}{\code{\link{build_query_hensikt}}}{\code{build_query_hensikt}},
-#'     \ifelse{html}{\code{\link{build_query_one_disease}}}{\code{build_query_one_disease}}
-#'     and
-#'     \ifelse{html}{\code{\link{build_query_outbreak}}}{\code{build_query_outbreak}}.
+#'    \code{\link{build_query_hensikt}}, \code{\link{build_query_one_disease}}
+#'     and \code{\link{build_query_outbreak}}.
 #'     The selection parameters can be set by using
-#'     \ifelse{html}{\code{\link{set_disease_parameters}}}{\code{set_disease_parameters}}.
+#'     \code{\link{set_disease_parameters}}.
 #'     or by giving a list of similar format for input to
 #'     \code{selection_parameters}, see the build_query-functions for necessary
 #'     input.
@@ -65,7 +64,7 @@
 #' Either the path and file name for an R script that can be sourced and that
 #'     sets the selection parameters or a named list with the selection parameters
 #'     (i.e. of the same format as the output of
-#'     \ifelse{html}{\code{\link{set_disease_parameters}}}{\code{set_disease_parameters}}).
+#'     \code{\link{set_disease_parameters}}).
 #'     Defaults to \code{NULL}.
 #' @param FUN \code{deprecated}\cr
 #' \code{FUN} should instead be included as input to \code{selection_parameters}.
@@ -74,9 +73,8 @@
 #' \code{select_statement} should instead be included as input to
 #'     \code{selection_parameters}. Defaults to \code{NULL}.
 #' @param \dots Other arguments to be passed to the underlying functions:
-#'     \ifelse{html}{\code{\link{login_PJS}}}{\code{login_PJS}}
-#'     and
-#'     \ifelse{html}{\code{\link{exclude_from_PJSdata}}}{\code{exclude_from_PJSdata}}.
+#'     \ifelse{html}{\code{\link[NVIdb:login]{NVIdb::login("PJS")}}}{\code{NVIdb::login("PJS")}}
+#'      and \code{\link{exclude_from_PJSdata}}.
 #'
 #' @return A named list with PJS data.
 #'
@@ -214,7 +212,7 @@ retrieve_PJSdata <- function(year = NULL,
   dbsource <- gsub(pattern = "PJSdata[[:digit:]]*", replacement = "v2_sak_m_res", x = dbsource)
 
   # OPEN ODBC CHANNEL ----
-  journal_rapp <- login_PJS(dbinterface = "odbc", ...)
+  journal_rapp <- NVIdb::login_PJS(dbinterface = "odbc", ...)
   PJSdata <- vector("list", length = length(select_statement))
 
   # PERFORM SELECTION AND STANDARDISATION FOR EACH SELECT STATEMENT ----
