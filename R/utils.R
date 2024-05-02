@@ -255,7 +255,8 @@ add_new_column <- function(data,
 #' @param from_path Path for the source file
 #' @param columnclasses Predefine format (numeric or character) of the variables
 #' @param fileencoding usually UTF-8
-#' @param \dots	Other arguments to be passed to \code{data.table::fread}.
+#' @param \dots	Other arguments to be passed to
+#'     \ifelse{html}{\code{\link[data.table:fread]{data.table::fread}}}{\code{data.table::fread}}.
 
 #' @return A data.frame with the data from the source file.
 #' @author Petter Hopp Petter.Hopp@@vetinst.no
@@ -353,33 +354,3 @@ set_name_vector <- function(colname_vector) {
 
   return(stats::setNames(colname_vector, name))
 }
-
-###   ----
-
-### find_n_th_word ----
-#' @title find_n_th_word
-#' @description Funtion to find the n'th word in a string.
-#' @details Funtion to find the n'th word in a string. The function is used in data cleaning.
-#'     For example when all filenames in a directory has been read (see read_Produksjonstilskudd) this function is used to identify
-#'     word in the filename that can be used to select the latest filefor a certain period.
-#'
-#' @param x a string where the n'th word should be selected
-#' @param position the position of the word that should be selected.
-
-#' @return The n'th word in a character string separated by spaces.If less than n words, NA is returned.
-#'
-#' @author Petter Hopp Petter.Hopp@@vetinst.no
-#'
-#' @examples
-#' \dontrun{
-#' #' Find second word in a string
-#' find_n_th_word("This is a text", 2)
-#'
-#' #' Find second word in all rows in a column with a string
-#' data <- rbind("This is a text", "The text is short", "Short", "Or a little bit longer")
-#' colnames(data) <- "text"
-#' data$word2 <- sapply(data$text, FUN = find_n_th_word, position = 2)
-#' }
-#' @noRd
-
-find_n_th_word <- function(x, position) {strsplit(x, " ")[[1]][position]}
