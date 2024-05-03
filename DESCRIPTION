@@ -1,0 +1,55 @@
+Package: NVIpjsr
+Title: Tools to facilitate working with PJS data
+Version: 0.1.0
+Date: 2024-05-03
+Authors@R: c(
+    person("Petter", "Hopp", , "Petter.Hopp@vetinst.no", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-8695-0378")),
+    person("Johan", "Åkerstedt", , "Johan.Akerstedt@vetinst.no", role = "aut"),
+    person("Norwegian Veterinary Institute", role = "cph")
+  )
+Description: Tools for retrieving, standardising, wrangling, preparing and reporting 
+    PJS data and EOS data. NVIpjsr was created by separating out PJS-functions from 
+    NVIdb. Further development of and creation of new PJS-functions will take place within 
+    NVIpjsr.
+License: BSD_3_clause + file LICENSE
+URL: https://github.com/NorwegianVeterinaryInstitute/NVIpjsr
+BugReports: https://github.com/NorwegianVeterinaryInstitute/NVIpjsr/issues
+Depends: 
+    R (>= 4.0.0)
+Encoding: UTF-8
+Language: en-GB
+Roxygen: list(markdown = FALSE)
+RoxygenNote: 7.3.1
+Imports: 
+    checkmate (>= 2.1.0),
+    data.table,
+    DBI,
+    dplyr,
+    magrittr,
+    stats,
+    NVIcheckmate (>= 0.7.0),
+    NVIdb (>= 0.11.2)
+Suggests: 
+    covr,
+    desc,
+    devtools,
+    knitr,
+    R.rsp,
+    remotes,
+    rmarkdown,
+    testthat (>= 3.0.0),
+    tibble,
+    usethis,
+    NVIpackager (>= 0.5.0),
+    NVIrpackages (>= 0.4.0)
+Remotes: 
+    github::NorwegianVeterinaryInstitute/NVIcheckmate,
+    github::NorwegianVeterinaryInstitute/NVIdb,
+    github::NorwegianVeterinaryInstitute/NVIpackager,
+    github::NorwegianVeterinaryInstitute/NVIrpackages
+VignetteBuilder: 
+    knitr,
+    R.rsp
+Config/testthat/edition: 3
+LazyData: true
