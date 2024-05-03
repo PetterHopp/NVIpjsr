@@ -19,6 +19,11 @@ Useful links:
 \author{
 \strong{Maintainer}: Petter Hopp \email{Petter.Hopp@vetinst.no} (\href{https://orcid.org/0000-0002-8695-0378}{ORCID})
 
+Authors:
+\itemize{
+  \item Johan Åkerstedt \email{Johan.Akerstedt@vetinst.no}
+}
+
 Other contributors:
 \itemize{
   \item Norwegian Veterinary Institute [copyright holder]
