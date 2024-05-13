@@ -26,7 +26,6 @@ Imports:
     data.table,
     DBI,
     dplyr,
-    magrittr,
     stats,
     NVIcheckmate (>= 0.7.0),
     NVIdb (>= 0.11.2)
