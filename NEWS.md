@@ -12,7 +12,9 @@
 
 ## Other changes:
 
--
+- `NVIpjsr` now uses the internal pipe "|>" and require therefore R >= 4.1.0.
+
+- `read_PJS_code_2_text` reads raw data from "./NVIverse/Data/".
 
 
 ## BREAKING CHANGES:
