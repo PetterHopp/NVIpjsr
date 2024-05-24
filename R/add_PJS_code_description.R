@@ -141,10 +141,11 @@
 #' @param filename [\code{character(1)}] \cr
 #'     File name of the source file for the translation table for PJS codes.
 #' @param from_path [\code{character(1)}] \cr
-#'     Path for the source translation table for PJS codes.
+#'     Path for the source files used to generate the translation table. Defaults
+#'     to \code{file.path(NVIdb::set_dir_NVI("NVIverse", slash = FALSE), "Data"))}.
 #' @param to_path [\code{character(1)}] \cr
-#'     Path for the target translation table for PJS codes when copying the
-#'     translation table.
+#'     Path to which the source files for generating the translation table should
+#'     be copied.
 #'
 #' @return \code{add_PJS_code_description} A data frame where the description text
 #'     for the PJS code has been added in the column to the right of the column
