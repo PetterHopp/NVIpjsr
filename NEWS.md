@@ -1,4 +1,4 @@
-# NVIpjsr 0.1.0.9000 - (2024-##-##)
+# NVIpjsr 0.1.0.9001 - (2024-##-##)
 
 ## New features:
 
@@ -7,7 +7,7 @@
 
 ## Bug fixes:
 
--
+- `retrieve_PJSdata` now accepts additional arguments in dots.
 
 
 ## Other changes:
