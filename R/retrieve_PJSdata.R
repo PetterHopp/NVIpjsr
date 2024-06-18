@@ -89,6 +89,10 @@ retrieve_PJSdata <- function(year = NULL,
                              select_statement = NULL,
                              ...) {
 
+  # CAPTURE DOTS ----
+  # Used below to ensure correct arguments for nested functions
+  dots <- list(...)
+
   # ARGUMENT CHECKING ----
   # Object to store check-results
   checks <- checkmate::makeAssertCollection()
@@ -212,7 +216,10 @@ retrieve_PJSdata <- function(year = NULL,
   dbsource <- gsub(pattern = "PJSdata[[:digit:]]*", replacement = "v2_sak_m_res", x = dbsource)
 
   # OPEN ODBC CHANNEL ----
-  journal_rapp <- NVIdb::login_PJS(dbinterface = "odbc", ...)
+  # journal_rapp <- NVIdb::login(dbservice = "PJS", dbinterface = "odbc", ...)
+  dots1 <- intersect(setdiff(names(formals(NVIdb::login)), c("dbservice", "dbinterface")), names(dots))
+  journal_rapp <- do.call(NVIdb::login, append(dots[dots1], list(dbservice = "PJS", dbinterface = "odbc")))
+
   PJSdata <- vector("list", length = length(select_statement))
 
   # PERFORM SELECTION AND STANDARDISATION FOR EACH SELECT STATEMENT ----
@@ -225,7 +232,9 @@ retrieve_PJSdata <- function(year = NULL,
     PJSdata[[i]] <- standardize_PJSdata(PJSdata = PJSdata[[i]], dbsource = dbsource[i])
 
     # Exclude ring trials, quality assurance and samples from abroad
-    PJSdata[[i]] <- exclude_from_PJSdata(PJSdata = PJSdata[[i]], ...)
+    # PJSdata[[i]] <- exclude_from_PJSdata(PJSdata = PJSdata[[i]], ...)
+    dots2 <- intersect(setdiff(names(formals(exclude_from_PJSdata)), c("PJSdata")), names(dots))
+    PJSdata[[i]] <- do.call(exclude_from_PJSdata, append(dots[dots2], list(PJSdata = PJSdata[[i]])))
   }
 
   # CLOSE ODBC CHANNEL ----

@@ -7,7 +7,7 @@
 
 ## Bug fixes:
 
--
+- `retrieve_PJSdata` now accepts additional arguments in dots.
 
 
 ## Other changes:
