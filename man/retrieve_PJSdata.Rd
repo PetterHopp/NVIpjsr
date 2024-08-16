@@ -4,13 +4,7 @@
 \alias{retrieve_PJSdata}
 \title{Retrieves data from PJS}
 \usage{
-retrieve_PJSdata(
-  year = NULL,
-  selection_parameters = NULL,
-  FUN = NULL,
-  select_statement = NULL,
-  ...
-)
+retrieve_PJSdata(year = NULL, selection_parameters = NULL, ...)
 }
 \arguments{
 \item{year}{[\code{numeric}]\cr
@@ -23,14 +17,6 @@ Either the path and file name for an R script that can be sourced and that
     (i.e. of the same format as the output of
     \code{\link{set_disease_parameters}}).
     Defaults to \code{NULL}.}
-
-\item{FUN}{\code{deprecated}\cr
-\code{FUN} should instead be included as input to \code{selection_parameters}.
-    Defaults to \code{NULL}.}
-
-\item{select_statement}{\code{deprecated}\cr
-\code{select_statement} should instead be included as input to
-    \code{selection_parameters}. Defaults to \code{NULL}.}
 
 \item{\dots}{Other arguments to be passed to the underlying functions:
 \ifelse{html}{\code{\link[NVIdb:login]{NVIdb::login("PJS")}}}{\code{NVIdb::login("PJS")}}

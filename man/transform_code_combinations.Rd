@@ -20,48 +20,48 @@ List with named vector(s) of code values that should transformed, see details an
 
 \item{to_values}{[\code{list}]\cr
 List with named vector(s) of code values that should be the results of the transformation,
-see details and examples.}
+    see details and examples.}
 
 \item{impute_when_missing_from}{[\code{character}]\cr
 Column names for the code variables from which code values should be copied if no
-transformation is performed. Defaults to the original column names.}
+    transformation is performed. Defaults to the original column names.}
 }
 \value{
 A \code{data.frame}.
 }
 \description{
 Transforms combinations of code values into new values in a data
-frame. This is intended for use when only a few code value combinations
-should be changed and one will avoid building translation tables or code
-with several \code{if}, \code{which} or \code{case_when} statements. In particularly it was
-inspired by the need of changing a few code combinations in PJS data when
-reporting surveillance programmes.
+    frame. This is intended for use when only a few code value combinations
+    should be changed and one will avoid building translation tables or code
+    with several \code{if}, \code{which} or \code{case_when} statements. In particularly it was
+    inspired by the need of changing a few code combinations in PJS data when
+    reporting surveillance programmes.
 }
 \details{
 The function builds a transformation table based on the input. The
-\code{from_values} and the \code{to_values} give the data to a transformation table,
-and the \code{from_columns} and the \code{to_columns} give the column names for the
-transformation table.
+    \code{from_values} and the \code{to_values} give the data to a transformation table,
+    and the \code{from_columns} and the \code{to_columns} give the column names for the
+    transformation table.
 
 The \code{from_values} is a list of one or more vectors. Each vector is named with
-the column name and represents one column variable with code values. The
-first entry in each vector constitute one code combination to be
-transformed, the second entry constitutes the next code combinations.
+    the column name and represents one column variable with code values. The
+    first entry in each vector constitute one code combination to be
+    transformed, the second entry constitutes the next code combinations.
 
 Likewise, is the \code{to_values} a list of one or more named vectors. Each
-vector is named and represents one column variable with
-code values to which the code combinations in the \code{from_values} should be
-transformed. The name of the vector is the name of the columns with the
-transformed values. The transformed values can be put in the original columns,
-in which case the transformed combinations will replace
-the original entries. If the transformed column names don't exist in data,
-the columns will be added to the data.
+    vector is named and represents one column variable with
+    code values to which the code combinations in the `from_values` should be
+    transformed. The name of the vector is the name of the columns with the
+    transformed values. The transformed values can be put in the original columns,
+    in which case the transformed combinations will replace
+    the original entries. If the transformed column names don't exist in data,
+    the columns will be added to the data.
 
 If the codes are not transformed, these can be kept in the data.
-\code{impute_when_missing_from} gives the column names of the columns from which
-to impute. Normally this will be the same as the original columns. However,
-if the number of transformed columns is less than the original columns, it
-will be necessary to give the columns from which to keep the code.
+    \code{impute_when_missing_from} gives the column names of the columns from which
+    to impute. Normally this will be the same as the original columns. However,
+    if the number of transformed columns is less than the original columns, it
+    will be necessary to give the columns from which to keep the code.
 }
 \examples{
 library(NVIdb)
