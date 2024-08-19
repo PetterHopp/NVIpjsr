@@ -80,18 +80,18 @@ choose_PJS_levels <- function(data,
   checks <- checkmate::makeAssertCollection()
   # Perform checks
   checkmate::assert_data_frame(data, add = checks)
-  checkmate::assert_subset(levels, choices = colnames(NVIdb::PJS_levels[, c(2:dim(NVIdb::PJS_levels)[2])]), empty.ok = FALSE, add = checks)
+  checkmate::assert_subset(levels, choices = colnames(NVIpjsr::PJS_levels[, c(2:dim(NVIpjsr::PJS_levels)[2])]), empty.ok = FALSE, add = checks)
   checkmate::assert_character(keep_col, null.ok = TRUE, add = checks)
   checkmate::assert_character(remove_col, null.ok = TRUE, add = checks)
   checkmate::assert_logical(unique_rows, add = checks)
   # Report check-results
   checkmate::reportAssertions(checks)
 
-  column_names <- NVIdb::PJS_levels[, c("variable", levels)]
+  column_names <- NVIpjsr::PJS_levels[, c("variable", levels)]
   if (length(levels) > 1) {
-    column_names$select <- rowSums(NVIdb::PJS_levels[, levels], na.rm = TRUE)
+    column_names$select <- rowSums(NVIpjsr::PJS_levels[, levels], na.rm = TRUE)
   } else {
-    column_names$select <- NVIdb::PJS_levels[, levels]
+    column_names$select <- NVIpjsr::PJS_levels[, levels]
   }
 
   column_names <- subset(column_names, column_names$select > 0)
