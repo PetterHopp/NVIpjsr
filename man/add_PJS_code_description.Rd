@@ -27,7 +27,8 @@ copy_PJS_codes_2_text(
 
 read_PJS_codes_2_text(
   filename = "PJS_codes_2_text.csv",
-  from_path = file.path(NVIdb::set_dir_NVI("NVIverse", slash = FALSE), "Data")
+  from_path = file.path(NVIdb::set_dir_NVI("NVIverse", slash = FALSE), "Data"),
+  ...
 )
 }
 \arguments{
@@ -86,6 +87,9 @@ to \code{file.path(NVIdb::set_dir_NVI("NVIverse", slash = FALSE), "Data"))}.}
 \item{to_path}{[\code{character(1)}] \cr
 Path to which the source files for generating the translation table should
 be copied.}
+
+\item{\dots}{Other arguments to be passed to
+\ifelse{html}{\code{\link[utils:read.csv2]{utils::read.csv2}}}{\code{utils::read.csv2}}.}
 }
 \value{
 \code{add_PJS_code_description} A data frame where the description text
