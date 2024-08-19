@@ -1,6 +1,6 @@
 #' @title Selects a subset of PJSdata based on code values
 #' @description Selects a subset of PJSdata based on code values.
-#'    The function accepts code values ending with "%" to indicate
+#'    The function accepts code values ending with "\%" to indicate
 #'    that sub levels should be included.
 #' @details The function is intended for cases where the select
 #'    query sent to PJS will be very complicated if the selection
