@@ -4,65 +4,65 @@
 # - assert_read_function
 # - assert_copy_function
 #
-#' @title Collection of assertions for copy_functions
-#' @description Collection of assertions used in standard copy_functions.
-#'
-#' @details All copy functions have the same arguments and the
-#'     assertion can be standardized. The assertion of \code{filname} is
-#'     constructed to handle both character and list input.
-#'
-#'     The assertion is based on removing ending "\\" and "/" from
-#'     \code{from_path} and \code{to_path} before the assertion is performed.
-#'
-#' @param filename Argument to the copy-function to be asserted.
-#' @param from_path Argument to the copy-function to be asserted. Ending
-#'     "\\" and "/" should have been removed before the assertion is performed.
-#' @param to_path Argument to the copy-function to be asserted. Ending
-#'     "\\" and "/" should have been removed before the assertion is performed.
-#'
-#' @return \code{TRUE} if none of the assertions failed. If any of the assertions
-#'     failed, one or more error messages are returned.
-#'
-#' @author Petter Hopp Petter.Hopp@@vetinst.no
-#' @keywords internal
-#'
-#'
-assert_copy_function <- function(filename,
-                                 from_path,
-                                 to_path) {
-
-  # ARGUMENT CHECKING ----
-  # Object to store check-results
-  checks <- checkmate::makeAssertCollection()
-
-  # Perform checks
-  ## filename
-  checkmate::assert(checkmate::check_character(filename,
-                                               min.chars = 1,
-                                               len = 1),
-                    checkmate::check_list(filename, min.len = 1),
-                    combine = "or",
-                    add = checks)
-
-  # checkmate::assert_list(filename, len = 2, add = checks)
-  # # from_path
-  # checkmate::assert_character(from_path, len = 1, min.chars = 1, add = checks)
-  # if (endsWith(from_path, "/")) {
-  #   checkmate::assert_directory_exists(substr(from_path, 1, nchar(from_path) - 1), access = "r", add = checks)
-  # } else {
-  #   checkmate::assert_directory_exists(from_path, access = "r", add = checks)
-  # }
-
-  ## from_path / filename
-  for (i in c(1:length(filename))) {
-    checkmate::assert_file_exists(file.path(from_path, filename[[i]]), access = "r", add = checks)
-  }
-  ## to_path
-  checkmate::assert_directory_exists(to_path, access = "r", add = checks)
-
-  # Report check-results
-  checkmate::reportAssertions(checks)
-}
+# #' @title Collection of assertions for copy_functions
+# #' @description Collection of assertions used in standard copy_functions.
+# #'
+# #' @details All copy functions have the same arguments and the
+# #'     assertion can be standardized. The assertion of \code{filname} is
+# #'     constructed to handle both character and list input.
+# #'
+# #'     The assertion is based on removing ending "\\" and "/" from
+# #'     \code{from_path} and \code{to_path} before the assertion is performed.
+# #'
+# #' @param filename Argument to the copy-function to be asserted.
+# #' @param from_path Argument to the copy-function to be asserted. Ending
+# #'     "\\" and "/" should have been removed before the assertion is performed.
+# #' @param to_path Argument to the copy-function to be asserted. Ending
+# #'     "\\" and "/" should have been removed before the assertion is performed.
+# #'
+# #' @return \code{TRUE} if none of the assertions failed. If any of the assertions
+# #'     failed, one or more error messages are returned.
+# #'
+# #' @author Petter Hopp Petter.Hopp@@vetinst.no
+# #' @keywords internal
+# #'
+# #'
+# assert_copy_function <- function(filename,
+#                                  from_path,
+#                                  to_path) {
+#
+#   # ARGUMENT CHECKING ----
+#   # Object to store check-results
+#   checks <- checkmate::makeAssertCollection()
+#
+#   # Perform checks
+#   ## filename
+#   checkmate::assert(checkmate::check_character(filename,
+#                                                min.chars = 1,
+#                                                len = 1),
+#                     checkmate::check_list(filename, min.len = 1),
+#                     combine = "or",
+#                     add = checks)
+#
+#   # checkmate::assert_list(filename, len = 2, add = checks)
+#   # # from_path
+#   # checkmate::assert_character(from_path, len = 1, min.chars = 1, add = checks)
+#   # if (endsWith(from_path, "/")) {
+#   #   checkmate::assert_directory_exists(substr(from_path, 1, nchar(from_path) - 1), access = "r", add = checks)
+#   # } else {
+#   #   checkmate::assert_directory_exists(from_path, access = "r", add = checks)
+#   # }
+#
+#   ## from_path / filename
+#   for (i in c(1:length(filename))) {
+#     checkmate::assert_file_exists(file.path(from_path, filename[[i]]), access = "r", add = checks)
+#   }
+#   ## to_path
+#   checkmate::assert_directory_exists(to_path, access = "r", add = checks)
+#
+#   # Report check-results
+#   checkmate::reportAssertions(checks)
+# }
 
 # #' @title Collection of assertions for add_functions
 # #' @description Collection of assertions used in standard add_functions.
@@ -162,64 +162,64 @@ assert_copy_function <- function(filename,
 # }
 
 
-#' @title Collection of assertions for read_functions
-#' @description Collection of assertions used in standard read_functions.
-#'
-#' @details All read functions include the same arguments and the
-#'     assertion can be standardized. The assertion of \code{filname} is
-#'     constructed to handle both character and list input.
-#'
-#'     The assertion is based on removing ending "\\" and "/" from
-#'     \code{from_path} before the assertion is performed.
-
-#' The assertCollection must be set up separately and is used as input argument, see example.
-#'
-#' @param filename Argument to the function to be asserted.
-#' @param from_path Argument to the function to be asserted. Ending
-#'     "\\" and "/" must have been removed before the assertion is performed.
-#' @param add assertCollection.
-#'
-#' @return An assertCollection that have been updated with the results of assertions for \code{filename} and \code{from_path}.
-#'
-#' @author Petter Hopp Petter.Hopp@@vetinst.no
-#' @keywords internal
-#' @export
-#'
-#' @examples
-#' # Attach package and make temporary directory
-#' library(NVIdb)
-#' td <- tempdir()
-#' write.csv2(NVIdb::PJS_levels, file = file.path(td, "PJS_levels.csv"))
-#'
-#' # ARGUMENT CHECKING
-#' # Object to store check-results
-#' checks <- checkmate::makeAssertCollection()
-#' # Perform checks
-#' checks <- assert_read_functions(filename = "PJS_levels.csv",
-#'                                 from_path = td,
-#'                                 add = checks)
-#' # Report check-results
-#' checkmate::reportAssertions(checks)
-assert_read_functions <- function(filename,
-                                  from_path,
-                                  add) {
-
-  checkmate::assert_class(x = add, classes = "AssertCollection")
-
-  # Perform checks ----
-
-  ## filename
-  checkmate::assert(checkmate::check_character(filename,
-                                               min.chars = 1, len = 1,
-                                               any.missing = FALSE),
-                    checkmate::check_list(filename,
-                                          min.len = 1,
-                                          any.missing = FALSE),
-                    combine = "or",
-                    add = add)
-  ## from_path / filename
-  for (i in c(1:length(filename))) {
-    checkmate::assert_file_exists(file.path(from_path, filename[[i]]), access = "r", add = add)
-  }
-  return(add)
-}
+# #' @title Collection of assertions for read_functions
+# #' @description Collection of assertions used in standard read_functions.
+# #'
+# #' @details All read functions include the same arguments and the
+# #'     assertion can be standardized. The assertion of \code{filname} is
+# #'     constructed to handle both character and list input.
+# #'
+# #'     The assertion is based on removing ending "\\" and "/" from
+# #'     \code{from_path} before the assertion is performed.
+#
+# #' The assertCollection must be set up separately and is used as input argument, see example.
+# #'
+# #' @param filename Argument to the function to be asserted.
+# #' @param from_path Argument to the function to be asserted. Ending
+# #'     "\\" and "/" must have been removed before the assertion is performed.
+# #' @param add assertCollection.
+# #'
+# #' @return An assertCollection that have been updated with the results of assertions for \code{filename} and \code{from_path}.
+# #'
+# #' @author Petter Hopp Petter.Hopp@@vetinst.no
+# #' @keywords internal
+# #' @export
+# #'
+# #' @examples
+# #' # Attach package and make temporary directory
+# #' library(NVIdb)
+# #' td <- tempdir()
+# #' write.csv2(NVIdb::PJS_levels, file = file.path(td, "PJS_levels.csv"))
+# #'
+# #' # ARGUMENT CHECKING
+# #' # Object to store check-results
+# #' checks <- checkmate::makeAssertCollection()
+# #' # Perform checks
+# #' checks <- assert_read_functions(filename = "PJS_levels.csv",
+# #'                                 from_path = td,
+# #'                                 add = checks)
+# #' # Report check-results
+# #' checkmate::reportAssertions(checks)
+# assert_read_functions <- function(filename,
+#                                   from_path,
+#                                   add) {
+#
+#   checkmate::assert_class(x = add, classes = "AssertCollection")
+#
+#   # Perform checks ----
+#
+#   ## filename
+#   checkmate::assert(checkmate::check_character(filename,
+#                                                min.chars = 1, len = 1,
+#                                                any.missing = FALSE),
+#                     checkmate::check_list(filename,
+#                                           min.len = 1,
+#                                           any.missing = FALSE),
+#                     combine = "or",
+#                     add = add)
+#   ## from_path / filename
+#   for (i in c(1:length(filename))) {
+#     checkmate::assert_file_exists(file.path(from_path, filename[[i]]), access = "r", add = add)
+#   }
+#   return(add)
+# }
