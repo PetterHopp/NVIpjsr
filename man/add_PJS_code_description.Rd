@@ -21,13 +21,15 @@ add_PJS_code_description(
 
 copy_PJS_codes_2_text(
   filename = "PJS_codes_2_text.csv",
-  from_path = paste0(NVIdb::set_dir_NVI("Provedata_Rapportering"), "FormaterteData/"),
+  from_path = file.path(NVIdb::set_dir_NVI("Provedata_Rapportering", slash = FALSE),
+    "FormaterteData"),
   to_path = NULL
 )
 
 read_PJS_codes_2_text(
   filename = "PJS_codes_2_text.csv",
-  from_path = file.path(NVIdb::set_dir_NVI("NVIverse", slash = FALSE), "Data"),
+  from_path = file.path(NVIdb::set_dir_NVI("Provedata_Rapportering", slash = FALSE),
+    "FormaterteData"),
   ...
 )
 }
@@ -82,7 +84,7 @@ File name of the source file for the translation table for PJS codes.}
 
 \item{from_path}{[\code{character(1)}] \cr
 Path for the source files used to generate the translation table. Defaults
-to \code{file.path(NVIdb::set_dir_NVI("NVIverse", slash = FALSE), "Data"))}.}
+to \code{file.path(NVIdb::set_dir_NVI("Provedata_Rapportering", slash = FALSE), "FormaterteData")}.}
 
 \item{to_path}{[\code{character(1)}] \cr
 Path to which the source files for generating the translation table should

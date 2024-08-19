@@ -142,7 +142,7 @@
 #'     File name of the source file for the translation table for PJS codes.
 #' @param from_path [\code{character(1)}] \cr
 #'     Path for the source files used to generate the translation table. Defaults
-#'     to \code{file.path(NVIdb::set_dir_NVI("NVIverse", slash = FALSE), "Data"))}.
+#'     to \code{file.path(NVIdb::set_dir_NVI("Provedata_Rapportering", slash = FALSE), "FormaterteData")}.
 #' @param to_path [\code{character(1)}] \cr
 #'     Path to which the source files for generating the translation table should
 #'     be copied.
