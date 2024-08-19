@@ -41,9 +41,9 @@ build_query_hensikt <- function(year, hensikt, db = "PJS") {
   # Report check-results
   checkmate::reportAssertions(checks)
 
-  select_year <- NVIdb::build_sql_select_year(year = year, varname = "aar")
+  select_year <- build_sql_select_year(year = year, varname = "aar")
 
-  select_hensikt <- NVIdb::build_sql_select_code(values = hensikt, varname = "hensiktkode")
+  select_hensikt <- build_sql_select_code(values = hensikt, varname = "hensiktkode")
 
   selection_v2_sak_m_res <- paste("SELECT * FROM v2_sak_m_res",
                                   "WHERE", select_year, "AND",
@@ -51,9 +51,9 @@ build_query_hensikt <- function(year, hensikt, db = "PJS") {
                                   select_hensikt,
                                   ")")
 
-  select_year <- NVIdb::build_sql_select_year(year = year, varname = "sak.aar")
+  select_year <- build_sql_select_year(year = year, varname = "sak.aar")
 
-  select_hensikt <- NVIdb::build_sql_select_code(values = hensikt, varname = "sak.hensiktkode")
+  select_hensikt <- build_sql_select_code(values = hensikt, varname = "sak.hensiktkode")
 
   selection_sakskonklusjon <- paste("SELECT v_sakskonklusjon.*,",
                                     "sak.mottatt_dato, sak.uttaksdato, sak.sak_avsluttet, sak.hensiktkode,",
