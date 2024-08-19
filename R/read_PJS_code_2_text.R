@@ -2,7 +2,8 @@
 #' @rdname add_PJS_code_description
 
 read_PJS_codes_2_text <- function(filename = "PJS_codes_2_text.csv",
-                                  from_path = file.path(NVIdb::set_dir_NVI("NVIverse", slash = FALSE), "Data")) {
+                                  from_path = file.path(NVIdb::set_dir_NVI("NVIverse", slash = FALSE), "Data"),
+                                  ...) {
 
   # Removing ending "/" and "\\" from pathnames
   from_path <- sub("/+$|\\\\+$", "", from_path)
@@ -16,9 +17,14 @@ read_PJS_codes_2_text <- function(filename = "PJS_codes_2_text.csv",
   checkmate::reportAssertions(checks)
 
   # READ DATA ----
-  PJS_codes_2_text <- read_csv_file(filename = filename,
-                                    from_path = from_path,
-                                    options = list(colClasses = "character", fileEncoding = "UTF-8"))
+  # PJS_codes_2_text <- read_csv_file(filename = filename,
+  #                                   from_path = from_path,
+  #                                   options = list(colClasses = "character", fileEncoding = "UTF-8"))
+
+  PJS_codes_2_text <- utils::read.csv2(file = file.path(from_path, filename),
+                                       colClasses = "character",
+                                       fileEncoding = "UTF-8",
+                                       ...)
 
   # Remove double "" that have replaced single when saving as csv-file
   PJS_codes_2_text$navn <- gsub('\"\"', "\"", PJS_codes_2_text$navn)
