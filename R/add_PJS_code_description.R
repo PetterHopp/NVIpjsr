@@ -142,10 +142,12 @@
 #'     File name of the source file for the translation table for PJS codes.
 #' @param from_path [\code{character(1)}] \cr
 #'     Path for the source files used to generate the translation table. Defaults
-#'     to \code{file.path(NVIdb::set_dir_NVI("NVIverse", slash = FALSE), "Data"))}.
+#'     to \code{file.path(NVIdb::set_dir_NVI("Provedata_Rapportering", slash = FALSE), "FormaterteData")}.
 #' @param to_path [\code{character(1)}] \cr
 #'     Path to which the source files for generating the translation table should
 #'     be copied.
+#' @param \dots	Other arguments to be passed to
+#'     \ifelse{html}{\code{\link[utils:read.csv2]{utils::read.csv2}}}{\code{utils::read.csv2}}.
 #'
 #' @return \code{add_PJS_code_description} A data frame where the description text
 #'     for the PJS code has been added in the column to the right of the column
@@ -221,7 +223,7 @@ add_PJS_code_description <- function(data,
                                      impute_old_when_missing = FALSE) {
 
   if (PJS_variable_type[1] == "auto" | new_column[1] == "auto") {
-    code_description_colname <- NVIdb::PJS_code_description_colname
+    code_description_colname <- NVIpjsr::PJS_code_description_colname
     if (isTRUE(backward)) {
       code_description_colname <- dplyr::rename(code_description_colname, new_column = code_colname, code_colname = new_column)
     }
