@@ -21,13 +21,16 @@ add_PJS_code_description(
 
 copy_PJS_codes_2_text(
   filename = "PJS_codes_2_text.csv",
-  from_path = paste0(NVIdb::set_dir_NVI("Provedata_Rapportering"), "FormaterteData/"),
+  from_path = file.path(NVIdb::set_dir_NVI("Provedata_Rapportering", slash = FALSE),
+    "FormaterteData"),
   to_path = NULL
 )
 
 read_PJS_codes_2_text(
   filename = "PJS_codes_2_text.csv",
-  from_path = paste0(NVIdb::set_dir_NVI("Provedata_Rapportering"), "FormaterteData/")
+  from_path = file.path(NVIdb::set_dir_NVI("Provedata_Rapportering", slash = FALSE),
+    "FormaterteData"),
+  ...
 )
 }
 \arguments{
@@ -80,11 +83,15 @@ Defaults to \code{FALSE}.}
 File name of the source file for the translation table for PJS codes.}
 
 \item{from_path}{[\code{character(1)}] \cr
-Path for the source translation table for PJS codes.}
+Path for the source files used to generate the translation table. Defaults
+to \code{file.path(NVIdb::set_dir_NVI("Provedata_Rapportering", slash = FALSE), "FormaterteData")}.}
 
 \item{to_path}{[\code{character(1)}] \cr
-Path for the target translation table for PJS codes when copying the
-translation table.}
+Path to which the source files for generating the translation table should
+be copied.}
+
+\item{\dots}{Other arguments to be passed to
+\ifelse{html}{\code{\link[utils:read.csv2]{utils::read.csv2}}}{\code{utils::read.csv2}}.}
 }
 \value{
 \code{add_PJS_code_description} A data frame where the description text

@@ -1,3 +1,33 @@
+# NVIpjsr 0.1.1 - (2024-08-19)
+
+## New features:
+
+-
+
+
+## Bug fixes:
+
+- `retrieve_PJSdata` now accepts additional arguments in dots.
+
+- The build_query-functions now correctly calls `NVIpjsr::build_sql_select_year` and `NVIpjsr::build_sql_select_code`.
+
+- `choose_PJS_levls` now correctly calls `NVIpjsr::PJS_levels`.
+
+- `select_PJSdata_for_value` now correctly calls `NVIpjsr::PJS_levels`.
+
+
+## Other changes:
+
+- `NVIpjsr` now uses the internal pipe "|>" and therefore require R >= 4.1.0.
+
+- simplified code for some functions.
+
+
+## BREAKING CHANGES:
+
+-
+
+
 # NVIpjsr 0.1.0 - (2024-05-03)
 
 ## First release

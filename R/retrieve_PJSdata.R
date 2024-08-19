@@ -33,7 +33,7 @@
 #'    \code{\link{build_query_hensikt}}, \code{\link{build_query_one_disease}}
 #'     and \code{\link{build_query_outbreak}}.
 #'     The selection parameters can be set by using
-#'     \code{\link{set_disease_parameters}}.
+#'     \code{\link{set_disease_parameters}}
 #'     or by giving a list of similar format for input to
 #'     \code{selection_parameters}, see the build_query-functions for necessary
 #'     input.
@@ -66,12 +66,6 @@
 #'     (i.e. of the same format as the output of
 #'     \code{\link{set_disease_parameters}}).
 #'     Defaults to \code{NULL}.
-#' @param FUN \code{deprecated}\cr
-#' \code{FUN} should instead be included as input to \code{selection_parameters}.
-#'     Defaults to \code{NULL}.
-#' @param select_statement \code{deprecated}\cr
-#' \code{select_statement} should instead be included as input to
-#'     \code{selection_parameters}. Defaults to \code{NULL}.
 #' @param \dots Other arguments to be passed to the underlying functions:
 #'     \ifelse{html}{\code{\link[NVIdb:login]{NVIdb::login("PJS")}}}{\code{NVIdb::login("PJS")}}
 #'      and \code{\link{exclude_from_PJSdata}}.
@@ -85,9 +79,11 @@
 #' #
 retrieve_PJSdata <- function(year = NULL,
                              selection_parameters = NULL,
-                             FUN = NULL,
-                             select_statement = NULL,
                              ...) {
+
+  # CAPTURE DOTS ----
+  # Used below to ensure correct arguments for nested functions
+  dots <- list(...)
 
   # ARGUMENT CHECKING ----
   # Object to store check-results
@@ -112,11 +108,12 @@ retrieve_PJSdata <- function(year = NULL,
   selection_parameters <- set_disease_parameters(selection_parameters = selection_parameters)
 
   # CHECK FOR DEPRECATED ARGUMENTS ----
-  if (!is.null(FUN)) {
+  if (!is.null(dots[[1]]) && "FUN" %in% names(dots)) {
+    # if (!is.null(FUN)) {
     w_msg <- paste("The argument 'FUN' is deprecated.",
                    "'FUN' should be included as input to 'selection_parameters' instead.")
     if (is.null(selection_parameters$FUN)) {
-      selection_parameters$FUN <- FUN
+      selection_parameters$FUN <- dots$FUN
       warning(paste(w_msg,
                     "The input to 'FUN' has been transferred to 'selection_parameters$FUN'."))
     } else {warning(paste(w_msg,
@@ -124,11 +121,12 @@ retrieve_PJSdata <- function(year = NULL,
     }
   }
 
-  if (!is.null(select_statement)) {
+  if (!is.null(dots[[1]]) && "select_statement" %in% names(dots)) {
+    #  if (!is.null(select_statement)) {
     w_msg <- paste("The argument 'select_statement' is deprecated.",
                    "'select_statement' should be included in input to 'selection_parameters' instead.")
     if (is.null(selection_parameters$select_statement)) {
-      selection_parameters$select_statement <- select_statement
+      selection_parameters$select_statement <- dots$select_statement
       warning(paste(w_msg,
                     "The input to 'select_statement' has been transferred to 'selection_parameters$select_statement'."))
     } else {warning(paste(w_msg,
@@ -212,7 +210,10 @@ retrieve_PJSdata <- function(year = NULL,
   dbsource <- gsub(pattern = "PJSdata[[:digit:]]*", replacement = "v2_sak_m_res", x = dbsource)
 
   # OPEN ODBC CHANNEL ----
-  journal_rapp <- NVIdb::login_PJS(dbinterface = "odbc", ...)
+  # journal_rapp <- NVIdb::login(dbservice = "PJS", dbinterface = "odbc", ...)
+  dots1 <- intersect(setdiff(names(formals(NVIdb::login)), c("dbservice", "dbinterface")), names(dots))
+  journal_rapp <- do.call(NVIdb::login, append(dots[dots1], list(dbservice = "PJS", dbinterface = "odbc")))
+
   PJSdata <- vector("list", length = length(select_statement))
 
   # PERFORM SELECTION AND STANDARDISATION FOR EACH SELECT STATEMENT ----
@@ -225,7 +226,9 @@ retrieve_PJSdata <- function(year = NULL,
     PJSdata[[i]] <- standardize_PJSdata(PJSdata = PJSdata[[i]], dbsource = dbsource[i])
 
     # Exclude ring trials, quality assurance and samples from abroad
-    PJSdata[[i]] <- exclude_from_PJSdata(PJSdata = PJSdata[[i]], ...)
+    # PJSdata[[i]] <- exclude_from_PJSdata(PJSdata = PJSdata[[i]], ...)
+    dots2 <- intersect(setdiff(names(formals(exclude_from_PJSdata)), c("PJSdata")), names(dots))
+    PJSdata[[i]] <- do.call(exclude_from_PJSdata, append(dots[dots2], list(PJSdata = PJSdata[[i]])))
   }
 
   # CLOSE ODBC CHANNEL ----

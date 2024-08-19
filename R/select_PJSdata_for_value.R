@@ -1,6 +1,6 @@
 #' @title Selects a subset of PJSdata based on code values
 #' @description Selects a subset of PJSdata based on code values.
-#'    The function accepts code values ending with "%" to indicate
+#'    The function accepts code values ending with "\%" to indicate
 #'    that sub levels should be included.
 #' @details The function is intended for cases where the select
 #'    query sent to PJS will be very complicated if the selection
@@ -60,7 +60,7 @@ select_PJSdata_for_value <- function(data,
   index <- c("aar", "ansvarlig_seksjon", "innsendelsenr", "saksnr")
   for (k in 1:length(code_column)) {
     index <- union(index,
-                   NVIdb::PJS_levels[which(NVIdb::PJS_levels[1:10, which(NVIdb::PJS_levels[which(NVIdb::PJS_levels$variable == code_column[k]), ] == 1)[1]] == 1), "variable"]
+                   NVIpjsr::PJS_levels[which(NVIpjsr::PJS_levels[1:10, which(NVIpjsr::PJS_levels[which(NVIpjsr::PJS_levels$variable == code_column[k]), ] == 1)[1]] == 1), "variable"]
 )
   }
   # Keeps only variables that exist in PJSdata. Necessary as resnr will not be in PJSdata.
@@ -85,8 +85,8 @@ select_PJSdata_for_value <- function(data,
 
 
   # Find records deviating from detected code values
-  ktr <- ktr %>%
-    dplyr::rowwise() %>%
+  ktr <- ktr |>
+    dplyr::rowwise() |>
     dplyr::mutate(select = max(unlist(lapply(value_2_check, grep, x = combined_codes)), 0))
 
   # if (!is.null(include_missing_for) & length(code_column == 1)) {

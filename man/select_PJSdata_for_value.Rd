@@ -30,7 +30,7 @@ A \code{data.frame}.
 }
 \description{
 Selects a subset of PJSdata based on code values.
-   The function accepts code values ending with "%" to indicate
+   The function accepts code values ending with "\%" to indicate
    that sub levels should be included.
 }
 \details{
