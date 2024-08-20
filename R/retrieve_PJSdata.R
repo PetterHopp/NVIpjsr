@@ -84,6 +84,7 @@ retrieve_PJSdata <- function(year = NULL,
   # CAPTURE DOTS ----
   # Used below to ensure correct arguments for nested functions
   dots <- list(...)
+  if (length(dots) == 0) {dots <- NULL}
 
   # ARGUMENT CHECKING ----
   # Object to store check-results
