@@ -1,9 +1,11 @@
-# NVIpjsr 0.1.1 - (2024-08-19)
+# NVIpjsr 0.1.2 - (2024-08-20)
 
-## New features:
+## Bug fixes:
 
--
+- removed error for `retrieve_PJSdata` when no additional arguments. 
 
+
+# NVIpjsr 0.1.1 - (2024-08-20)
 
 ## Bug fixes:
 
@@ -21,11 +23,6 @@
 - `NVIpjsr` now uses the internal pipe "|>" and therefore require R >= 4.1.0.
 
 - simplified code for some functions.
-
-
-## BREAKING CHANGES:
-
--
 
 
 # NVIpjsr 0.1.0 - (2024-05-03)
