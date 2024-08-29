@@ -12,7 +12,7 @@
 
 ## Other changes:
 
--
+- Created startup message when `NVIdb` is attached after `NVIpjsr`.
 
 
 ## BREAKING CHANGES:
@@ -24,7 +24,7 @@
 
 ## Bug fixes:
 
-- removed error for `retrieve_PJSdata` when no additional arguments. 
+- removed error for `retrieve_PJSdata` when no additional arguments.
 
 
 # NVIpjsr 0.1.1 - (2024-08-20)
@@ -52,7 +52,7 @@
 ## First release
 
 Tools for retrieving, standardising, wrangling, preparing and reporting PJS data
-and EOS data. `NVIpjsr` was created by separating out PJS-functions from `NVIdb`. 
+and EOS data. `NVIpjsr` was created by separating out PJS-functions from `NVIdb`.
 The following functions were copied from `NVIdb v0.11.3`:
 
 - `add_PJS_code_description` Translates PJS codes to descriptive text
