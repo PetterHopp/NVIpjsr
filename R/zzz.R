@@ -9,7 +9,8 @@
   setHook(packageEvent("NVIdb", "attach"), function(...) {
     packageStartupMessage(
       "You have loaded 'NVIdb' after 'NVIpjsr' - this is likely ",
-      "to cause problems.\nIf you need functions from both 'NVIdb' and 'NVIpjsr', ",
+      "to cause problems as functions in NVIpjsr are masked by old versions ",
+      "in NVIdb.\nIf you need functions from both 'NVIdb' and 'NVIpjsr', ",
       "please load 'NVIdb' first, then 'NVIpjsr':\nlibrary(NVIdb); library(NVIpjsr)"
     )
   })
