@@ -181,24 +181,3 @@ list_parameters <- function(varname = NULL, variables, PJS_variable_type, transl
   return(parameters)
 }
 
-# variables <- c("01", "0102", "02023%")
-# varname <- "hensikt2select"
-# PJS_variable_type <- "Hensikt"
-# translation_table <- NVIdb::read_PJS_codes_2_text()
-#
-# Kode <- variables
-# parameters <- as.data.frame(Kode)
-# # report_selection_parameters <- as.data.frame(matrix(nrow = 1, ncol = 4,
-#                                              dimnames = list(NULL, col_names = c("Status", "Variable", "Kode", "Beskrivelse"))))
-#
-# if (max(aar) != min(aar)) {
-#   reportaar <- paste0(min(aar), "_", max(aar))
-# } else {
-#   reportaar <- max(aar)
-# }
-# reportaar <- paste(unique(c(min(aar), max(aar))), collapse = "-")
-# parameters <- as.data.frame(matrix(as.character(reportaar),
-#                                    nrow = 1,
-#                                    dimnames = list(NULL, "Kode"))) %>%
-#   dplyr::mutate(Status = "Selektert", Variable = "År")
-# report_selection_parameters <- bind_rows(report_selection_parameters, parameters)
