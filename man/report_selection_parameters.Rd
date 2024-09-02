@@ -32,7 +32,7 @@ Table with the code and the description for PJS variables. Defaults to
 "PJS_codes_2_text".}
 }
 \value{
-[\code{data.frame}] with the selection parameters suited for report.
+[\code{data.frame}] with the selection parameters prepared for reporting.
 }
 \description{
 Reports the selection parameters to a data frame.
@@ -42,7 +42,7 @@ The selection parameters can be set by using
     \code{\link{set_disease_parameters}}.
     or by giving a list of similar format for input to
     \code{selection_parameters}, see the build_query-functions for necessary
-    input
+    input.
 }
 \examples{
 \dontrun{

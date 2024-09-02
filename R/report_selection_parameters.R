@@ -89,6 +89,12 @@ report_selection_parameters <- function(year = NULL,
                                 translation_table = translation_table)
   report <- rbind(report, parameters)
 
+  # analyttt2select
+  parameters <- list_parameters(variables = selection_parameters$analytt2select,
+                                PJS_variable_type = "Analytt",
+                                translation_table = translation_table)
+  report <- rbind(report, parameters)
+
   # metode2select
   parameters <- list_parameters(variables = selection_parameters$metode2select,
                                 PJS_variable_type = "Metode",
@@ -114,7 +120,7 @@ report_selection_parameters <- function(year = NULL,
   report <- rbind(report, parameters)
 
   # Additional parameters
-  if(!is.null(additional_parameters) && length(additional_parameters) > 0) {
+  if (!is.null(additional_parameters) && length(additional_parameters) > 0) {
     for (i in c(1:length(additional_parameters))) {
       # i <- 1
       variables <- additional_parameters[[i]]
@@ -142,10 +148,10 @@ report_selection_parameters <- function(year = NULL,
 # Data for reporting selection criteria
 
 list_parameters <- function(varname = NULL, variables, PJS_variable_type, translation_table) {
-  if (is.null(varname)){
+  if (is.null(varname)) {
     varname <- deparse(substitute(variables))
   }
-  parameters <- as.data.frame(list(c("Status" = NA, "Variable" = NA, "Kode" = NA, "Beskrivelse" = NA)))
+  parameters <- as.data.frame(list("Status" = NA, "Variable" = NA, "Kode" = NA, "Beskrivelse" = NA))
 
   if (!is.null(variables)) {
     Kode <- trimws(variables)
@@ -180,4 +186,3 @@ list_parameters <- function(varname = NULL, variables, PJS_variable_type, transl
 
   return(parameters)
 }
-
