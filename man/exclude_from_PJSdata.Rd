@@ -24,12 +24,12 @@ Performs common subsetting of PJS-data by excluding rows
 \details{
 Performs common cleaning of PJSdata by removing samples that usually
     should not be included when analyzing PJSdata. The cleaning is dependent
-    on having the following columns eier_lokalitettype, eierlokalitetnr and
+    on having the following columns: eier_lokalitettype, eier_lokalitetnr and
     hensiktkode.
 
     \code{abroad = "exclude"} will exclude samples that have eier_lokalitet
-    of type "land" and eier_lokalitetnr being different from NO. Samples
-    registered on other types than LAND are not excluded.
+    of type "LAND" and eier_lokalitetnr being different from "NO". Samples
+    registered on other types than "LAND" are not excluded.
 
     \code{quality = "exclude"} will exclude all samples registered s quality
     assurance and ring trials, i.e. hensiktkode starting with "09".
@@ -37,7 +37,7 @@ Performs common cleaning of PJSdata by removing samples that usually
 \examples{
 \dontrun{
 # cleaning sak_m_res
- sak_m_res <- exclude_from_PJSdata(PJSdata = sak_m_res,
+sak_m_res <- exclude_from_PJSdata(PJSdata = sak_m_res,
                                    abroad = "exclude",
                                    quality = "exclude")
 }
