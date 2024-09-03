@@ -85,18 +85,18 @@ build_query_one_disease <- function(year, analytt, hensikt = NULL, metode = NULL
   checkmate::reportAssertions(checks)
 
 
-  select_year <- NVIdb::build_sql_select_year(year = year, varname = "aar")
+  select_year <- build_sql_select_year(year = year, varname = "aar")
 
-  select_hensikt <- NVIdb::build_sql_select_code(values = hensikt, varname = "hensiktkode")
+  select_hensikt <- build_sql_select_code(values = hensikt, varname = "hensiktkode")
   if (nchar(select_hensikt) > 0) {select_hensikt <- paste(select_hensikt, "OR")}
 
   # Select metodekode
-  select_metode <- NVIdb::build_sql_select_code(values = metode, varname = "metodekode")
+  select_metode <- build_sql_select_code(values = metode, varname = "metodekode")
   if (nchar(select_metode) > 0) {select_metode <- paste(select_metode, "OR")}
 
-  select_konkl_analytt <- NVIdb::build_sql_select_code(values = analytt, varname = "konkl_analyttkode")
+  select_konkl_analytt <- build_sql_select_code(values = analytt, varname = "konkl_analyttkode")
 
-  select_res_analytt <- NVIdb::build_sql_select_code(values = analytt, varname = "analyttkode_funn")
+  select_res_analytt <- build_sql_select_code(values = analytt, varname = "analyttkode_funn")
 
   # Build query
   selection_v2_sak_m_res <- paste("SELECT * FROM v2_sak_m_res",
@@ -112,9 +112,9 @@ build_query_one_disease <- function(year, analytt, hensikt = NULL, metode = NULL
   selection_v2_sak_m_res <- gsub(' +', ' ', selection_v2_sak_m_res)
 
 
-  select_year <- NVIdb::build_sql_select_year(year = year, varname = "sak.aar")
+  select_year <- build_sql_select_year(year = year, varname = "sak.aar")
 
-  select_analytt <- NVIdb::build_sql_select_code(values = analytt, varname = "analyttkode")
+  select_analytt <- build_sql_select_code(values = analytt, varname = "analyttkode")
 
   # Build query
   selection_sakskonklusjon <- paste("SELECT v_sakskonklusjon.*,",

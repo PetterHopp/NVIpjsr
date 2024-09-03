@@ -247,111 +247,111 @@ add_new_column <- function(data,
 ### ----
 
 ### read_csv_file ----
-#' @title Read csv-file
-#' @description Reads files with data .
-#' @details Used to read csv files with data for use in scripts.
-#'
-#' @param filename Filename of the file that should be read
-#' @param from_path Path for the source file
-#' @param options [\code{list}]\cr
-#' The options colClasses and fileEncoding. Defaults to \code{colClasses = NA}
-#'     and \code{fileEncoding <- "UTF-8"}.
-# #' @param columnclasses Predefine format (numeric or character) of the variables
-# #' @param fileencoding usually UTF-8
-#' @param \dots	Other arguments to be passed to
-#'     \ifelse{html}{\code{\link[data.table:fread]{data.table::fread}}}{\code{data.table::fread}}.
-
-#' @return A data.frame with the data from the source file.
-#' @author Petter Hopp Petter.Hopp@@vetinst.no
-#'
-#' @examples
-#' \dontrun{
-#' read_csv_file(filename, from_path, columnclasses, fileencoding)
-#' }
-#' @keywords internal
-
-read_csv_file <- function(filename, from_path, options = NULL, ...) {
-
-  # Removes trailing "/" and "\\".
-  from_path <- sub("/+$|\\\\+$", "", from_path)
-  # # Check if from_path ends in "/". If not, "/" is added.
-  # if (!endsWith(from_path, "/")) { from_path <- paste0(from_path, "/") }
-
-  # if (is.null(sep)) {sep <- ";"}
-  # if (!exists("dec")) {dec <- ","}
-
-  if (is.null(options)) {
-    options <- list(colClasses = NA, fileEncoding = "UTF-8")
-  } else {
-    if (is.null(options$colClasses)) {options$colClasses <- NA}
-    if (is.null(options$fileEncoding)) {options$fileEncoding <- "UTF-8"}
-  }
-  # Get creation date of source file
-  if (dir.exists(from_path)) {
-    if (file.exists(file.path(from_path, filename))) {
-      df <- data.table::fread(file = file.path(from_path, filename),
-                              colClasses = options$colClasses,
-                              encoding = options$fileEncoding,
-                              showProgress = FALSE,
-                              data.table = FALSE,
-                              ...)
-      # df <- utils::read.table(file = file.path(from_path, filename),
-      #                         colClasses = options$colClasses,
-      #                        fileEncoding = options$fileEncoding,
-      #                         stringsAsFactors = options$stringsAsFactors,
-      #                        sep = sep,
-      #                        dec = dec,
-      #                        header = TRUE,
-      #                        ...)
-    }
-  }
-  return(df)
-  # return(as.data.frame(df))
-}
+# #' @title Read csv-file
+# #' @description Reads files with data .
+# #' @details Used to read csv files with data for use in scripts.
+# #'
+# #' @param filename Filename of the file that should be read
+# #' @param from_path Path for the source file
+# #' @param options [\code{list}]\cr
+# #' The options colClasses and fileEncoding. Defaults to \code{colClasses = NA}
+# #'     and \code{fileEncoding <- "UTF-8"}.
+# # #' @param columnclasses Predefine format (numeric or character) of the variables
+# # #' @param fileencoding usually UTF-8
+# #' @param \dots	Other arguments to be passed to
+# #'     \ifelse{html}{\code{\link[data.table:fread]{data.table::fread}}}{\code{data.table::fread}}.
+#
+# #' @return A data.frame with the data from the source file.
+# #' @author Petter Hopp Petter.Hopp@@vetinst.no
+# #'
+# #' @examples
+# #' \dontrun{
+# #' read_csv_file(filename, from_path, columnclasses, fileencoding)
+# #' }
+# #' @keywords internal
+#
+# read_csv_file <- function(filename, from_path, options = NULL, ...) {
+#
+#   # Removes trailing "/" and "\\".
+#   from_path <- sub("/+$|\\\\+$", "", from_path)
+#   # # Check if from_path ends in "/". If not, "/" is added.
+#   # if (!endsWith(from_path, "/")) { from_path <- paste0(from_path, "/") }
+#
+#   # if (is.null(sep)) {sep <- ";"}
+#   # if (!exists("dec")) {dec <- ","}
+#
+#   if (is.null(options)) {
+#     options <- list(colClasses = NA, fileEncoding = "UTF-8")
+#   } else {
+#     if (is.null(options$colClasses)) {options$colClasses <- NA}
+#     if (is.null(options$fileEncoding)) {options$fileEncoding <- "UTF-8"}
+#   }
+#   # Get creation date of source file
+#   if (dir.exists(from_path)) {
+#     if (file.exists(file.path(from_path, filename))) {
+#       df <- data.table::fread(file = file.path(from_path, filename),
+#                               colClasses = options$colClasses,
+#                               encoding = options$fileEncoding,
+#                               showProgress = FALSE,
+#                               data.table = FALSE,
+#                               ...)
+#       # df <- utils::read.table(file = file.path(from_path, filename),
+#       #                         colClasses = options$colClasses,
+#       #                        fileEncoding = options$fileEncoding,
+#       #                         stringsAsFactors = options$stringsAsFactors,
+#       #                        sep = sep,
+#       #                        dec = dec,
+#       #                        header = TRUE,
+#       #                        ...)
+#     }
+#   }
+#   return(df)
+#   # return(as.data.frame(df))
+# }
 
 ###   ----
 
 ### set_name_vector ----
-#' @title set_name_vector
-#' @description Ensures that all elements in a vector are named.
-#' @details Used to name all elements in vectors with column names that should be added to data frames
-#'     Thereby it can easily be differentiated between standard column names (vector elements) and
-#'     wanted column names in the generated tables (names). The user can input a named vector to the function.
-#'     This is considered easier for the user to understand than inputting two vectors.
-#'
-#'     This function is used in different add-functions before calling add_new_variable
-#'
-#' @param colname_vector A unnamed, partly named or fully named vector of character variables input in add-functions
+# #' @title set_name_vector
+# #' @description Ensures that all elements in a vector are named.
+# #' @details Used to name all elements in vectors with column names that should be added to data frames
+# #'     Thereby it can easily be differentiated between standard column names (vector elements) and
+# #'     wanted column names in the generated tables (names). The user can input a named vector to the function.
+# #'     This is considered easier for the user to understand than inputting two vectors.
+# #'
+# #'     This function is used in different add-functions before calling add_new_variable
+# #'
+# #' @param colname_vector A unnamed, partly named or fully named vector of character variables input in add-functions
 
-#' @return A named vector where previously unnamed elements have been named with the element value as name.
-#'
-#' @author Petter Hopp Petter.Hopp@@vetinst.no
-#'
-#' @examples
-#' \dontrun{
-#' new_columns <- c("name11" = "column1", "name2" = "column2", "column3")
-#' new_columns <- set_name_vector(new_columns)
-#' }
-#' @keywords internal
+# #' @return A named vector where previously unnamed elements have been named with the element value as name.
+# #'
+# #' @author Petter Hopp Petter.Hopp@@vetinst.no
+# #'
+# #' @examples
+# #' \dontrun{
+# #' new_columns <- c("name11" = "column1", "name2" = "column2", "column3")
+# #' new_columns <- set_name_vector(new_columns)
+# #' }
+# #' @keywords internal
 
-# Function that ensure that all elements in a vector are named
-# For elements that aren't named, the vector value are used as name
-set_name_vector <- function(colname_vector) {
-  # Existing names to the vector name
-  name <- names(colname_vector)
-
-  # vector values to unnamed vector
-  column <- unname(colname_vector)
-
-  # Check if any elements are named
-  if (!is.null(name)) {
-    # if some elements are named, move element value to unnamed elements
-    for (i in 1:length(name)) {
-      if (name[i] == "") {name[i] <- column[i]}
-    }
-
-    # if no elements are named, set element values as names
-  } else {name <- column }
-
-  return(stats::setNames(colname_vector, name))
-}
+# # Function that ensure that all elements in a vector are named
+# # For elements that aren't named, the vector value are used as name
+# set_name_vector <- function(colname_vector) {
+#   # Existing names to the vector name
+#   name <- names(colname_vector)
+#
+#   # vector values to unnamed vector
+#   column <- unname(colname_vector)
+#
+#   # Check if any elements are named
+#   if (!is.null(name)) {
+#     # if some elements are named, move element value to unnamed elements
+#     for (i in 1:length(name)) {
+#       if (name[i] == "") {name[i] <- column[i]}
+#     }
+#
+#     # if no elements are named, set element values as names
+#   } else {name <- column }
+#
+#   return(stats::setNames(colname_vector, name))
+# }

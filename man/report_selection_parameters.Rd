@@ -32,7 +32,7 @@ Table with the code and the description for PJS variables. Defaults to
 "PJS_codes_2_text".}
 }
 \value{
-[\code{data.frame}] with the selection parameters suited for report.
+[\code{data.frame}] with the selection parameters prepared for reporting.
 }
 \description{
 Reports the selection parameters to a data frame.
@@ -42,11 +42,29 @@ The selection parameters can be set by using
     \code{\link{set_disease_parameters}}.
     or by giving a list of similar format for input to
     \code{selection_parameters}, see the build_query-functions for necessary
-    input
+    input.
+
+When using the argument additional_parameters the input should be a named list.
+    The name of each element should be constructed by the "variable type", "2"
+    and thereafter either "select" or "delete", i.e. "metode2delete". The
+    variable type must be one of the variable types for which the code can be
+    automatically translated to description text, see
+    \code{\link{add_PJS_code_description}}.
 }
 \examples{
 \dontrun{
+# Reads translation table for PJS codes
+PJS_codes_2_text <- read_PJS_codes_2_text()
 
+selection_parameters <- set_disease_parameters(
+  hensikt2select = c("0100108018", "0100109003", "0100111003", "0800109"),
+  analytt2select = c("01220104\%", "1502010235"),
+  metode2select = c("070070", "070231", "010057", "060265"),
+  FUN = build_query_one_disease)
+
+selection <- report_selection_parameters(year = 2024,
+                                         selection_parameters = selection_parameters,
+                                         translation_table = PJS_codes_2_text)
 }
 
 }

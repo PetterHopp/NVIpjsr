@@ -89,34 +89,34 @@ build_query_outbreak <- function(period,
   checkmate::reportAssertions(checks)
 
 
-  select_year <- NVIdb::build_sql_select_year(year = period, varname = "aar")
+  select_year <- build_sql_select_year(year = period, varname = "aar")
 
-  select_hensikt <- NVIdb::build_sql_select_code(values = hensikt, varname = "hensiktkode")
+  select_hensikt <- build_sql_select_code(values = hensikt, varname = "hensiktkode")
   if (nchar(select_hensikt) > 0) {select_codes <- select_hensikt}
 
   # Select utbruddsid
-  select_utbrudd <- NVIdb::build_sql_select_code(values = utbrudd, varname = "utbrudd_id")
+  select_utbrudd <- build_sql_select_code(values = utbrudd, varname = "utbrudd_id")
   if (nchar(select_utbrudd) > 0) {
     if (nchar(select_codes) > 0) {select_codes <- paste(select_codes, "OR")}
     select_codes <- paste(select_codes, select_utbrudd)
   }
 
   # Select metodekode
-  select_metode <- NVIdb::build_sql_select_code(values = metode, varname = "metodekode")
+  select_metode <- build_sql_select_code(values = metode, varname = "metodekode")
   if (nchar(select_metode) > 0) {
     if (nchar(select_codes) > 0) {select_codes <- paste(select_codes, "OR")}
     select_codes <- paste(select_codes, select_metode)
   }
 
   # Select konkl_analyttkode
-  select_konkl_analytt <- NVIdb::build_sql_select_code(values = analytt, varname = "konkl_analyttkode")
+  select_konkl_analytt <- build_sql_select_code(values = analytt, varname = "konkl_analyttkode")
   if (nchar(select_konkl_analytt) > 0) {
     if (nchar(select_codes) > 0) {select_codes <- paste(select_codes, "OR")}
     select_codes <- paste(select_codes, select_konkl_analytt)
   }
 
   # Select res_analyttkode
-  select_res_analytt <- NVIdb::build_sql_select_code(values = analytt, varname = "analyttkode_funn")
+  select_res_analytt <- build_sql_select_code(values = analytt, varname = "analyttkode_funn")
   if (nchar(select_res_analytt) > 0) {
     if (nchar(select_codes) > 0) {select_codes <- paste(select_codes, "OR")}
     select_codes <- paste(select_codes, select_res_analytt)
@@ -136,10 +136,10 @@ build_query_outbreak <- function(period,
   # selection_v2_sak_m_res <- gsub("( ", "(", selection_v2_sak_m_res, fixed = TRUE)
 
 
-  select_year <- NVIdb::build_sql_select_year(year = period, varname = "sak.aar")
+  select_year <- build_sql_select_year(year = period, varname = "sak.aar")
 
   if (!is.null(analytt)) {
-    select_analytt <- NVIdb::build_sql_select_code(values = analytt, varname = "analyttkode")
+    select_analytt <- build_sql_select_code(values = analytt, varname = "analyttkode")
     select_analytt <- paste0("AND (",
                              select_analytt,
                              ")")
