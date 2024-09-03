@@ -6,6 +6,13 @@
 #'     \code{selection_parameters}, see the build_query-functions for necessary
 #'     input.
 #'
+#' When using the argument additional_parameters the input should be a named list.
+#'     The name of each element should be constructed by the "variable type", "2"
+#'     and thereafter either "select" or "delete", i.e. "metode2delete". The
+#'     variable type must be one of the variable types for which the code can be
+#'     automatically translated to description text, see
+#'     \code{\link{add_PJS_code_description}}.
+#'
 #' @param year [\code{numeric}]\cr
 #' One year or a vector giving the first and last years that should be selected.
 #'     Defaults to \code{NULL}.
@@ -26,7 +33,18 @@
 #' @export
 #' @examples
 #' \dontrun{
+#' # Reads translation table for PJS codes
+#' PJS_codes_2_text <- read_PJS_codes_2_text()
 #'
+#' selection_parameters <- set_disease_parameters(
+#'   hensikt2select = c("0100108018", "0100109003", "0100111003", "0800109"),
+#'   analytt2select = c("01220104%", "1502010235"),
+#'   metode2select = c("070070", "070231", "010057", "060265"),
+#'   FUN = build_query_one_disease)
+#'
+#' selection <- report_selection_parameters(year = 2024,
+#'                                          selection_parameters = selection_parameters,
+#'                                          translation_table = PJS_codes_2_text)
 #' }
 #'
 report_selection_parameters <- function(year = NULL,
@@ -86,6 +104,12 @@ report_selection_parameters <- function(year = NULL,
   # hensikt2select
   parameters <- list_parameters(variables = selection_parameters$hensikt2select,
                                 PJS_variable_type = "Hensikt",
+                                translation_table = translation_table)
+  report <- rbind(report, parameters)
+
+  # utbrudd2select
+  parameters <- list_parameters(variables = selection_parameters$utbrudd2select,
+                                PJS_variable_type = "Utbrudd",
                                 translation_table = translation_table)
   report <- rbind(report, parameters)
 
