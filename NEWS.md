@@ -1,8 +1,8 @@
-# NVIpjsr 0.1.2.9000 - (2024-##-##)
+# NVIpjsr 0.1.2.9002 - (2024-##-##)
 
 ## New features:
 
--
+- Created `report_selection_parameters` which generates a data frame with the selection parameters for reporting these to for example an Excel file.
 
 
 ## Bug fixes:
@@ -12,7 +12,7 @@
 
 ## Other changes:
 
--
+- Created startup message when `NVIdb` is attached after `NVIpjsr`.
 
 
 ## BREAKING CHANGES:
@@ -24,7 +24,7 @@
 
 ## Bug fixes:
 
-- removed error for `retrieve_PJSdata` when no additional arguments. 
+- removed error for `retrieve_PJSdata` when no additional arguments.
 
 
 # NVIpjsr 0.1.1 - (2024-08-20)
@@ -52,7 +52,7 @@
 ## First release
 
 Tools for retrieving, standardising, wrangling, preparing and reporting PJS data
-and EOS data. `NVIpjsr` was created by separating out PJS-functions from `NVIdb`. 
+and EOS data. `NVIpjsr` was created by separating out PJS-functions from `NVIdb`.
 The following functions were copied from `NVIdb v0.11.3`:
 
 - `add_PJS_code_description` Translates PJS codes to descriptive text
