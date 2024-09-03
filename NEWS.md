@@ -2,7 +2,7 @@
 
 ## New features:
 
--
+- Created `report_selection_parameters` which generates a data frame with the selection parameters for reporting these to for example an Excel file.
 
 
 ## Bug fixes:
