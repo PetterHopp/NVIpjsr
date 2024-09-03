@@ -4,6 +4,7 @@
 #'
 #' @return If \code{NVIpjsr} is attached before \code{NVIdb}, a startup message
 #'    is created when \code{NVIdb} is attached.
+#' @noRd
 
 .onAttach <- function(libname, pkgname) {
   setHook(packageEvent("NVIdb", "attach"), function(...) {
