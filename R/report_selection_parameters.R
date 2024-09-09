@@ -59,10 +59,11 @@ report_selection_parameters <- function(year = NULL,
   checkmate::assert_integerish(year,
                                lower = 1990, upper = as.numeric(format(Sys.Date(), "%Y")),
                                min.len = 1,
-                               null.ok = TRUE,
+                               any.missing = FALSE, all.missing = FALSE,
                                add = checks)
   NVIcheckmate::assert(checkmate::check_file_exists(x = selection_parameters, access = "r"),
-                       checkmate::check_list(x = selection_parameters),
+                       checkmate::check_list(x = selection_parameters, min.len = 1,
+                               all.missing = FALSE),
                        combine = "or",
                        comment = "The argument selection_parameter must either be a file with selection parameters or a list with selection parameters",
                        add = checks)

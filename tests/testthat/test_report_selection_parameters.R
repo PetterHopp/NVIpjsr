@@ -150,3 +150,43 @@ test_that("report disease parameters using parameter file", {
                      "Selektert", "Selektert", "Selektert", "Selektert", "Selektert",
                      "Selektert"))
 })
+
+
+
+test_that("errors for report_selection_parameters", {
+  linewidth <- options("width")
+  options(width = 80)
+
+  # Reads translation table for PJS codes
+  PJS_codes_2_text <- read_PJS_codes_2_text()
+
+  expect_error(report_selection_parameters(year = NA,
+                                           selection_parameters = list("analytt2select" = c("01220104%", "1502010235"),
+                                                                       "FUN" = build_query_one_disease),
+                                           additional_parameters = NULL,
+                                           translation_table = PJS_codes_2_text),
+               regexp = "Variable 'year': Contains missing values")
+
+  expect_error(report_selection_parameters(year = 2022,
+                                           selection_parameters = NA,
+                                           additional_parameters = NULL,
+                                           translation_table = PJS_codes_2_text),
+               regexp = "Variable 'selection_parameters': One of the following must apply:")
+
+  expect_error(report_selection_parameters(year = 2022,
+                                           selection_parameters = list("analytt2select" = c("01220104%", "1502010235"),
+                                                                       "FUN" = build_query_one_disease),
+                                           additional_parameters = NA,
+                                           translation_table = PJS_codes_2_text),
+               regexp = "Variable 'additional_parameters': Must be of type 'list'")
+
+  expect_error(report_selection_parameters(year = 2022,
+                                           selection_parameters = list("analytt2select" = c("01220104%", "1502010235"),
+                                                                       "FUN" = build_query_one_disease),
+                                           additional_parameters = NULL,
+                                           translation_table = "PJS_codes_2_text"),
+               regexp = "Variable 'translation_table': Must be of type 'data.frame'")
+
+
+  options(width = unlist(linewidth))
+})
