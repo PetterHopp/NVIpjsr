@@ -2,7 +2,7 @@
 
 ## New features:
 
-- Created `report_selection_parameters` which generates a data frame with the selection parameters for reporting these to for example an Excel file.
+- Created `report_selection_parameters` which generates a data frame with the selection parameters for reporting these to an Excel file or others.
 
 
 ## Bug fixes:
@@ -35,14 +35,14 @@
 
 - The build_query-functions now correctly calls `NVIpjsr::build_sql_select_year` and `NVIpjsr::build_sql_select_code`.
 
-- `choose_PJS_levls` now correctly calls `NVIpjsr::PJS_levels`.
+- `choose_PJS_levels` now correctly calls `NVIpjsr::PJS_levels`.
 
 - `select_PJSdata_for_value` now correctly calls `NVIpjsr::PJS_levels`.
 
 
 ## Other changes:
 
-- `NVIpjsr` now uses the internal pipe "|>" and therefore require R >= 4.1.0.
+- `NVIpjsr` now uses the internal pipe "|>" and therefore requires R >= 4.1.0.
 
 - simplified code for some functions.
 
