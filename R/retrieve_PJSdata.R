@@ -185,7 +185,7 @@ retrieve_PJSdata <- function(year = NULL,
   # check if the select statements are named. If not, give them names
   # if there are no names for the list entries
   if (is.null(names(select_statement))) {
-    select_statement_names <- rep("", c(1:length(select_statement)))
+    select_statement_names <- rep("", length(select_statement))
   } else {
     # Naming elements that miss names if some are named
     select_statement_names <- names(select_statement)
