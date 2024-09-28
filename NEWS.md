@@ -7,7 +7,9 @@
 
 ## Bug fixes:
 
--
+- `set_disease_parameters` now keeps the names of the elements if using named list in the `selection_statement`.
+
+- `retrieve_PJSdata` now don't get an error if all list elements in the `selection_parameters$selection_statement` is unnamed.
 
 
 ## Other changes:
