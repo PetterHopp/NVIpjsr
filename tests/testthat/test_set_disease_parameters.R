@@ -95,11 +95,11 @@ test_that("set disease parameters by direct input", {
                  fixed = TRUE)
 
   parameters <- suppressWarnings(set_disease_parameters(hensikt2select = c("0100108018", "0100109003", "0100111003"),
-                                        hensikt2delete = c("0800109"),
-                                        utbrudd2select = "22",
-                                        metode2select = NULL,
-                                        art2select = c("01%"),
-                                        missing_art = "non_selected_hensikt"))
+                                                        hensikt2delete = c("0800109"),
+                                                        utbrudd2select = "22",
+                                                        metode2select = NULL,
+                                                        art2select = c("01%"),
+                                                        missing_art = "non_selected_hensikt"))
 
   expect_equal(parameters,
                list("purpose" = NULL,
@@ -179,7 +179,7 @@ test_that("set disease parameters using parameter file", {
   )
 
   expect_warning(set_disease_parameters(file = file.path(tempdir(), "PD.R")),
-                               regexp = "The argument 'file' is deprecated")
+                 regexp = "The argument 'file' is deprecated")
 
   parameters <- suppressWarnings(set_disease_parameters(file = file.path(tempdir(), "PD.R")))
   expect_equal(parameters,
@@ -209,6 +209,51 @@ test_that("set disease parameters using parameter file", {
                     "include_missing_art" = "never",
                     "FUN" = NULL,
                     "select_statement" = NULL))
+})
+
+
+test_that("set disease parameters using selection_parameters with select_statement", {
+  # Set up of selection_parameters
+  hensikt = c("0100101003", "0100102002", "0100103002")
+  utbrudd = c("32")
+  analytt = c("01110201","1502010254")
+  metode <- c("070203","070355")
+
+  # Make select statement
+  select_statementX <- build_query_outbreak(period = 2024,
+                                            utbrudd = utbrudd,
+                                            hensikt = hensikt,
+                                            analytt = analytt,
+                                            metode = metode)
+
+  # Include select sentence for view v_innsendelse
+  sql_select_year <- build_sql_select_year(year = 2024, varname = "aar")
+  select_statementX[[3]] <-   paste("SELECT aar, ansvarlig_seksjon,",
+                                    "innsendelsesnummer, anamnese",
+                                    "FROM v_innsendelse",
+                                    "WHERE",
+                                    sql_select_year)
+
+  # generate list with selection_parameters
+  selection_parametersX = list(hensikt2select = hensikt,
+                               utbrudd2select = utbrudd,
+                               metode2select = metode,
+                               analytt2select = analytt,
+                               select_statement = select_statementX)
+
+  # generate selection_parameters
+  selection_parameters <- set_disease_parameters(selection_parameters = selection_parametersX)
+
+  expect_identical(selection_parametersX$hensikt2select, selection_parameters$hensikt2select)
+  expect_identical(selection_parametersX$utbrudd2select, selection_parameters$utbrudd2select)
+  expect_identical(selection_parametersX$metode2select, selection_parameters$metode2select)
+  expect_identical(selection_parametersX$analytt2select, selection_parameters$analytt2select)
+  expect_identical(selection_parametersX$select_statement, selection_parameters$select_statement)
+
+  # repeat generate selection_parameters
+  selection_parameters2 <- set_disease_parameters(selection_parameters = selection_parameters)
+  expect_identical(selection_parameters2, selection_parameters)
+
 })
 
 
