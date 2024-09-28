@@ -162,9 +162,15 @@ set_disease_parameters <- function(purpose = NULL,
                                empty.ok = FALSE)
       var2select <- intersect(names(selection_parameters[!sapply(selection_parameters, is.null)]),
                               var2select_template)
+      if ("select_statement" %in% var2select) {
+        select_statement_names <- names(selection_parameters$select_statement)
+      }
       for (i in var2select) {
         # assign(i, unname(unlist(selection_parameters[i])))
         assign(i, unname(selection_parameters[i][[1]]))
+      }
+      if (exists("select_statement_names")) {
+        names(select_statement) <- select_statement_names
       }
     }
   }
