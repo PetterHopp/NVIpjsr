@@ -31,6 +31,19 @@
 #' @author Petter Hopp Petter.Hopp@@vetinst.no
 #' @export
 #'
+#'
+#' @examples
+#' \dontrun{
+#' library(NVIpjsr)
+#'
+#' # Read all data from proveresultat_virusinfeksjoner including historic data
+#' proveresultat_gyro <- read_eos_data(eos_table_name = "proveresultat_gyro")
+#'
+#' # Read data from proveresultat_virusinfeksjoner for 2022-2024
+#' proveresultat_bse <- read_eos_data(eos_table_name = "proveresultat_bse",
+#'                                    year = c(2022:2024))
+#' }
+#'
 read_eos_data <- function(eos_table,
                           from_path = paste0(NVIdb::set_dir_NVI("EOS"), "RaData"),
                           year = NULL,
