@@ -216,8 +216,8 @@ test_that("set disease parameters using selection_parameters with select_stateme
   # Set up of selection_parameters
   hensikt = c("0100101003", "0100102002", "0100103002")
   utbrudd = c("32")
-  analytt = c("01110201","1502010254")
-  metode <- c("070203","070355")
+  analytt = c("01110201", "1502010254")
+  metode <- c("070203", "070355")
 
   # Make select statement
   select_statementX <- build_query_outbreak(period = 2024,
@@ -228,7 +228,7 @@ test_that("set disease parameters using selection_parameters with select_stateme
 
   # Include select sentence for view v_innsendelse
   sql_select_year <- build_sql_select_year(year = 2024, varname = "aar")
-  select_statementX[[3]] <-   paste("SELECT aar, ansvarlig_seksjon,",
+  select_statementX[[3]] <- paste("SELECT aar, ansvarlig_seksjon,",
                                     "innsendelsesnummer, anamnese",
                                     "FROM v_innsendelse",
                                     "WHERE",
