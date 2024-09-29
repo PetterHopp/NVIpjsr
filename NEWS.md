@@ -16,6 +16,8 @@
 
 - Created startup message when `NVIdb` is attached after `NVIpjsr`.
 
+- Improved examples in help for several functions.
+
 
 ## BREAKING CHANGES:
 
