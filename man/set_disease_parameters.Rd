@@ -122,7 +122,7 @@ Saker in PJS that concern one infection / disease can be characterised
     \code{selection_parameters}, respectively.
 }
 \examples{
-libery(NVIpjsr)
+library(NVIpjsr)
 # Generates selection_parameters-list with selection parameters for PD
 selection_parameters <- set_disease_parameters(
   analytt2select = c("01220104\%", "1502010235"),

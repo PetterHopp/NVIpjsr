@@ -87,7 +87,7 @@
 #' @author Petter Hopp Petter.Hopp@@vetinst.no
 #' @export
 #' @examples
-#' libery(NVIpjsr)
+#' library(NVIpjsr)
 #' # Generates selection_parameters-list with selection parameters for PD
 #' selection_parameters <- set_disease_parameters(
 #'   analytt2select = c("01220104%", "1502010235"),
