@@ -6,6 +6,7 @@
 ^data-raw$
 ^man-roxygen$
 ^notes$
+^LICENSE\.md
 ^README\.md
 ^README\.Rmd$
 ^.*\.Rproj$
