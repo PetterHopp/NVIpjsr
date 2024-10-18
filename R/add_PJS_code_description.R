@@ -262,7 +262,7 @@ add_PJS_code_description <- function(data,
                                           add = checks)
   }
   # PJS_variable_type
-  if (PJS_variable_type[1] != "auto") {
+  if (PJS_variable_type[1] != "auto" & isTRUE(checkmate::check_data_frame(translation_table))) {
     checkmate::assert_subset(PJS_variable_type,
                              choices = unique(translation_table$type),
                              add = checks)
