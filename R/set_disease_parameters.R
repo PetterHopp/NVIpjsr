@@ -168,7 +168,7 @@ set_disease_parameters <- function(purpose = NULL,
                              script)]
 
       for (i in 1:length(script)) {
-        sub("[[:blank:]]*[<\\-][[:blank:]]*", " <- ", script[i])
+        sub("[[:blank:]]*<\\-[[:blank:]]*", " <- ", script[i])
         sub("[[:blank:]]*[=][[:blank:]]*", " = ", script[i])
         eval(parse(text = script[i]))
       }
