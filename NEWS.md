@@ -1,3 +1,25 @@
+# NVIpjsr 0.2.0.9000 - (2025-##-##)
+
+## New features:
+
+-
+
+
+## Bug fixes:
+
+-
+
+
+## Other changes:
+
+-
+
+
+## BREAKING CHANGES:
+
+-
+
+
 # NVIpjsr 0.2.0 - (2025-02-07)
 
 ## New features:
@@ -23,11 +45,6 @@
 - Created startup message when `NVIdb` is attached after `NVIpjsr`.
 
 - Improved examples in help for several functions.
-
-
-## BREAKING CHANGES:
-
--
 
 
 # NVIpjsr 0.1.2 - (2024-08-20)
