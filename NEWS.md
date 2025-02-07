@@ -11,7 +11,7 @@
 
 - `set_disease_parameters` now keeps the names of the elements if using named list in the `selection_statement`.
 
-- `set_disease_parameters` now handles doubble spaces before and after =, <- when reading disease parameters from a file.
+- `set_disease_parameters` now handles double spaces before and after =, <- when reading disease parameters from a file.
 
 - `retrieve_PJSdata` now don't get an error if all list elements in the `selection_parameters$selection_statement` is unnamed.
 
