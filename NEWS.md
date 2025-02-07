@@ -1,8 +1,40 @@
+# NVIpjsr 0.2.0 - (2025-02-07)
+
+## New features:
+
+- Created `report_selection_parameters` which generates a data frame with the selection parameters used when selecting from PJS, for reporting selection parameters to an Excel file or others.
+
+- `add_PJS_code_description` will now translate "annen_aktor_rollekode", "delpr_provematerialekode" and "delpr_provematerialetype" when the arguments `new_column` = `"auto"` and/or `PJS_variable_type` = `"auto"`.
+
+
+## Bug fixes:
+
+- `set_disease_parameters` now keeps the names of the elements if using named list in the `selection_statement`.
+
+- `set_disease_parameters` now handles double spaces before and after =, <- when reading disease parameters from a file.
+
+- `retrieve_PJSdata` now don't get an error if all list elements in the `selection_parameters$selection_statement` is unnamed.
+
+- `select_PJSdata_for_value` now don't get an error when the input data has 0 rows.
+
+
+## Other changes:
+
+- Created startup message when `NVIdb` is attached after `NVIpjsr`.
+
+- Improved examples in help for several functions.
+
+
+## BREAKING CHANGES:
+
+-
+
+
 # NVIpjsr 0.1.2 - (2024-08-20)
 
 ## Bug fixes:
 
-- removed error for `retrieve_PJSdata` when no additional arguments. 
+- removed error for `retrieve_PJSdata` when no additional arguments.
 
 
 # NVIpjsr 0.1.1 - (2024-08-20)
@@ -13,14 +45,14 @@
 
 - The build_query-functions now correctly calls `NVIpjsr::build_sql_select_year` and `NVIpjsr::build_sql_select_code`.
 
-- `choose_PJS_levls` now correctly calls `NVIpjsr::PJS_levels`.
+- `choose_PJS_levels` now correctly calls `NVIpjsr::PJS_levels`.
 
 - `select_PJSdata_for_value` now correctly calls `NVIpjsr::PJS_levels`.
 
 
 ## Other changes:
 
-- `NVIpjsr` now uses the internal pipe "|>" and therefore require R >= 4.1.0.
+- `NVIpjsr` now uses the internal pipe "|>" and therefore requires R >= 4.1.0.
 
 - simplified code for some functions.
 
@@ -30,7 +62,7 @@
 ## First release
 
 Tools for retrieving, standardising, wrangling, preparing and reporting PJS data
-and EOS data. `NVIpjsr` was created by separating out PJS-functions from `NVIdb`. 
+and EOS data. `NVIpjsr` was created by separating out PJS-functions from `NVIdb`.
 The following functions were copied from `NVIdb v0.11.3`:
 
 - `add_PJS_code_description` Translates PJS codes to descriptive text

@@ -1,4 +1,6 @@
 # library(NVIdb)
+# library(NVIpjsr)
+
 library(DBI)
 library(testthat)
 # library(NVIcheckmate)
@@ -263,6 +265,14 @@ test_that("errors for add_PJS_code_description", {
                                         PJS_variable_type = c("hensikt", "metode", "seksjon"),
                                         new_column = c("hensikt", "metode", "seksjon")),
                regexp = "Variable 'data': Must be of type 'data.frame', not 'character'.",
+               fixed = TRUE)
+
+  expect_error(add_PJS_code_description(testdata,
+                                        translation_table = "PJS_codes_2_text",
+                                        code_colname = c("hensiktkode", "metodekode", "ansvarlig_seksjon"),
+                                        PJS_variable_type = c("hensikt", "metode", "seksjon"),
+                                        new_column = c("hensikt", "metode", "seksjon")),
+               regexp = "Variable 'translation_table': Must be of type 'data.frame'",
                fixed = TRUE)
 
   expect_error(add_PJS_code_description(testdata,

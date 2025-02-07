@@ -13,7 +13,7 @@ test_that("Test Standardize PJSdata and column change column names and class", {
 
   # test name changes
   correct_result <- c("innsendelsenr", "eier_lokalitettype", "mottatt", "uttatt", "avsluttet",
-                      "komnr", "annen_aktortype", "annen_aktornr", "utbruddnr", "provenr",
+                      "komnr", "annen_aktor_rollekode", "annen_aktortype", "annen_aktornr", "utbruddnr", "provenr",
                       "fysiologisk_stadiumkode", "uttatt_parprove", "mottatt_parprove", "merknad_prove", "delprovenr",
                       "undnr", "und_godkjent", "und_avsluttet", "resnr", "res_analyttkode",
                       "enhetkode", "res_kjennelsekode", "konklnr", "konkl_provenr", "konkl_kjennelsekode",

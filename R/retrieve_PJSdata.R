@@ -75,8 +75,25 @@
 #' @author Petter Hopp Petter.Hopp@@vetinst.no
 #' @export
 #' @examples
+#' \dontrun{
+#' library(NVIpjsr)
 #'
-#' #
+#' selection_parameters <- set_disease_parameters(
+#'   hensikt2select = c("0100108018", "0100109003", "0100111003", "0800109"),
+#'   analytt2select = c("01220104%", "1502010235"),
+#'   metode2select = c("070070", "070231", "010057", "060265"),
+#'   FUN = build_query_one_disease)
+#'
+#' # Read PJSdata
+#' PJSrawdata <- retrieve_PJSdata(year = 2024,
+#'                                selection_parameters = selection_parameters)
+#'
+#' # Read PJSdata, include samples from abroad
+#' PJSrawdata <- retrieve_PJSdata(year = 2024,
+#'                                selection_parameters = selection_parameters,
+#'                                abroad = "include")
+#' }
+#'
 retrieve_PJSdata <- function(year = NULL,
                              selection_parameters = NULL,
                              ...) {
@@ -185,7 +202,7 @@ retrieve_PJSdata <- function(year = NULL,
   # check if the select statements are named. If not, give them names
   # if there are no names for the list entries
   if (is.null(names(select_statement))) {
-    select_statement_names <- rep("", c(1:length(select_statement)))
+    select_statement_names <- rep("", length(select_statement))
   } else {
     # Naming elements that miss names if some are named
     select_statement_names <- names(select_statement)

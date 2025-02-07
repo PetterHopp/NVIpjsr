@@ -52,6 +52,19 @@ Reads EOS data from RaData. Includes historical data if these exists.
 
 The \code{eos_table} name is the same name as the name as in the EOS data base.
 }
+\examples{
+\dontrun{
+library(NVIpjsr)
+
+# Read all data from proveresultat_virusinfeksjoner including historic data
+proveresultat_gyro <- read_eos_data(eos_table_name = "proveresultat_gyro")
+
+# Read data from proveresultat_virusinfeksjoner for 2022-2024
+proveresultat_bse <- read_eos_data(eos_table_name = "proveresultat_bse",
+                                   year = c(2022:2024))
+}
+
+}
 \author{
 Petter Hopp Petter.Hopp@vetinst.no
 }
