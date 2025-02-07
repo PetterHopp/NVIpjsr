@@ -47,9 +47,9 @@ select_PJSdata_for_value <- function(data,
   # Report check-results
   checkmate::reportAssertions(checks)
 
-
+if (nrow(data) > 0) {
   data$sPfv_sort_order <- 1:nrow(data)
-
+}
 
   # transform value_2_check to regular expressions
   value_2_check <- paste0("^", value_2_check, "$")
@@ -105,8 +105,10 @@ ktr$select <- !ktr$select
   data <- merge(x = ktr, y = data, by = c(index, code_column), all.x = TRUE, all.y = FALSE, sort = TRUE)
   data <- data[, column_names]
 
+  if (nrow(data) > 0) {
   data <- data[order(data$sPfv_sort_order), ]
   data$sPfv_sort_order <- NULL
+  }
 
   return(data)
 }
