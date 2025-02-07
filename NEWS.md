@@ -1,15 +1,21 @@
-# NVIpjsr 0.1.2.9003 - (2024-##-##)
+# NVIpjsr 0.2.0 - (2025-02-07)
 
 ## New features:
 
-- Created `report_selection_parameters` which generates a data frame with the selection parameters for reporting these to an Excel file or others.
+- Created `report_selection_parameters` which generates a data frame with the selection parameters used when selecting from PJS, for reporting selection parameters to an Excel file or others.
+
+- `add_PJS_code_description` will now translate "annen_aktor_rollekode", "delpr_provematerialekode" and "delpr_provematerialetype" when the arguments `new_column` = `"auto"` and/or `PJS_variable_type` = `"auto"`.
 
 
 ## Bug fixes:
 
 - `set_disease_parameters` now keeps the names of the elements if using named list in the `selection_statement`.
 
+- `set_disease_parameters` now handles double spaces before and after =, <- when reading disease parameters from a file.
+
 - `retrieve_PJSdata` now don't get an error if all list elements in the `selection_parameters$selection_statement` is unnamed.
+
+- `select_PJSdata_for_value` now don't get an error when the input data has 0 rows.
 
 
 ## Other changes:

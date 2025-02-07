@@ -144,6 +144,7 @@ Export of data from PJS will produce data frames in which many columns
   registertype \tab rekvirenttype \tab rekvirenttype_navn \tab categories of locations and addresses \cr
   registertype \tab eier_lokalitettype \tab eier_lokalitettype_navn \tab categories of locations and addresses \cr
   registertype \tab annen_aktortype \tab annen_aktortype_navn \tab categories of locations and addresses \cr
+  rolle \tab annen_aktor_rollekode \tab annen_aktorrolle \tab categories of locations and addresses \cr
   art \tab artkode \tab art \tab species and breed codes to species name \cr
   artrase \tab artkode \tab art \tab species and breed codes to species or breed name \cr
   fysiologisk_stadium \tab fysiologisk_stadiumkode \tab fysiologisk_stadium \tab \cr
@@ -151,7 +152,9 @@ Export of data from PJS will produce data frames in which many columns
   driftsform \tab driftsformkode \tab driftsform \tab \cr
   oppstalling \tab oppstallingkode \tab oppstalling \tab \cr
   provetype \tab provetypekode \tab provetype \tab \cr
+  provetype \tab delpr_provetypekode \tab delprovetype \tab \cr
   provemateriale \tab provematerialekode \tab provemateriale \tab \cr
+  provemateriale \tab delpr_provematerialekode \tab delprovemateriale \tab \cr
   forbehandling \tab forbehandlingkode \tab forbehandling \tab \cr
   metode \tab metodekode \tab metode \tab \cr
   metode \tab subund_metodekode \tab submetode \tab \cr

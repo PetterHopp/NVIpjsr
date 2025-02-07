@@ -101,7 +101,7 @@ for information on new features, bug fixes and other changes.
 
 ## Copyright and license
 
-Copyright (c) 2024 Norwegian Veterinary Institute.  
+Copyright (c) 2024 - 2025 Norwegian Veterinary Institute.  
 Licensed under the BSD\_3\_clause License. See
 [License](https://github.com/NorwegianVeterinaryInstitute/NVIpjsr/blob/main/LICENSE)
 for details.

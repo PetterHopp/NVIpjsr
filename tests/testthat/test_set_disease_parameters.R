@@ -209,7 +209,32 @@ test_that("set disease parameters using parameter file", {
                     "include_missing_art" = "never",
                     "FUN" = NULL,
                     "select_statement" = NULL))
-})
+
+  # Check if doubble spaces are corrected
+  writeLines(
+    c('hensikt2select  <-  c("0100108018", "0100109003", "0100111003", "0800109")',
+      'utbrudd2select <- NULL',
+      'metode2select  <- c("070070", "070231", "010057", "060265")',
+      'analytt2select <-  "01220104%"'),
+    con = file.path(tempdir(), "PD.R")
+  )
+
+  parameters <- set_disease_parameters(selection_parameters = file.path(tempdir(), "PD.R"))
+  expect_equal(parameters,
+               list("purpose" = NULL,
+                    "hensikt2select" = c("0100108018", "0100109003", "0100111003", "0800109"),
+                    "hensikt2delete" = NULL,
+                    "utbrudd2select" = NULL,
+                    "metode2select" = c("070070", "070231", "010057", "060265"),
+                    "analytt2select" = "01220104%",
+                    "analytt2delete" = NULL,
+                    "art2select" = NULL,
+                    "include_missing_art" = "never",
+                    "FUN" = NULL,
+                    "select_statement" = NULL))
+
+
+  })
 
 
 test_that("set disease parameters using selection_parameters with select_statement", {
