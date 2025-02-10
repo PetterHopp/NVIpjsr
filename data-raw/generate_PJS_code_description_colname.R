@@ -23,6 +23,7 @@ PJS_code_description_colname <- as.data.frame(matrix(rbind(c("sakskonkl_kjennels
                                                            c("provematerialekode", "provemateriale", "provemateriale"),
                                                            c("delpr_provematerialekode", "provemateriale", "delprovemateriale"),
                                                            c("forbehandlingkode", "forbehandling", "forbehandling"),
+                                                           c("delpr_forbehandlingkode", "delpr_forbehandling", "delpr_forbehandling"),
                                                            c("konkl_typekode", "konkl_type", "konkl_type"),
                                                            c("konkl_kjennelsekode", "kjennelse", "konkl_kjennelse"),
                                                            c("konkl_analyttkode", "analytt", "konkl_analytt"),
