@@ -2,12 +2,12 @@
 
 ## New features:
 
--
+- `add_PJS_code_description` will now translate "delpr_forbehandlingkode" when the arguments `new_column` = `"auto"` and/or `PJS_variable_type` = `"auto"`.
 
 
 ## Bug fixes:
 
--
+- 
 
 
 ## Other changes:
