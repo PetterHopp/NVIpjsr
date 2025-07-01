@@ -20,7 +20,7 @@ Depends:
 Encoding: UTF-8
 Language: en-GB
 Roxygen: list(markdown = FALSE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Imports: 
     checkmate (>= 2.1.0),
     data.table,
