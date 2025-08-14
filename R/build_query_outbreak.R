@@ -82,7 +82,7 @@ build_query_outbreak <- function(period,
   checkmate::assert_character(hensikt, min.chars = 2, null.ok = TRUE, any.missing = FALSE, add = checks)
   checkmate::assert_character(analytt, min.chars = 2, null.ok = TRUE, any.missing = FALSE, add = checks)
   NVIcheckmate::assert_non_null(x = list(utbrudd, hensikt, analytt), add = checks)
-  checkmate::assert_character(metode, min.chars = 6, null.ok = TRUE, any.missing = FALSE, add = checks)
+  checkmate::assert_character(metode, min.chars = 2, null.ok = TRUE, any.missing = FALSE, add = checks)
   checkmate::assert_choice(db, choices = c("PJS"), add = checks)
 
   # Report check-results
