@@ -7,7 +7,9 @@
 
 ## Bug fixes:
 
-- 
+- `build_query_one_disease` now accepts metodekode with 2 characters only.
+
+- `build_query_outbreak` now accepts metodekode with 2 characters only.
 
 
 ## Other changes:
