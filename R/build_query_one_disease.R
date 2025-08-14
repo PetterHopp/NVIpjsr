@@ -78,7 +78,7 @@ build_query_one_disease <- function(year, analytt, hensikt = NULL, metode = NULL
   checkmate::assert_integerish(year, lower = 1990, upper = as.numeric(format(Sys.Date(), "%Y")), min.len = 1, add = checks)
   checkmate::assert_character(analytt, min.chars = 2, any.missing = FALSE, add = checks)
   checkmate::assert_character(hensikt, min.chars = 2, null.ok = TRUE, any.missing = FALSE, add = checks)
-  checkmate::assert_character(metode, min.chars = 6, null.ok = TRUE, any.missing = FALSE, add = checks)
+  checkmate::assert_character(metode, min.chars = 2, null.ok = TRUE, any.missing = FALSE, add = checks)
   checkmate::assert_choice(db, choices = c("PJS"), add = checks)
 
   # Report check-results
