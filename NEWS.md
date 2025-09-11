@@ -1,3 +1,27 @@
+# NVIpjsr 0.2.0.9000 - (2025-##-##)
+
+## New features:
+
+- `add_PJS_code_description` will now translate "delpr_forbehandlingkode" when the arguments `new_column` = `"auto"` and/or `PJS_variable_type` = `"auto"`.
+
+
+## Bug fixes:
+
+- `build_query_one_disease` now accepts metodekode with 2 characters only.
+
+- `build_query_outbreak` now accepts metodekode with 2 characters only.
+
+
+## Other changes:
+
+-
+
+
+## BREAKING CHANGES:
+
+-
+
+
 # NVIpjsr 0.2.0 - (2025-02-07)
 
 ## New features:
@@ -23,11 +47,6 @@
 - Created startup message when `NVIdb` is attached after `NVIpjsr`.
 
 - Improved examples in help for several functions.
-
-
-## BREAKING CHANGES:
-
--
 
 
 # NVIpjsr 0.1.2 - (2024-08-20)
