@@ -156,6 +156,7 @@ Export of data from PJS will produce data frames in which many columns
   provemateriale \tab provematerialekode \tab provemateriale \tab \cr
   provemateriale \tab delpr_provematerialekode \tab delprovemateriale \tab \cr
   forbehandling \tab forbehandlingkode \tab forbehandling \tab \cr
+  forbehandling \tab delpr_forbehandlingkode \tab delpr_forbehandling \tab \cr
   metode \tab metodekode \tab metode \tab \cr
   metode \tab subund_metodekode \tab submetode \tab \cr
   konkl_type \tab konkl_typekode \tab konkl_type \tab \cr

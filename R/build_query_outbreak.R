@@ -82,7 +82,7 @@ build_query_outbreak <- function(period,
   checkmate::assert_character(hensikt, min.chars = 2, null.ok = TRUE, any.missing = FALSE, add = checks)
   checkmate::assert_character(analytt, min.chars = 2, null.ok = TRUE, any.missing = FALSE, add = checks)
   NVIcheckmate::assert_non_null(x = list(utbrudd, hensikt, analytt), add = checks)
-  checkmate::assert_character(metode, min.chars = 6, null.ok = TRUE, any.missing = FALSE, add = checks)
+  checkmate::assert_character(metode, min.chars = 2, null.ok = TRUE, any.missing = FALSE, add = checks)
   checkmate::assert_choice(db, choices = c("PJS"), add = checks)
 
   # Report check-results
@@ -92,7 +92,11 @@ build_query_outbreak <- function(period,
   select_year <- build_sql_select_year(year = period, varname = "aar")
 
   select_hensikt <- build_sql_select_code(values = hensikt, varname = "hensiktkode")
-  if (nchar(select_hensikt) > 0) {select_codes <- select_hensikt}
+  if (nchar(select_hensikt) > 0) {
+    select_codes <- select_hensikt
+  } else {
+      select_codes <- ""
+    }
 
   # Select utbruddsid
   select_utbrudd <- build_sql_select_code(values = utbrudd, varname = "utbrudd_id")

@@ -63,7 +63,7 @@ report_selection_parameters <- function(year = NULL,
                                add = checks)
   NVIcheckmate::assert(checkmate::check_file_exists(x = selection_parameters, access = "r"),
                        checkmate::check_list(x = selection_parameters, min.len = 1,
-                               all.missing = FALSE),
+                                             all.missing = FALSE),
                        combine = "or",
                        comment = "The argument selection_parameter must either be a file with selection parameters or a list with selection parameters",
                        add = checks)
@@ -190,23 +190,11 @@ list_parameters <- function(varname = NULL, variables, PJS_variable_type, transl
     }
     parameters$Variable <- PJS_variable_type
     parameters <- NVIpjsr::add_PJS_code_description(parameters,
-                                                  translation_table = translation_table,
-                                                  PJS_variable_type = tolower(PJS_variable_type),
-                                                  code_colname = "kode_stripped",
-                                                  new_column = "Beskrivelse")
+                                                    translation_table = translation_table,
+                                                    PJS_variable_type = tolower(PJS_variable_type),
+                                                    code_colname = "kode_stripped",
+                                                    new_column = "Beskrivelse")
     parameters <- parameters[, c("Status", "Variable", "Kode", "Beskrivelse")]
-
-    # parameters <- as.data.frame(matrix(c(variables),
-    #                                    nrow = length(c(variables)),
-    #                                    dimnames = list(NULL, "Kode"))) %>%
-    #   dplyr::mutate(kode_stripped = gsub("%", "", Kode)) %>%
-    #   dplyr::mutate(Status = dplyr::case_when(grepl(pattern = "select", x = varname, ignore.case = TRUE) ~ "Selektert",
-    #                                           grepl(pattern = "delete", x = varname, ignore.case = TRUE) ~ "Ekskludert")) %>%
-    #   dplyr::mutate(Variable = PJS_variable_type) %>%
-    #   add_PJS_code_description(PJS_variable_type = tolower(PJS_variable_type),
-    #                            code_colname = "kode_stripped",
-    #                            new_column = "Beskrivelse") %>%
-    #   dplyr::select(Status, Variable, Kode, Beskrivelse)
   }
 
   return(parameters)
