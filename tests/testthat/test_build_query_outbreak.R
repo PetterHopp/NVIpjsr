@@ -1,7 +1,31 @@
 # library(NVIdb)
+# library(NVIpjsr)
 library(testthat)
 
 test_that("build query ND outbreak", {
+  # Only utbrudd included in selection
+  query <- build_query_outbreak(period = 2022,
+                                utbrudd = "27")
+
+  correct_result <- paste("SELECT *",
+                          "FROM v2_sak_m_res",
+                          "WHERE aar = 2022 AND",
+                          "( utbrudd_id = '27')")
+
+  expect_equal(query["selection_v2_sak_m_res"][[1]], correct_result, ignore_attr = TRUE)
+
+  correct_result <- paste("SELECT v_sakskonklusjon.*, sak.mottatt_dato, sak.uttaksdato, sak.sak_avsluttet,",
+                          "sak.hensiktkode, sak.eier_lokalitetstype, sak.eier_lokalitetnr",
+                          "FROM v_innsendelse AS sak",
+                          "INNER JOIN v_sakskonklusjon",
+                          "ON (v_sakskonklusjon.aar = sak.aar AND",
+                          "v_sakskonklusjon.ansvarlig_seksjon = sak.ansvarlig_seksjon AND",
+                          "v_sakskonklusjon.innsendelsesnummer = sak.innsendelsesnummer)",
+                          "WHERE sak.aar = 2022")
+
+  expect_equal(query["selection_sakskonklusjon"][[1]], correct_result, ignore_attr = TRUE)
+
+  # All parameters included in the selection
   query <- build_query_outbreak(period = 2022,
                                 utbrudd = "27",
                                 hensikt = c("0100101014", # "Mistanke"
