@@ -92,7 +92,11 @@ build_query_outbreak <- function(period,
   select_year <- build_sql_select_year(year = period, varname = "aar")
 
   select_hensikt <- build_sql_select_code(values = hensikt, varname = "hensiktkode")
-  if (nchar(select_hensikt) > 0) {select_codes <- select_hensikt}
+  if (nchar(select_hensikt) > 0) {
+    select_codes <- select_hensikt
+  } else {
+      select_codes <- ""
+    }
 
   # Select utbruddsid
   select_utbrudd <- build_sql_select_code(values = utbrudd, varname = "utbrudd_id")
