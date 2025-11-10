@@ -241,35 +241,39 @@ retrieve_PJSdata <- function(year = NULL,
   # OPEN ODBC CHANNEL ----
   # journal_rapp <- NVIdb::login(dbservice = "PJS", dbinterface = "odbc", ...)
   dots1 <- intersect(setdiff(names(formals(NVIdb::login)), c("dbservice", "dbinterface")), names(dots))
-  journal_rapp <- do.call(NVIdb::login, append(dots[dots1], list(dbservice = "PJS", dbinterface = "odbc")))
+  # journal_rapp <- do.call(NVIdb::login, append(dots[dots1], list(dbservice = "PJS", dbinterface = "odbc")))
+  journal_rapp <- do.call(NVIdb::login, append(dots[dots1], list(dbservice = "PJS", dbinterface = "RODBC")))
 
   PJSdata <- vector("list", length = length(select_statement))
 
   # PERFORM SELECTION AND STANDARDISATION FOR EACH SELECT STATEMENT ----
   for (i in c(1:length(select_statement))) {
 
-    # MOVE anamnese LAST IN SELECTION STATEMENT ----
-    # Identify table in the first select clause in sql statement
-    db_table <- sub("SELECT[[:space:]]*\\*[[:space:]]*FROM[[:space:]]*([^[:space:]]*).*",
-                    "\\1",
-                    select_statement[[i]], ignore.case = TRUE)
-    # List fields in the db_table
-    if (nchar(db_table) > 0 && regexpr("[[:space:],\\*]", db_table) < 0) {
-      fields <- DBI::dbListFields(conn = journal_rapp, name = db_table)
-      # Put anamnese last in select clause if exist in the db_table
-      if ("anamnese" %in% tolower(fields)) {
-        fields <- paste0(fields, collapse = ", ")
-        fields <- paste0(sub("anamnese, ", "", fields, ignore.case = TRUE), ", anamnese")
-        select_statement[[i]] <- sub(paste0("SELECT[[:space:]]*\\*[[:space:]]*FROM[[:space:]]*", db_table),
-                                     paste("SELECT", fields, "FROM", db_table),
-                                     select_statement[[i]],
-                                     ignore.case = TRUE)
-      }
-    }
+    # # MOVE anamnese LAST IN SELECTION STATEMENT ----
+    # # Identify table in the first select clause in sql statement
+    # db_table <- sub("SELECT[[:space:]]*\\*[[:space:]]*FROM[[:space:]]*([^[:space:]]*).*",
+    #                 "\\1",
+    #                 select_statement[[i]], ignore.case = TRUE)
+    # # List fields in the db_table
+    # if (nchar(db_table) > 0 && regexpr("[[:space:],\\*]", db_table) < 0) {
+    #   fields <- DBI::dbListFields(conn = journal_rapp, name = db_table)
+    #   # Put anamnese last in select clause if exist in the db_table
+    #   if ("anamnese" %in% tolower(fields)) {
+    #     fields <- paste0(fields, collapse = ", ")
+    #     fields <- paste0(sub("anamnese, ", "", fields, ignore.case = TRUE), ", anamnese")
+    #     select_statement[[i]] <- sub(paste0("SELECT[[:space:]]*\\*[[:space:]]*FROM[[:space:]]*", db_table),
+    #                                  paste("SELECT", fields, "FROM", db_table),
+    #                                  select_statement[[i]],
+    #                                  ignore.case = TRUE)
+    #   }
+    # }
 
     # READ DATA FROM PJS ----
-    PJSdata[[i]] <- DBI::dbGetQuery(con = journal_rapp,
-                                    statement = select_statement[[i]])
+    # PJSdata[[i]] <- DBI::dbGetQuery(con = journal_rapp,
+    #                                 statement = select_statement[[i]])
+    PJSdata[[i]] <- RODBC::sqlQuery(journal_rapp,
+                                    query = select_statement[[i]],
+                                    as.is = TRUE)
     # STANDARDIZE DATA ----
     PJSdata[[i]] <- standardize_PJSdata(PJSdata = PJSdata[[i]], dbsource = dbsource[i])
 
@@ -280,7 +284,8 @@ retrieve_PJSdata <- function(year = NULL,
   }
 
   # CLOSE ODBC CHANNEL ----
-  DBI::dbDisconnect(journal_rapp)
+  # DBI::dbDisconnect(journal_rapp)
+  RODBC::odbcClose(journal_rapp)
 
   # RETURN RESULT ----
   # Give name to each entry in the list of PJSdata
