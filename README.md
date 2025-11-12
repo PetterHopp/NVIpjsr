@@ -26,13 +26,26 @@ for more information.
 
 ## Installation
 
-`NVIpjsr` is available at
-[GitHub](https://github.com/NorwegianVeterinaryInstitute). To install
-`NVIpjsr` you will need:
+`NVIpjsr` is available in package manager for workbench and at
+[GitHub](https://github.com/NorwegianVeterinaryInstitute).
+
+#### Workbench
+
+To install `NVIpjsr` on workbench, run the following code:
+
+    install.packages("NVIpjsr")
+
+#### At personal computer
+
+You may install the package with or without vignettes. Although it will
+be easier to install without vignettes, it is recommended to install
+with vignettes for all packages except `c("NVIrpackages", "NVIconfig")`.
+
+To install `NVIpjsr` you will need:
 
 -   R version &gt; 4.1.0
 -   R package `remotes`
--   Rtools version 4.0, 4.2, 4.3 or 4.4 depending on R version
+-   Rtools version 4.0, 4.2, 4.3, 4.4 or 4.5 depending on R version
 
 First install and attach the `remotes` package.
 
