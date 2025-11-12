@@ -2,9 +2,9 @@
 library(testthat)
 library(checkmate)
 
-  # Read data with saksnr
+# Read data with saksnr
   eos_rapp <- NVIdb::login_by_credentials("EOS", dbinterface = "odbc")
-  proveresultat_ila <-  DBI::dbGetQuery(eos_rapp,
+  proveresultat_ila <- DBI::dbGetQuery(eos_rapp,
                                         "select * from proveresultat_ila_historikk where År = 2022")
   DBI::dbDisconnect(eos_rapp)
 
