@@ -14,7 +14,7 @@ nvarchar(MAX) is fixed. This occured due to using `dbinterface = "odbc"`.
 
 ## Other changes:
 
--
+- Included variable "anamnese"" in PJS_levels.
 
 
 ## BREAKING CHANGES:
