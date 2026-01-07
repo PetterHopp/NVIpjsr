@@ -16,6 +16,8 @@ nvarchar(MAX) is fixed. This occured due to using `dbinterface = "odbc"`.
 
 - Included variable "anamnese"" in PJS_levels.
 
+- Created help for functions with deprecated arguments from NVIdb.
+
 
 ## BREAKING CHANGES:
 
