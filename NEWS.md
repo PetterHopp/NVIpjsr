@@ -11,6 +11,8 @@ are c("odbc", "RODBC").
 - An error when using `retrieve_PJSdata` due to changing format of merknad to
 nvarchar(MAX) is fixed. This occured due to using `dbinterface = "odbc"`.
 
+- `standardize_PJSdata` now correct generates the "fagnr" when the data have been retrieved using "odbc".
+
 
 ## Other changes:
 
