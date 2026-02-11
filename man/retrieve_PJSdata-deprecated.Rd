@@ -58,7 +58,7 @@ Retrieves and standardises PJS data. \code{retrieve_PJSdata} is
 
 For the function to run automatically without having to enter PJS user
     credentials, it is dependent that PJS user credentials have been saved using
-    \ifelse{html}{\code{\link{set_credentials_PJS}}}{\code{set_credentials_PJS}}.
+    \code{set_credentials_PJS}.
     Otherwise, the credentials must be input manually to establish an open
     ODBC channel.
 

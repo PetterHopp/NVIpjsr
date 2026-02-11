@@ -1,7 +1,7 @@
 Package: NVIpjsr
 Title: Tools to facilitate working with PJS data
-Version: 0.2.1.9001
-Date: 2025-##-##
+Version: 0.2.2
+Date: 2026-02-11
 Authors@R: c(
     person("Petter", "Hopp", , "Petter.Hopp@vetinst.no", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-8695-0378")),
