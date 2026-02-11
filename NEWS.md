@@ -1,3 +1,25 @@
+# NVIpjsr 0.2.2.9000 - (2026-##-##)
+
+## New features:
+
+-
+
+
+## Bug fixes:
+
+-
+
+
+## Other changes:
+
+-
+
+
+## BREAKING CHANGES:
+
+-
+
+
 # NVIpjsr 0.2.2 - (2026-02-11)
 
 ## New features:
@@ -11,7 +33,7 @@ are c("odbc", "RODBC").
 - An error when using `retrieve_PJSdata` due to changing format of merknad to
 nvarchar(MAX) is fixed. This occured due to using `dbinterface = "odbc"`.
 
-- `standardize_PJSdata` now correct generates the "fagnr" when the data have been retrieved using "odbc".
+- `standardize_PJSdata` now correctly generates the "fagnr" when the data have been retrieved using "odbc".
 
 
 ## Other changes:
