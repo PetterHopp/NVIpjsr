@@ -1,4 +1,4 @@
-# NVIpjsr 0.2.1.9001 - (2025-##-##)
+# NVIpjsr 0.2.2 - (2026-02-11)
 
 ## New features:
 
@@ -19,11 +19,6 @@ nvarchar(MAX) is fixed. This occured due to using `dbinterface = "odbc"`.
 - Included variable "anamnese"" in PJS_levels.
 
 - Created help for functions with deprecated arguments from NVIdb.
-
-
-## BREAKING CHANGES:
-
--
 
 
 # NVIpjsr 0.2.1 - (2025-09-11)
