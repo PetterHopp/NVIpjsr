@@ -1,8 +1,32 @@
+# NVIpjsr 0.2.2 - (2026-02-11)
+
+## New features:
+
+- `retrieve_PJSdata` now accepts the input argument `dbinterface`. Valid values
+are c("odbc", "RODBC").
+
+
+## Bug fixes:
+
+- An error when using `retrieve_PJSdata` due to changing format of merknad to
+nvarchar(MAX) is fixed. This occured due to using `dbinterface = "odbc"`.
+
+- `standardize_PJSdata` now correct generates the "fagnr" when the data have been retrieved using "odbc".
+
+
+## Other changes:
+
+- Included variable "anamnese"" in PJS_levels.
+
+- Created help for functions with deprecated arguments from NVIdb.
+
+
 # NVIpjsr 0.2.1 - (2025-09-11)
 
 ## New features:
 
-- `add_PJS_code_description` will now translate "delpr_forbehandlingkode" when the arguments `new_column` = `"auto"` and/or `PJS_variable_type` = `"auto"`.
+- `add_PJS_code_description` will now translate "delpr_forbehandlingkode" when
+the arguments `new_column` = `"auto"` and/or `PJS_variable_type` = `"auto"`.
 
 
 ## Bug fixes:

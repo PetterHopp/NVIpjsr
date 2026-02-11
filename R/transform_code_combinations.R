@@ -46,16 +46,17 @@
 #' @author Petter Hopp Petter.Hopp@@vetinst.no
 #' @export
 #' @examples
+#' \dontrun{
 #' library(NVIdb)
 #'
 #' #  A code combination of two is tranformed to another code combination of two
-#'   data <- as.data.frame(cbind(
+#' data <- as.data.frame(cbind(
 #' c("Detected", "Detected", "Not detected", NA),
 #'                               c("M. bovis", "M. kansasii", "M. bovis", NA)
 #' ))
-#'   colnames(data) <- c("kjennelse", "analytt")
+#' colnames(data) <- c("kjennelse", "analytt")
 #'
-#'   data <- transform_code_combinations(data = data,
+#' data <- transform_code_combinations(data = data,
 #'                                       from_values = list("kjennelse" = c("Detected"),
 #'                                                          "analytt" = c("M. kansasii")),
 #'                                       to_values = list("kjennelse" = c("Not detected"),
@@ -73,6 +74,8 @@
 #'                                 "driftsform" = c("produksjonsdyr", "ville dyr", NA)),
 #'              to_values = list("art2" = c("oppdrettshjort", "villrein", "ukjent")),
 #'              impute_when_missing_from = "art")
+#' }
+#'
 transform_code_combinations <- function(data,
                                         from_values,
                                         to_values,

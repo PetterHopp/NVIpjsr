@@ -1,5 +1,93 @@
 #' @title Retrieves data from PJS
 #' @description Retrieves and standardises PJS data. \code{retrieve_PJSdata} is
+#'     a wrapper for several \code{NVIpjsr}-functions and the intention of
+#'     \code{retrieve_PJSdata} is to shorten code and to ensure that a standard
+#'     procedure is followed when retrieving PJS data, see details. It can only
+#'     be used for retrieving case data from PJS where the columns "aar",
+#'     "ansvarlig_seksjon" and "innsendelsenr" are included in the columns. It
+#'     cannot be used for retrieving data from other tables available in
+#'     "journal_rapp".
+#'
+#' @details \code{retrieve_PJSdata} is a wrapper for the following
+#'     \code{NVIdb}-functions and \code{NVIpjsr}-functions:
+#' \itemize{
+#'   \item Constructs the select statement by a build_query-function (see details)
+#'     and selection parameters.
+#'   \item Creates an open ODBC-channel using
+#'     \ifelse{html}{\code{\link[NVIdb:login_PJS]{login_PJS}}}{\code{NVIdb::login_PJS}}.
+#'   \item Retrieves the data using the select statement constructed above.
+#'   \item Standardises the data using
+#'     \ifelse{html}{\code{\link{standardize_PJSdata}}}{\code{standardize_PJSdata}}.
+#'   \item Excludes unwanted cases using
+#'     \ifelse{html}{\code{\link{exclude_from_PJSdata}}}{\code{exclude_from_PJSdata}}.
+#'   }
+#'
+#' For the function to run automatically without having to enter PJS user
+#'     credentials, it is dependent that PJS user credentials have been saved using
+#'     \code{set_credentials_PJS}.
+#'     Otherwise, the credentials must be input manually to establish an open
+#'     ODBC channel.
+#'
+#' The select statement for PJS can be built giving the selection parameters and
+#'     input to one of the build_query-functions, i.e.
+#'     \ifelse{html}{\code{\link{build_query_hensikt}}}{\code{build_query_hensikt}},
+#'     \ifelse{html}{\code{\link{build_query_one_disease}}}{\code{build_query_one_disease}}
+#'     and
+#'     \ifelse{html}{\code{\link{build_query_outbreak}}}{\code{build_query_outbreak}}.
+#'     The selection parameters can be set by using
+#'     \ifelse{html}{\code{\link{set_disease_parameters}}}{\code{set_disease_parameters}}.
+#'     or by giving a list of similar format for input to
+#'     \code{selection_parameters}, see the build_query-functions for necessary
+#'     input.
+#'
+#' \code{retrieve_PJSdata} gives the possibility of giving the select_statement
+#'     as a string instead of using the build_query-functions. If so, the
+#'     select_statement should be included in the selection parameters. This
+#'     should only by done for select statements that previously have been tested
+#'     and are known to have correct syntax. \code{retrieve_PJSdata} has no
+#'     possibility of checking the sql syntax before it is submitted to PJS and
+#'     untested select statements can take a lot of time or stop the function
+#'     without proper error messages. In the case that both a select_statement
+#'     and a function with the necessary selection_parameters are given,
+#'     the select_statement constructed by the function will be used.
+#'
+#' The output is a named list where each entry is a data frame with PJS data. If
+#'     the select statement is named, the returned data frame will have that name.
+#'     If the select statement is unnamed, it will try to identify the first
+#'     table in the select statement and use this as name. If not possible, the
+#'     name will be of the format "PJSdata#" where # is the number of the select
+#'     statement.
+
+#'
+#' @param year [\code{numeric}]\cr
+#' One year or a vector giving the first and last years that should be selected.
+#'     Defaults to \code{NULL}.
+#' @param selection_parameters [\code{character(1)}]\cr
+#' Either the path and file name for an R script that can be sourced and that
+#'     sets the selection parameters or a named list with the selection parameters
+#'     (i.e. of the same format as the output of
+#'     \ifelse{html}{\code{\link{set_disease_parameters}}}{\code{set_disease_parameters}}).
+#'     Defaults to \code{NULL}.
+#' @param FUN \code{deprecated}\cr
+#' \code{FUN} should instead be included as input to \code{selection_parameters}.
+#'     Defaults to \code{NULL}.
+#' @param select_statement \code{deprecated}\cr
+#' \code{select_statement} should instead be included as input to
+#'     \code{selection_parameters}. Defaults to \code{NULL}.
+#' @param \dots Other arguments to be passed to the underlying functions:
+#'     \ifelse{html}{\code{\link[NVIdb:login_PJS]{login_PJS}}}{\code{NVIdb::login_PJS}}
+#'     and
+#'     \ifelse{html}{\code{\link{exclude_from_PJSdata}}}{\code{exclude_from_PJSdata}}.
+#'
+#' @return A named list with PJS data.
+#'
+#' @author Petter Hopp Petter.Hopp@@vetinst.no
+#' @name retrieve_PJSdata-deprecated
+#' @keywords internal
+NULL
+#'
+#' @title Retrieves data from PJS
+#' @description Retrieves and standardises PJS data. \code{retrieve_PJSdata} is
 #'     a wrapper for several \code{NVIdb} - and \code{NVIpjsr} - functions and the intention of
 #'     \code{retrieve_PJSdata} is to shorten code and to ensure that a standard
 #'     procedure is followed when retrieving PJS data, see details. It can only
@@ -50,15 +138,15 @@
 #'     the select_statement constructed by the function will be used.
 #'
 #' Be aware that there is a known problem for the R-package "odbc" when selecting
-#'    long text variables like "anamnese". Such variables need to be put last in
-#'    the select statement. The variable "anamnese" is included in the main views
-#'    used for retrieving data from PJS. \code{retrieve_PJSdata} will rewrite
+#'    long text variables like "anamnese" and "merknad" (for sak). Such variables
+#'    need to be put last in the select statement. These variables are included
+#'    in the main views used for retrieving data from PJS. \code{retrieve_PJSdata} will rewrite
 #'    select statements generated by the \code{build_query}-functions and sql
 #'    statements starting with "SELECT * FROM 'tablename'", but will not rewrite
 #'    the sql statement in other situations. If this happens, you must either
-#'    rewrite the sql statement and put "anamnese" last in the select statement
-#'    or use the R-package "RODBC" instead. If using "RODBC", you cannot use
-#'    \code{retrieve_PJSdata}.
+#'    rewrite the sql statement and put these variables last in the select statement
+#'    or use the R-package "RODBC" instead by giving the argument
+#'    \code{dbinterface = "RODBC"}.
 #'
 #' The output is a named list where each entry is a data frame with PJS data. If
 #'     the select statement is named, the returned data frame will have that name.
@@ -77,6 +165,9 @@
 #'     (i.e. of the same format as the output of
 #'     \code{\link{set_disease_parameters}}).
 #'     Defaults to \code{NULL}.
+#' @param dbinterface [\code{character(1)}]\cr
+#' The R-package that is used for interface towards the data base. Valid values
+#'     are c("odbc", "RODBC"). Defaults to \code{"odbc"}.
 #' @param \dots Other arguments to be passed to the underlying functions:
 #'     \ifelse{html}{\code{\link[NVIdb:login]{NVIdb::login("PJS")}}}{\code{NVIdb::login("PJS")}}
 #'      and \code{\link{exclude_from_PJSdata}}.
@@ -103,10 +194,16 @@
 #' PJSrawdata <- retrieve_PJSdata(year = 2024,
 #'                                selection_parameters = selection_parameters,
 #'                                abroad = "include")
+#'
+#' # Read PJSdata using RODBC
+#' PJSrawdata <- retrieve_PJSdata(year = 2024,
+#'                                selection_parameters = selection_parameters,
+#'                                dbinterface = "RODBC")
 #' }
 #'
 retrieve_PJSdata <- function(year = NULL,
                              selection_parameters = NULL,
+                             dbinterface = "odbc",
                              ...) {
 
   # CAPTURE DOTS ----
@@ -177,6 +274,8 @@ retrieve_PJSdata <- function(year = NULL,
                                      selection_parameters$utbrudd2select,
                                      selection_parameters$select_statement, add = checks))
   NVIcheckmate::assert_non_null(list(unlist(selection_parameters$FUN), selection_parameters$select_statement), add = checks)
+  checkmate::assert_choice(dbinterface,
+                           choices = c("odbc", "RODBC"), add = checks)
 
   # Report check-results
   checkmate::reportAssertions(checks)
@@ -241,35 +340,53 @@ retrieve_PJSdata <- function(year = NULL,
   # OPEN ODBC CHANNEL ----
   # journal_rapp <- NVIdb::login(dbservice = "PJS", dbinterface = "odbc", ...)
   dots1 <- intersect(setdiff(names(formals(NVIdb::login)), c("dbservice", "dbinterface")), names(dots))
-  journal_rapp <- do.call(NVIdb::login, append(dots[dots1], list(dbservice = "PJS", dbinterface = "odbc")))
+
+  # if (dbinterface == "odbc") {
+  journal_rapp <- do.call(NVIdb::login, append(dots[dots1], list(dbservice = "PJS", dbinterface = dbinterface)))
+  #   }
+  # journal_rapp <- do.call(NVIdb::login, append(dots[dots1], list(dbservice = "PJS", dbinterface = "RODBC")))
 
   PJSdata <- vector("list", length = length(select_statement))
 
   # PERFORM SELECTION AND STANDARDISATION FOR EACH SELECT STATEMENT ----
   for (i in c(1:length(select_statement))) {
 
-    # MOVE anamnese LAST IN SELECTION STATEMENT ----
-    # Identify table in the first select clause in sql statement
-    db_table <- sub("SELECT[[:space:]]*\\*[[:space:]]*FROM[[:space:]]*([^[:space:]]*).*",
-                    "\\1",
-                    select_statement[[i]], ignore.case = TRUE)
-    # List fields in the db_table
-    if (nchar(db_table) > 0 && regexpr("[[:space:],\\*]", db_table) < 0) {
-      fields <- DBI::dbListFields(conn = journal_rapp, name = db_table)
-      # Put anamnese last in select clause if exist in the db_table
-      if ("anamnese" %in% tolower(fields)) {
-        fields <- paste0(fields, collapse = ", ")
-        fields <- paste0(sub("anamnese, ", "", fields, ignore.case = TRUE), ", anamnese")
-        select_statement[[i]] <- sub(paste0("SELECT[[:space:]]*\\*[[:space:]]*FROM[[:space:]]*", db_table),
-                                     paste("SELECT", fields, "FROM", db_table),
-                                     select_statement[[i]],
-                                     ignore.case = TRUE)
+    if (dbinterface == "odbc") {
+      # MOVE anamnese LAST IN SELECTION STATEMENT ----
+      # Identify table in the first select clause in sql statement
+      db_table <- sub("SELECT[[:space:]]*\\*[[:space:]]*FROM[[:space:]]*([^[:space:]]*).*",
+                      "\\1",
+                      select_statement[[i]], ignore.case = TRUE)
+      # List fields in the db_table
+      if (nchar(db_table) > 0 && regexpr("[[:space:],\\*]", db_table) < 0) {
+        fields <- DBI::dbListFields(conn = journal_rapp, name = db_table)
+        # Put anamnese last in select clause if exist in the db_table
+        if ("anamnese" %in% tolower(fields) | "merknad" %in% tolower(fields)) {
+          fields <- paste0(fields, collapse = ", ")
+          if (regexpr("merknad", fields, ignore.case = TRUE) > 0) {
+            fields <- paste0(sub("merknad, ", "", fields, ignore.case = TRUE), ", merknad")
+          }
+          if (regexpr("anamnese", fields, ignore.case = TRUE) > 0) {
+            fields <- paste0(sub("anamnese, ", "", fields, ignore.case = TRUE), ", anamnese")
+          }
+          select_statement[[i]] <- sub(paste0("SELECT[[:space:]]*\\*[[:space:]]*FROM[[:space:]]*", db_table),
+                                       paste("SELECT", fields, "FROM", db_table),
+                                       select_statement[[i]],
+                                       ignore.case = TRUE)
+        }
       }
+
+      # READ DATA FROM PJS ----
+      PJSdata[[i]] <- DBI::dbGetQuery(con = journal_rapp,
+                                      statement = select_statement[[i]])
     }
 
-    # READ DATA FROM PJS ----
-    PJSdata[[i]] <- DBI::dbGetQuery(con = journal_rapp,
-                                    statement = select_statement[[i]])
+    if (dbinterface == "RODBC") {
+      PJSdata[[i]] <- RODBC::sqlQuery(journal_rapp,
+                                      query = select_statement[[i]],
+                                      as.is = TRUE)
+    }
+
     # STANDARDIZE DATA ----
     PJSdata[[i]] <- standardize_PJSdata(PJSdata = PJSdata[[i]], dbsource = dbsource[i])
 
@@ -280,7 +397,8 @@ retrieve_PJSdata <- function(year = NULL,
   }
 
   # CLOSE ODBC CHANNEL ----
-  DBI::dbDisconnect(journal_rapp)
+  if (dbinterface == "odbc") {DBI::dbDisconnect(journal_rapp)}
+  if (dbinterface == "RODBC") {RODBC::odbcClose(journal_rapp)}
 
   # RETURN RESULT ----
   # Give name to each entry in the list of PJSdata
