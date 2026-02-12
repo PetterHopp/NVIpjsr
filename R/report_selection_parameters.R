@@ -164,7 +164,8 @@ report_selection_parameters <- function(year = NULL,
   }
 
   # Clean table for empty rows
-  report <- subset(report, !report$Kode %in% c("", "X") & !is.na(report$Kode))
+  # report <- subset(report, !report$Kode %in% c("", "X") & !is.na(report$Kode))
+  report <- report[which(!report$Kode %in% c("", "X") & !is.na(report$Kode)), ]
 
   return(report)
 }
