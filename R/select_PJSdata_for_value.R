@@ -98,7 +98,8 @@ if (nrow(data) > 0) {
 ktr$select <- !ktr$select
 }
 
-  ktr <- subset(ktr, ktr$select == TRUE)
+  # ktr <- subset(ktr, ktr$select == TRUE)
+  ktr <- ktr[which(ktr$select == TRUE), ]
   ktr[, c("combined_codes", "select")] <- c(NULL, NULL)
 
   column_names <- colnames(data)
