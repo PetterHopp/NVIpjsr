@@ -7,7 +7,8 @@
 
 ## Bug fixes:
 
--
+- Input for the argument `values_2_select` in `select_PJSdata_for_value` is changed so that
+the input should be the same wether there is one ore several columns for which the rows should be selected.
 
 
 ## Other changes:
@@ -17,7 +18,8 @@
 
 ## BREAKING CHANGES:
 
--
+- Input for the argument `values_2_select` in `select_PJSdata_for_value` is changed when several columns are
+included in `code_column`. Old input should be rewritten to a vector with the single values.
 
 
 # NVIpjsr 0.2.2 - (2026-02-11)

@@ -39,9 +39,27 @@ The function is intended for cases where the select
    is included and it can be easier to read the script if the
    subset is selected in a second step.
 
+When there are more than one columns in \code{code_column}, the row
+   is selected if a value in \code{value_2_select} is found in at least one
+   of the columns in \code{code_column}.
+
 The function selects according to different values. The default
    action is to include the selected rows. But when \code{keep_selected
-   = FALSE}, the selected rows are excluded from the data.
+   = FALSE}, the selected rows are excluded from the data. Do not
+   set \code{keep_selected = FALSE} when there are more than one column in
+   \code{code_column}, as this may give unpredictable results.
+}
+\examples{
+\dontrun{
+library(NVIpjsr)
+
+# Only included rows that have one of the codes in at least one of the selected columns
+PJSdata <- select_PJSdata_for_value(
+  data = PJSdata,
+  code_column = c("sakskonkl_analyttkode", "konkl_analyttkode", "res_analyttkode"),
+  value_2_check = c("01050305", "01130402", "01150101\%"))
+}
+
 }
 \author{
 Petter Hopp Petter.Hopp@vetinst.no
