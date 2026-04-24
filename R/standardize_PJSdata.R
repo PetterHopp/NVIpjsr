@@ -46,7 +46,7 @@ standardize_PJSdata <- function(PJSdata, dbsource = "v2_sak_m_res") {
   # pjsDATA
   checkmate::assert_data_frame(PJSdata, add = checks)
   # dbsource
-  checkmate::assert_character(dbsource, len = 1, min.chars = 1, add = checks)
+  checkmate::assert_string(dbsource, min.chars = 1, add = checks)
 
   # Report check-results
   checkmate::reportAssertions(checks)
@@ -86,7 +86,8 @@ standardize_PJSdata <- function(PJSdata, dbsource = "v2_sak_m_res") {
   }
 
   # Delete test data, i.e. saker with ansvarlig_seksjon in c("14", "99")
-  PJSdata <- subset(PJSdata, !PJSdata$ansvarlig_seksjon %in% c("14", "99"))
+  # PJSdata <- subset(PJSdata, !PJSdata$ansvarlig_seksjon %in% c("14", "99"))
+  PJSdata <- PJSdata[which(!PJSdata$ansvarlig_seksjon %in% c("14", "99")), ]
 
 return(PJSdata)
 }

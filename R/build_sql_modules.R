@@ -77,7 +77,7 @@ build_sql_select_year <- function(year, varname, db = "PJS") {
                                min.len = 1,
                                any.missing = FALSE,
                                add = checks)
-  checkmate::assert_character(varname, min.chars = 1, len = 1, any.missing = FALSE, add = checks)
+  checkmate::assert_string(varname, min.chars = 1, add = checks)
   checkmate::assert_choice(db, choices = c("PJS"), add = checks)
 
   # Report check-results
@@ -122,7 +122,7 @@ build_sql_select_code <- function(values, varname, db = "PJS") {
 
   # Perform checks
   checkmate::assert_character(values, null.ok = TRUE, all.missing = FALSE, min.chars = 1, add = checks)
-  checkmate::assert_character(varname, add = checks)
+  checkmate::assert_string(varname, min.chars = 1, add = checks)
   checkmate::assert_choice(db, choices = c("PJS"), add = checks)
 
   # Report check-results
@@ -141,7 +141,8 @@ build_sql_select_code <- function(values, varname, db = "PJS") {
     # Include missing if any NA
     if (any(is.na(values))) {
       select_code <- paste(varname, "IS NULL OR ")
-      values <- subset(values, !is.na(values))
+      values <- values[which(!is.na(values))]
+      # values <- subset(values, !is.na(values))
     }
 
     # use "=" in sql string for values where sub-codes shall not be included when one code

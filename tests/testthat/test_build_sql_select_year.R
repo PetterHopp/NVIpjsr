@@ -36,13 +36,13 @@ test_that("errors for build_sql_select_year", {
                regexp = "Variable 'year': Must be of type 'integerish', not 'character'")
 
   expect_error(build_sql_select_year(year = 2020, varname = NA, db = "PJS"),
-               regexp = "Contains missing values")
+               regexp = "Variable 'varname': May not be NA")
 
   expect_error(build_sql_select_year(year = 2020, varname = "", db = "PJS"),
                regexp = "All elements must have at least 1 characters")
 
   expect_error(build_sql_select_year(year = 2020, varname = c("aar", "sak.aar"), db = "PJS"),
-               regexp = "Must have length 1, but has length")
+               regexp = "Must have length 1")
 
   expect_error(build_sql_select_year(year = 2020, varname = "aar", db = "EOS"),
                regexp = "Must be element of set \\{'PJS'\\}, but is")

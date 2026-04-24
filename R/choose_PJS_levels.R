@@ -17,12 +17,19 @@
 #'     As standard, only unique (distinct) rows are output. This can
 #'     be changed by specifying \code{unique = FALSE}.
 #'
-#' @param data Data frame with data from PJS
-#' @param levels PJS-levels from which data should be chosen. Valid values are c("sak", "prove", "delprove", "undersokelse", "resultat",
+#' @param data  [\code{data.frame}] \cr
+#' Data from PJS.
+#' @param levels [\code{character}]\cr
+#' PJS-levels from which the columns in the data should be chosen. Valid values
+#'     are c("sak", "prove", "delprove", "undersokelse", "resultat",
 #'     "konklusjon", "subundersokelse", "subresultat").
-#' @param keep_col Column names of columns that should be included in addition to the columns defined by levels.
-#' @param remove_col Column names of columns that should be removed even if being at the defined levels.
-#' @param unique_rows If \code{TRUE} (default), only unique rows are included in the data frame.
+#' @param keep_col [\code{character}]\cr
+#' Column names of columns that should be included in addition to the columns defined by levels.
+#' @param remove_col [\code{character}]\cr
+#' Column names of columns that should be removed even if being at the defined levels.
+#' @param unique_rows [\code{logical(1)}]\cr
+#' If \code{TRUE} only unique rows are included in the data frame. Defaults to
+#'     \code{TRUE}.
 #'
 #' @return A data frame with columns from the chosen levels in PJS.
 #'
@@ -94,7 +101,8 @@ choose_PJS_levels <- function(data,
     column_names$select <- NVIpjsr::PJS_levels[, levels]
   }
 
-  column_names <- subset(column_names, column_names$select > 0)
+  # column_names <- subset(column_names, column_names$select > 0)
+  column_names <- column_names[which(column_names$select > 0), ]
 
   # column_names <- union(as.vector(column_names$variable), union(as.vector(sub("kode", "", column_names$variable))))
   column_names <- unique(c(as.vector(column_names$variable), sub("kode", "", as.vector(column_names$variable))))

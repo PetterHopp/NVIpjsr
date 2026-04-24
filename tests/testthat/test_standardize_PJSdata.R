@@ -48,7 +48,7 @@ test_that("errors for standardize_PJSdata", {
   # PJStest <- readRDS("./tests/testthat/PJS_testdata.rds")
 
   expect_error(standardize_PJSdata(PJSdata = PJStest, dbsource = NULL),
-               regexp = "Variable 'dbsource': Must be of type 'character'")
+               regexp = "Variable 'dbsource': Must be of type 'string'")
 
   expect_error(standardize_PJSdata(PJSdata = "no_data"),
                regexp = "Variable 'PJSdata': Must be of type 'data.frame', not 'character'.")
