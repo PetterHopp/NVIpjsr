@@ -121,7 +121,7 @@
 #'     "pjscode_2_descriptions.csv". If more than one code type should be translated,
 #'     they can be given in the vector. You may also use argument
 #'     \code{PJS_variable_type = "auto"}, if \code{code_colname} have standardized
-#'     PJS column names only, see details.
+#'     PJS column names only, see details. Defaults to \code{"auto"}.
 #' @param code_colname [\code{character}] \cr
 #'     The name of the column with codes that should be translated. If several codes
 #'     should be translated, a vector with the names of the coded variables should be given.
@@ -129,7 +129,7 @@
 #'     The name of the new column with the text describing the code. If several
 #'     codes should be translated, a vector with the new column names should be
 #'     given. You may also use argument \code{new_column = "auto"}, if \code{code_colname}
-#'     have standardized PJS column names only, see details.
+#'     have standardized PJS column names only, see details. Defaults to \code{"auto"}.
 #' @param position [\code{character}] \cr
 #'     Position for the new columns, can be one of c("first", "left", "right",
 #'     "last", "keep"). If several codes should be translated, either one value
@@ -195,6 +195,10 @@
 #'                                     code_colname = c("artkode", "hensiktkode", "konklusjonkode"),
 #'                                     new_column = c("auto"))
 #'
+#' # When using default input (as above), the code above can be shortened to:
+#' newdata3 <- add_PJS_code_description(olddata,
+#'                                     code_colname = c("artkode", "hensiktkode", "konklusjonkode"))
+#'
 #' # Translating art with species and breed names to only species names
 #' # First the text in art is back-translated to the artkode
 #' newdata4 <- add_PJS_code_description(data = olddata,
@@ -218,9 +222,9 @@
 #'
 add_PJS_code_description <- function(data,
                                      translation_table = PJS_codes_2_text,
-                                     PJS_variable_type,
+                                     PJS_variable_type = "auto",
                                      code_colname,
-                                     new_column,
+                                     new_column = "auto",
                                      position = "right",
                                      overwrite = FALSE,
                                      backward = FALSE,

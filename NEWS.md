@@ -2,7 +2,7 @@
 
 ## New features:
 
--
+- For `add_PJS_code_description` the default value for the input arguments `PJS_variable_type` and `new_column` is set to "auto".
 
 
 ## Bug fixes:
