@@ -1,8 +1,8 @@
-# NVIpjsr 0.2.2.9000 - (2026-##-##)
+# NVIpjsr 0.2.2.9002 - (2026-##-##)
 
 ## New features:
 
--
+- For `add_PJS_code_description` the default value for the input arguments `PJS_variable_type` and `new_column` is set to "auto".
 
 
 ## Bug fixes:
