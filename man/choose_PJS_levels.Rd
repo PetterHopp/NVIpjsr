@@ -13,16 +13,23 @@ choose_PJS_levels(
 )
 }
 \arguments{
-\item{data}{Data frame with data from PJS}
+\item{data}{[\code{data.frame}] \cr
+Data from PJS.}
 
-\item{levels}{PJS-levels from which data should be chosen. Valid values are c("sak", "prove", "delprove", "undersokelse", "resultat",
-"konklusjon", "subundersokelse", "subresultat").}
+\item{levels}{[\code{character}]\cr
+PJS-levels from which the columns in the data should be chosen. Valid values
+    are c("sak", "prove", "delprove", "undersokelse", "resultat",
+    "konklusjon", "subundersokelse", "subresultat").}
 
-\item{keep_col}{Column names of columns that should be included in addition to the columns defined by levels.}
+\item{keep_col}{[\code{character}]\cr
+Column names of columns that should be included in addition to the columns defined by levels.}
 
-\item{remove_col}{Column names of columns that should be removed even if being at the defined levels.}
+\item{remove_col}{[\code{character}]\cr
+Column names of columns that should be removed even if being at the defined levels.}
 
-\item{unique_rows}{If \code{TRUE} (default), only unique rows are included in the data frame.}
+\item{unique_rows}{[\code{logical(1)}]\cr
+If \code{TRUE} only unique rows are included in the data frame. Defaults to
+    \code{TRUE}.}
 }
 \value{
 A data frame with columns from the chosen levels in PJS.

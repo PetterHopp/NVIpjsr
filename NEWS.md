@@ -1,3 +1,27 @@
+# NVIpjsr 0.2.2.9002 - (2026-##-##)
+
+## New features:
+
+- For `add_PJS_code_description` the default value for the input arguments `PJS_variable_type` and `new_column` is set to "auto".
+
+
+## Bug fixes:
+
+- Input for the argument `values_2_select` in `select_PJSdata_for_value` is changed so that
+the input should be the same wether there is one ore several columns for which the rows should be selected.
+
+
+## Other changes:
+
+-
+
+
+## BREAKING CHANGES:
+
+- Input for the argument `values_2_select` in `select_PJSdata_for_value` is changed when several columns are
+included in `code_column`. Old input should be rewritten to a vector with the single values.
+
+
 # NVIpjsr 0.2.2 - (2026-02-11)
 
 ## New features:
@@ -11,7 +35,7 @@ are c("odbc", "RODBC").
 - An error when using `retrieve_PJSdata` due to changing format of merknad to
 nvarchar(MAX) is fixed. This occured due to using `dbinterface = "odbc"`.
 
-- `standardize_PJSdata` now correct generates the "fagnr" when the data have been retrieved using "odbc".
+- `standardize_PJSdata` now correctly generates the "fagnr" when the data have been retrieved using "odbc".
 
 
 ## Other changes:
