@@ -21,7 +21,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Johan Åkerstedt \email{Johan.Akerstedt@vetinst.no}
+  \item Johan Åkerstedt \email{Johan.Akerstedt@vetinst.no} (\href{https://orcid.org/0000-0001-7887-6887}{ORCID})
 }
 
 Other contributors:

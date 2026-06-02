@@ -5,7 +5,8 @@ Date: 2026-##-##
 Authors@R: c(
     person("Petter", "Hopp", , "Petter.Hopp@vetinst.no", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-8695-0378")),
-    person("Johan", "Åkerstedt", , "Johan.Akerstedt@vetinst.no", role = "aut"),
+    person("Johan", "Åkerstedt", , "Johan.Akerstedt@vetinst.no", role = "aut",
+           comment = c(ORCID = "0000-0001-7887-6887")),
     person("Norwegian Veterinary Institute", role = "cph")
   )
 Description: Tools for retrieving, standardising, wrangling, preparing and reporting 
