@@ -209,7 +209,7 @@
 #'                                      impute_old_when_missing = TRUE)
 #'
 #' # Thereafter, the code is translated to art
-#' # By using `impute_old_when_missing = TRUE`, you ensure that text that cannot
+#' # By using 'impute_old_when_missing = TRUE', you ensure that text that cannot
 #' # be translated back to code, is reported as text in the end result.
 #' newdata4 <- add_PJS_code_description(data = newdata4,
 #'                                      PJS_variable_type = "art",
