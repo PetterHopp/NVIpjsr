@@ -2,12 +2,19 @@ Package: NVIpjsr
 Title: Tools to facilitate working with PJS data
 Version: 0.2.2.9002
 Date: 2026-##-##
-Authors@R: c(
-    person("Petter", "Hopp", , "Petter.Hopp@vetinst.no", role = c("aut", "cre"),
+Authors@R: 
+  c(person(given = "Petter",
+           family = "Hopp",
+           role = c("aut", "cre"),
+           email = "Petter.Hopp@vetinst.no",
            comment = c(ORCID = "0000-0002-8695-0378")),
-    person("Johan", "Åkerstedt", , "Johan.Akerstedt@vetinst.no", role = "aut"),
-    person("Norwegian Veterinary Institute", role = "cph")
-  )
+    person(given = "Johan",
+           family = "Åkerstedt",
+           role = "aut",
+           email = "Johan.Akerstedt@vetinst.no",
+           comment = c(ORCID = "0000-0001-7887-6887")),
+    person(given = "Norwegian Veterinary Institute",
+           role = "cph"))
 Description: Tools for retrieving, standardising, wrangling, preparing and reporting 
     PJS data and EOS data. NVIpjsr was created by separating out PJS-functions from 
     NVIdb. Further development of and creation of new PJS-functions will take place within 
