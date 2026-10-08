@@ -16,7 +16,7 @@ test_that("Choose variables from PJS levels", {
 
   # test levels
   correct_result <- c("aar", "ansvarlig_seksjon", "innsendelsenr", "hensiktkode", "rekvirenttype",
-                      "rekvirentnr", "eier_lokalitettype", "eier_lokalitetnr", "mottatt", "uttatt",
+                      "rekvirentnr", "eier_lokalitettype", "eier_lokalitetnr", "mottatt", "uttatt", "uttatt2",
                       "avsluttet", "landnr", "komnr", "gruppenr",
                       "annen_aktortype", "annen_aktornr", "merknad", "fagkode", "fagnr",
                       "fagansvarlig_person", "karantene", "kartreferanse", "eierreferanse", "innsenderreferanse",
@@ -51,7 +51,7 @@ test_that("Choose variables from PJS levels", {
 
   expect_identical(colnames(sak),
                    c("aar", "ansvarlig_seksjon", "innsendelsenr", "hensiktkode", "hensikt", "rekvirenttype",
-                     "rekvirentnr", "eier_lokalitettype", "eier_lokalitetnr", "mottatt", "uttatt",
+                     "rekvirentnr", "eier_lokalitettype", "eier_lokalitetnr", "mottatt", "uttatt", "uttatt2",
                      "avsluttet", "landnr", "komnr", "gruppenr",
                      "annen_aktortype", "annen_aktornr", "merknad", "fagkode", "fagnr",
                      "fagansvarlig_person", "karantene", "kartreferanse", "eierreferanse", "innsenderreferanse",

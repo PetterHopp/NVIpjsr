@@ -12,7 +12,7 @@ test_that("Test Standardize PJSdata and column change column names and class", {
   PJStest2 <- standardize_PJSdata(PJSdata = PJStest)
 
   # test name changes
-  correct_result <- c("innsendelsenr", "eier_lokalitettype", "mottatt", "uttatt", "avsluttet",
+  correct_result <- c("innsendelsenr", "eier_lokalitettype", "mottatt", "uttatt", "uttatt2", "avsluttet",
                       "komnr", "annen_aktor_rollekode", "annen_aktortype", "annen_aktornr", "utbruddnr", "provenr",
                       "fysiologisk_stadiumkode", "uttatt_parprove", "mottatt_parprove", "merknad_prove", "delprovenr",
                       "undnr", "und_godkjent", "und_avsluttet", "resnr", "res_analyttkode",
@@ -35,7 +35,7 @@ test_that("Test Standardize PJSdata and column change column names and class", {
 
   # test Date class
     expect_identical(names(which(unlist(lapply(PJStest2, class)) == "Date")),
-                     intersect(colnames(PJStest2), c("mottatt", "uttatt", "avsluttet", "sak_forst_avsluttet",
+                     intersect(colnames(PJStest2), c("mottatt", "uttatt", "uttatt2", "avsluttet", "sak_forst_avsluttet",
                                                      "uttatt_parprove", "mottatt_parprove",
                                                      "und_godkjent", "und_avsluttet")))
 
