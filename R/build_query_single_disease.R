@@ -1,23 +1,26 @@
-#' @title Builds query to select data for a single disease from PJS
+#' @title Builds query to select all data for a single disease from PJS
 #' @description Builds the query for selecting all data for one infectious
-#'     agent/disease for selected years from PJS. The necessary input is the
-#'     year(s) and analytter. In addition one may input specific utbruddsid,
-#'     hensiktskoder and metodekoder specific for the infection and/or disease.
-#'     The the query is written in T-SQL as used by MS-SQL.
+#'     agent/disease for the chosen period from PJS. The necessary input is the
+#'     period (given by year(s) or dates) and analytter. In addition one may
+#'     input hensiktskoder, utbruddsID-er and metodekoder specific for the
+#'     infection and/or disease. The the query is written in T-SQL as used by
+#'     MS-SQL.
 #'
-#' @details The function builds select statements with SQL syntax to
-#'     select all PJS-saker regarding a single disease from PJS.
-#'     The select statements can thereafter be used to query
-#'     journal_rapp/PJS using
+#' @details The function builds select statements with SQL syntax to select all
+#'     PJS-saker regarding a single disease from PJS. The select statements can
+#'     thereafter be used to query journal_rapp/PJS either by giving it as input
+#'     to the wrapper function
+#'     \ifelse{html}{\code{\link{retrieve_PJSdata}}}{\code{retrieve_PJSdata}} or
+#'     by using it in the statement argument in
 #'     \ifelse{html}{\code{\link[DBI:dbGetQuery]{DBI::dbGetQuery}}}{\code{DBI::dbGetQuery}}
-#'     when using \code{odbc} or
+#'     when using \code{odbc} or by using it in the query argument in
 #'     \ifelse{html}{\code{\link[RODBC:sqlQuery]{RODBC::sqlQuery}}}{\code{RODBC::sqlQuery}}
 #'     when using \code{RODBC}.
 #'
 #'     The select statements are build to select all cases for a single
 #'     infectious agent and disease. For the input analytt, all analyttkoder
 #'     relevant for the infectious agent should be included, i.e. the
-#'     infectious agent code, the disease code and for some agents also analytt
+#'     infectious agent code, the disease code. For some agents also analytt
 #'     codes for agent properties should be included. This should ensure that
 #'     all cases with a result, konklusjon or sakskonklusjon for the analytt(er)
 #'     are included. Thereby, all journals were the examination have been
@@ -47,7 +50,9 @@
 #'     been examined yet, samples that were unfit for examination and samples
 #'     for which wrong results have been entered.
 #'
-#' @template build_query_year
+#' @param period [\code{numeric}]\cr
+#'     Time period given as either one year or a vector giving the first
+#'     and last years or as a vector giving the first and last dates.
 #' @param analytt [\code{character}]\cr
 #'     Analyttkoder that should be selected. If sub-analytter should be included,
 #'     end the code with \%.
@@ -68,13 +73,13 @@
 #' @examples
 #' # SQL-select query for Pancreatic disease (PD)
 #' build_query_single_disease(
-#'   year = 2020,
+#'   period = 2020,
 #'   analytt = c("01220104%", "1502010235"),
 #'   hensikt = c("0100108018", "0100109003", "0100111003", "0800109"),
 #'   metode = c("070070", "070231", "010057", "060265")
 #'   )
 #'
-build_query_single_disease <- function(year,
+build_query_single_disease <- function(period,
                                        analytt = NULL,
                                        hensikt = NULL,
                                        metode = NULL,
@@ -82,101 +87,142 @@ build_query_single_disease <- function(year,
                                        db = "PJS") {
 
   # ARGUMENT CHECKKING ----
-
   # Object to store check-results
   checks <- checkmate::makeAssertCollection()
-
   # Perform checks
-  checkmate::assert_integerish(year, lower = 1990, upper = as.numeric(format(Sys.Date(), "%Y")), min.len = 1, add = checks)
+  checkmate::assert(checkmate::check_integerish(period,
+                                                lower = 1990,
+                                                upper = as.numeric(format(Sys.Date(), "%Y")),
+                                                any.missing = FALSE,
+                                                min.len = 1),
+                    checkmate::check_date(period,
+                                          lower = as.Date("1990-01-01"), upper = Sys.Date(),
+                                          any.missing = FALSE,
+                                          min.len = 1, max.len = 2),
+                    add = checks)
   checkmate::assert_character(analytt, min.chars = 2, any.missing = FALSE, add = checks)
   checkmate::assert_character(hensikt, min.chars = 2, null.ok = TRUE, any.missing = FALSE, add = checks)
   checkmate::assert_character(metode, min.chars = 2, null.ok = TRUE, any.missing = FALSE, add = checks)
   checkmate::assert_character(utbrudd, min.chars = 1, null.ok = TRUE, any.missing = FALSE, add = checks)
   checkmate::assert_choice(db, choices = c("PJS"), add = checks)
-
   # Report check-results
   checkmate::reportAssertions(checks)
 
+  # PREPARE INPUT BEFORE BUILDING QUERIES ----
+  if (inherits(period, what = "Date")) {
+    year <- as.numeric(format(period, "%Y"))
+  } else {
+    year <- period
+    }
+
+
   # BUILD QUERY FOR v_sak_prove_konkl ----
+  # Extract all samples
+  #  1 with relevant konkl_analytt and
+  #  2 with relevant hensikt or utbrudd and missing konkl_analytt. Thereby,
+  #    irrelevant konkl_analytt should be avoided for the hensikt and utbrudd.
+
   # Build modules for the select statement
-  # Build select module for year
-  select_year <- build_sql_select_year(year = year, varname = "aar")
+  # Build sql code snippet for extracting year, always present
+  sql_snippet_year <- build_sql_select_year(year = year, varname = "aar")
 
-  # Build select module for hensikt
-  select_hensikt <- build_sql_select_code(values = hensikt, varname = "hensiktkode")
-  if (nchar(select_hensikt) > 0) {select_hensikt <- paste(select_hensikt, "OR")}
+  # Build sql code snippet for extracting konkl_analyttkode, always present
+  sql_snippet_konkl_analytt <- build_sql_select_code(values = analytt, varname = "konkl_analyttkode")
 
-  # Build select module for utbrudd
-  select_utbrudd <- build_sql_select_code(values = utbrudd, varname = "utbrudd_id")
-  if (nchar(select_utbrudd) > 0) {select_utbrudd <- paste(select_utbrudd, "OR")}
+  # Build extra part if hensikt or utbrudd are present
+  if (!is.null(hensikt) | !is.null(utbrudd)) {
+    # Build sql code snippet for extracting hensikt
+    if (!is.null(hensikt)) {
+      sql_snippet_hensikt <- build_sql_select_code(values = hensikt, varname = "hensiktkode")
+      if (!is.null(utbrudd)) {
+        sql_snippet_hensikt <- paste(sql_snippet_hensikt, "OR")
+      }
+    } else {sql_snippet_hensikt <- ""}
 
-  # Build select module for konkl_analyttkode
-  select_konkl_analytt <- build_sql_select_code(values = analytt, varname = "konkl_analyttkode")
+    # Build sql code snippet for extracting utbrudd
+    if (!is.null(utbrudd)) {
+      sql_snippet_utbrudd <- build_sql_select_code(values = utbrudd, varname = "utbrudd_id")
+    } else {sql_snippet_utbrudd <- ""}
 
-  # Combine modules into query for v_sak_prove_konkl
-  selection_v_sak_prove_konkl <- paste("SELECT * FROM v_sak_prove_konkl",
-                                       "WHERE", select_year, "AND",
-                                       paste0("(", select_hensikt),
-                                       select_utbrudd,
-                                       paste0(select_konkl_analytt, ")"))
+    # Combining sql_snippet_hensikt and sql_snippet_utbrudd with missing(konkl_analytt)
+    sql_snippet_missing_konkl_analytt <-
+      paste("OR", "((", sql_snippet_hensikt, sql_snippet_utbrudd, ")",
+            "AND konkl_analyttkode IS NULL)")
+  } else {sql_snippet_missing_konkl_analytt <- ""}
 
-  # # Remove double spaces from string
-  selection_v_sak_prove_konkl <- gsub(' +', ' ', selection_v_sak_prove_konkl)
-
-  "SELECT *
-  FROM v_sak_prove_konkl
-  WHERE aar = 2020 AND
-     ( hensiktkode IN ('0100108018', '0100109003', '0100111003', '0800109') OR
-     konkl_analyttkode = '1502010235' OR konkl_analyttkode LIKE '01220104%' )"
+  # Combine code snippets into query for v_sak_prove_konkl
+  query_v_sak_prove_konkl <- paste("SELECT * FROM v_sak_prove_konkl",
+                                   "WHERE", sql_snippet_year,
+                                   "AND",
+                                   "(",
+                                   sql_snippet_konkl_analytt,
+                                   sql_snippet_missing_konkl_analytt,
+                                   ")")
 
   # BUILD QUERY FOR v_sak_prove_res ----
+  # Ensures that all samples with relevant metode or res_analytt are included
   # Build modules for the select statement
   # Use already created modules for year, hensikt, and utbrudd
 
-  # Build select module for metode
-  select_metode <- build_sql_select_code(values = metode, varname = "metodekode")
-  if (nchar(select_metode) > 0) {select_metode <- paste(select_metode, "OR")}
+  # Build sql code snippet for extracting res_analyttkode, always present
+  sql_snippet_res_analytt <- build_sql_select_code(values = analytt, varname = "analyttkode_funn")
 
-  # Build select module for res_analyttkode
-  select_res_analytt <- build_sql_select_code(values = analytt, varname = "analyttkode_funn")
+  # Build sql code snippet for extracting metode
+  if (!is.null(metode)) {
+    sql_snippet_metode <- build_sql_select_code(values = metode, varname = "metodekode")
+    sql_snippet_metode <- paste(sql_snippet_metode, "OR")
+  } else {sql_snippet_metode <- ""}
+
+  # Build extra part if hensikt or utbrudd are present
+  if (!is.null(hensikt) | !is.null(utbrudd)) {
+    # Combining sql_snippet_hensikt and sql_snippet_utbrudd with missing(res_analytt)
+    sql_snippet_missing_metode <-
+      paste("OR", "((", sql_snippet_hensikt, sql_snippet_utbrudd, ")",
+            "AND metodekode IS NULL)")
+  } else {sql_snippet_missing_metode <- ""}
 
   # Combine modules into query for v_sak_prove_konkl
-  selection_v_sak_prove_res <- paste("SELECT * FROM v_sak_prove_res",
-                                     "WHERE", select_year, "AND",
-                                     paste0("(", select_hensikt),
-                                     select_utbrudd,
-                                     select_metode,
-                                     paste0(select_res_analytt, ")"))
-
-  # Remove double spaces from string
-  selection_v_sak_prove_res <- gsub(' +', ' ', selection_v_sak_prove_res)
+  query_v_sak_prove_res <- paste("SELECT * FROM v_sak_prove_res",
+                                 "WHERE", sql_snippet_year, "AND",
+                                 "(",
+                                 sql_snippet_metode,
+                                 sql_snippet_res_analytt,
+                                 sql_snippet_missing_metode,
+                                 ")")
 
 
   # BUILD QUERY FOR THE SELECT STATEMENT FOR v_sakskonklusjon ----
-  # Build select module for saks_year
-  select_sak_year <- build_sql_select_year(year = year, varname = "sak.aar")
+  # Build sql code snippet for extracting saks_year
+  sql_snippet_sak_year <- build_sql_select_year(year = year, varname = "sak.aar")
 
-  # Build select module for sakskonkl_analyttkode
-  select_sakskonkl_analytt <- build_sql_select_code(values = analytt, varname = "analyttkode")
+  # Build sql code snippet for extracting sakskonkl_analyttkode
+  sql_snippet_sakskonkl_analytt <- build_sql_select_code(values = analytt, varname = "analyttkode")
 
   # Combine modules into query for v_sakskonklusjon
-  selection_sakskonklusjon <- paste("SELECT v_sakskonklusjon.*,",
-                                    "sak.mottatt_dato, sak.uttaksdato, sak.sak_avsluttet, sak.hensiktkode,",
-                                    "sak.eier_lokalitetstype, sak.eier_lokalitetnr",
-                                    "FROM v_innsendelse AS sak",
-                                    "INNER JOIN v_sakskonklusjon",
-                                    "ON (v_sakskonklusjon.aar = sak.aar AND",
-                                    "v_sakskonklusjon.ansvarlig_seksjon = sak.ansvarlig_seksjon AND",
-                                    "v_sakskonklusjon.innsendelsesnummer = sak.innsendelsesnummer)",
-                                    "WHERE", select_sak_year, "AND",
-                                    paste0("(", select_sakskonkl_analytt, ")"))
+  query_sakskonklusjon <- paste("SELECT v_sakskonklusjon.*,",
+                                "sak.mottatt_dato, sak.uttaksdato, sak.sak_avsluttet, sak.hensiktkode,",
+                                "sak.eier_lokalitetstype, sak.eier_lokalitetnr",
+                                "FROM v_innsendelse AS sak",
+                                "INNER JOIN v_sakskonklusjon",
+                                "ON (v_sakskonklusjon.aar = sak.aar AND",
+                                "v_sakskonklusjon.ansvarlig_seksjon = sak.ansvarlig_seksjon AND",
+                                "v_sakskonklusjon.innsendelsesnummer = sak.innsendelsesnummer)",
+                                "WHERE", sql_snippet_sak_year, "AND",
+                                paste0("(", sql_snippet_sakskonkl_analytt, ")"))
+
+  # REMOVE EXTRA SPACES FROM SELECT QUERIES
+  for (query in c("query_v_sak_prove_konkl", "query_v_sak_prove_res", "query_sakskonklusjon")) {
+    query <- gsub("\\s+", " ", query) # multiple spaces -> one
+    query <- gsub("\\( ", "(", query) # remove space after (
+    query <- gsub(" \\)", ")", query) # remove space before )
+  }
 
   # RETURN SELECT QUERIES
   # Combine queries into list
   # Each select statment is given name after the main table for the selection query
-  select_statement <- list("v_sak_prove_konkl" = selection_v_sak_prove_konkl,
-                           "v_sak_prove_res" = selection_v_sak_prove_res,
-                           "v_sakskonklusjon" = selection_sakskonklusjon)
+  select_statement <- list("v_sak_prove_konkl" = query_v_sak_prove_konkl,
+                           "v_sak_prove_res" = query_v_sak_prove_res,
+                           "v_sakskonklusjon" = query_sakskonklusjon)
 
 
   # return list

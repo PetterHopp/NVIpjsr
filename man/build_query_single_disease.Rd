@@ -2,10 +2,10 @@
 % Please edit documentation in R/build_query_single_disease.R
 \name{build_query_single_disease}
 \alias{build_query_single_disease}
-\title{Builds query to select data for a single disease from PJS}
+\title{Builds query to select all data for a single disease from PJS}
 \usage{
 build_query_single_disease(
-  year,
+  period,
   analytt = NULL,
   hensikt = NULL,
   metode = NULL,
@@ -14,9 +14,9 @@ build_query_single_disease(
 )
 }
 \arguments{
-\item{year}{[\code{numeric}]\cr
-One year or a vector giving the first and last years that should 
-be selected.}
+\item{period}{[\code{numeric}]\cr
+Time period given as either one year or a vector giving the first
+and last years or as a vector giving the first and last dates.}
 
 \item{analytt}{[\code{character}]\cr
 Analyttkoder that should be selected. If sub-analytter should be included,
@@ -41,26 +41,29 @@ A list with select-statements for "v_sak_prove_konkl",
     "v_sak_prove_res", and "v_sakskonklusjon".
 }
 \description{
-Builds a query to select all data for a single disease from
-    PJS. The inputs are utbruddsid, hensiktskoder, analyttkoder for the
-    infectious agent and/or disease, and metodekoder specific for the
+Builds the query for selecting all data for one infectious
+    agent/disease for the chosen period from PJS. The necessary input is the
+    period (given by year(s) or dates) and analytter. In addition one may
+    input hensiktskoder, utbruddsID-er and metodekoder specific for the
     infection and/or disease. The the query is written in T-SQL as used by
     MS-SQL.
 }
 \details{
-The function builds select statements with SQL syntax to
-    select all PJS-saker regarding a single disease from PJS.
-    The select statements can thereafter be used to query
-    journal_rapp/PJS using
+The function builds select statements with SQL syntax to select all
+    PJS-saker regarding a single disease from PJS. The select statements can
+    thereafter be used to query journal_rapp/PJS either by giving it as input
+    to the wrapper function
+    \ifelse{html}{\code{\link{retrieve_PJSdata}}}{\code{retrieve_PJSdata}} or
+    by using it in the statement argument in
     \ifelse{html}{\code{\link[DBI:dbGetQuery]{DBI::dbGetQuery}}}{\code{DBI::dbGetQuery}}
-    when using \code{odbc} or
+    when using \code{odbc} or by using it in the query argument in
     \ifelse{html}{\code{\link[RODBC:sqlQuery]{RODBC::sqlQuery}}}{\code{RODBC::sqlQuery}}
     when using \code{RODBC}.
 
     The select statements are build to select all cases for a single
     infectious agent and disease. For the input analytt, all analyttkoder
     relevant for the infectious agent should be included, i.e. the
-    infectious agent code, the disease code and for some agents also analytt
+    infectious agent code, the disease code. For some agents also analytt
     codes for agent properties should be included. This should ensure that
     all cases with a result, konklusjon or sakskonklusjon for the analytt(er)
     are included. Thereby, all journals were the examination have been
