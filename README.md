@@ -2,11 +2,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
--   [Overview](#overview)
--   [Installation](#installation)
--   [Usage](#usage)
--   [Copyright and license](#copyright-and-license)
--   [Contributing](#contributing)
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Copyright and license](#copyright-and-license)
+- [Contributing](#contributing)
 
 ## Overview
 
@@ -50,9 +50,9 @@ with vignettes for all `NVIverse` packages except
 
 To install `NVIpjsr` you will need:
 
--   R version &gt; 4.1.0
--   R package `remotes`
--   Rtools version 4.0, 4.2, 4.3, 4.4 or 4.5 depending on R version
+- R version &gt; 4.1.0
+- R package `remotes`
+- Rtools version 4.0, 4.2, 4.3, 4.4 or 4.5 depending on R version
 
 First install and attach the `remotes` package.
 
@@ -117,9 +117,9 @@ Consult the vignettes for task-oriented help.
 
 Vignettes in package `NVIpjsr`:
 
--   Contribute to NVIpjsr (html)  
--   NVIpjsr reference manual (pdf)  
--   Retrieve and standardise PJS-data (html)
+- Contribute to NVIpjsr (html)  
+- NVIpjsr reference manual (pdf)  
+- Retrieve and standardise PJS-data (html)
 
 ##### NEWS
 

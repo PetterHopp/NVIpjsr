@@ -97,6 +97,11 @@ Be aware that there is a known problem for the R-package "odbc" when selecting
    or use the R-package "RODBC" instead by giving the argument
    \code{dbinterface = "RODBC"}.
 
+If errors arise due to login problems to MS-SQL and you are using package
+   \code{odbc} (the default), you may try to change to package \code{RODBC}.
+   Such errors will often refer to something like \code{nanodbc}, which is
+   the interface between \code{odbc} and MS-SQL.
+
 The output is a named list where each entry is a data frame with PJS data. If
     the select statement is named, the returned data frame will have that name.
     If the select statement is unnamed, it will try to identify the first
