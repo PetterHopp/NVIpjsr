@@ -1,4 +1,4 @@
-# library(NVIdb)
+# library(NVIpjsr)
 library(testthat)
 
 test_that("Choose variables from PJS levels", {
