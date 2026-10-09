@@ -115,14 +115,14 @@ build_query_single_disease <- function(period,
     year <- period
     }
 
-
   # BUILD QUERY FOR v_sak_prove_konkl ----
   # Extract all samples
-  #  1 with relevant konkl_analytt and
-  #  2 with relevant hensikt or utbrudd and missing konkl_analytt. Thereby,
-  #    irrelevant konkl_analytt should be avoided for the hensikt and utbrudd.
+  #  1 with relevant konkl_analytt or
+  #  2 with relevant hensikt or utbrudd and missing konkl_analytt.
+  #    Thereby, irrelevant konkl_analytt should be avoided for the hensikt and
+  #    utbrudd.
 
-  # Build modules for the select statement
+  # Build sql snippets that will be building blocks for the sql query
   # Build sql code snippet for extracting year, always present
   sql_snippet_year <- build_sql_select_year(year = year, varname = "aar")
 
@@ -150,7 +150,7 @@ build_query_single_disease <- function(period,
             "AND konkl_analyttkode IS NULL)")
   } else {sql_snippet_missing_konkl_analytt <- ""}
 
-  # Combine code snippets into query for v_sak_prove_konkl
+  # Combine sql snippets into query for v_sak_prove_konkl
   query_v_sak_prove_konkl <- paste("SELECT * FROM v_sak_prove_konkl",
                                    "WHERE", sql_snippet_year,
                                    "AND",
@@ -160,9 +160,16 @@ build_query_single_disease <- function(period,
                                    ")")
 
   # BUILD QUERY FOR v_sak_prove_res ----
-  # Ensures that all samples with relevant metode or res_analytt are included
-  # Build modules for the select statement
-  # Use already created modules for year, hensikt, and utbrudd
+  # Extract all samples
+  #  1 with relevant res_analytt or
+  #  2 with relevant metode or
+  #  2 with relevant hensikt or utbrudd and missing res_analytt.
+  #    Thereby, irrelevant res_analytt should be avoided for the hensikt and
+  #    utbrudd unless a relevant metode has been used and an irrelevant analytt
+  #    is given.
+
+  # Build sql snippets that will be building blocks for the sql query
+  # Use already created sql snippets for year, hensikt, and utbrudd
 
   # Build sql code snippet for extracting res_analyttkode, always present
   sql_snippet_res_analytt <- build_sql_select_code(values = analytt, varname = "analyttkode_funn")
@@ -181,7 +188,7 @@ build_query_single_disease <- function(period,
             "AND metodekode IS NULL)")
   } else {sql_snippet_missing_metode <- ""}
 
-  # Combine modules into query for v_sak_prove_konkl
+  # Combine sql snippets into query for v_sak_prove_konkl
   query_v_sak_prove_res <- paste("SELECT * FROM v_sak_prove_res",
                                  "WHERE", sql_snippet_year, "AND",
                                  "(",
@@ -189,6 +196,28 @@ build_query_single_disease <- function(period,
                                  sql_snippet_res_analytt,
                                  sql_snippet_missing_metode,
                                  ")")
+
+  # BUILD QUERY FOR v_sak_prove_und ----
+  # Extract all samples
+  #  1 with relevant hensikt or utbrudd
+  #    Thereby, data on all metods used for these cases are available.
+  #    Saker also found using v_sak_prove_res, will be deleted from the result
+  #    of this query.
+
+  # Build sql snippets that will be building blocks for the sql query
+  # Use already created sql snippets for year, hensikt, and utbrudd
+
+  # Build extra part if hensikt or utbrudd are present
+  if (!is.null(hensikt) | !is.null(utbrudd)) {
+  # Combine sql snippets into query for v_sak_prove_und
+  query_v_sak_prove_und <- paste("SELECT * FROM v_sak_prove",
+                                 "WHERE", sql_snippet_year, "AND",
+                                 "(",
+                                 sql_snippet_hensikt,
+                                 sql_snippet_utbrudd,
+                                 ")")
+  } else {query_v_sak_prove_und <- "SELECT TOP (0) * FROM v_sak_prove"}
+
 
 
   # BUILD QUERY FOR THE SELECT STATEMENT FOR v_sakskonklusjon ----
@@ -211,10 +240,10 @@ build_query_single_disease <- function(period,
                                 paste0("(", sql_snippet_sakskonkl_analytt, ")"))
 
   # REMOVE EXTRA SPACES FROM SELECT QUERIES
-  for (query in c("query_v_sak_prove_konkl", "query_v_sak_prove_res", "query_sakskonklusjon")) {
+  for (query in c(query_v_sak_prove_konkl, query_v_sak_prove_res, query_sakskonklusjon)) {
     query <- gsub("\\s+", " ", query) # multiple spaces -> one
-    query <- gsub("\\( ", "(", query) # remove space after (
-    query <- gsub(" \\)", ")", query) # remove space before )
+    query <- gsub("\\(\\s+", "\\(", query) # remove space after (
+    query <- gsub("\\s+)", ")", query) # remove space before )
   }
 
   # RETURN SELECT QUERIES
@@ -222,6 +251,7 @@ build_query_single_disease <- function(period,
   # Each select statment is given name after the main table for the selection query
   select_statement <- list("v_sak_prove_konkl" = query_v_sak_prove_konkl,
                            "v_sak_prove_res" = query_v_sak_prove_res,
+                           "v_sak_prove_und" = query_v_sak_prove_und,
                            "v_sakskonklusjon" = query_sakskonklusjon)
 
 
