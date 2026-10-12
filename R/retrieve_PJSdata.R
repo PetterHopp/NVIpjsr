@@ -118,8 +118,9 @@ NULL
 #'
 #' The select statement for PJS can be built giving the selection parameters and
 #'     input to one of the build_query-functions, i.e.
-#'    \code{\link{build_query_hensikt}}, \code{\link{build_query_one_disease}}
-#'     and \code{\link{build_query_outbreak}}.
+#'    \code{\link{build_query_hensikt}}, \code{\link{build_query_one_disease}},
+#'    \code{\link{build_query_single_disease}} and
+#'    \code{\link{build_query_outbreak}}.
 #'     The selection parameters can be set by using
 #'     \code{\link{set_disease_parameters}}
 #'     or by giving a list of similar format for input to

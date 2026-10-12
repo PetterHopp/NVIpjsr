@@ -1,6 +1,6 @@
 Package: NVIpjsr
 Title: Tools to facilitate working with PJS data
-Version: 0.2.2.9002
+Version: 0.2.2.9003
 Date: 2026-##-##
 Authors@R: 
   c(person(given = "Petter",

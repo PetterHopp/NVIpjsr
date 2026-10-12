@@ -71,6 +71,7 @@ NVIpackager::install_NVIpkg(pkg = pkg, pkg_path = pkg_path, rsource = "local")
 # From GitHub
 # Local install of dev branch from repo on PetterHopp
 # NVIpackager::install_NVIpkg(pkg = pkg, pkg_path = pkg_path, rsource = "github", username = "PetterHopp", ref = "dev", dependencies = FALSE)
+# NVIpackager::install_NVIpkg(pkg = pkg, pkg_path = pkg_path, rsource = "github", username = "PetterHopp", ref = "issue-56-build_query_single_disease", dependencies = FALSE)
 #
 # Install last release from NorwegianVeterinaryInstitute
 # NVIpackager::install_NVIpkg(pkg = pkg, pkg_path = pkg_path, rsource = "github", username = "NorwegianVeterinaryInstitute")
