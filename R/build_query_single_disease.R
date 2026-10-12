@@ -210,13 +210,13 @@ build_query_single_disease <- function(period,
   # Build extra part if hensikt or utbrudd are present
   if (!is.null(hensikt) | !is.null(utbrudd)) {
   # Combine sql snippets into query for v_sak_prove_und
-  query_v_sak_prove_und <- paste("SELECT * FROM v_sak_prove",
+  query_v_sak_prove_und <- paste("SELECT * FROM v_sak_prove_und",
                                  "WHERE", sql_snippet_year, "AND",
                                  "(",
                                  sql_snippet_hensikt,
                                  sql_snippet_utbrudd,
                                  ")")
-  } else {query_v_sak_prove_und <- "SELECT TOP (0) * FROM v_sak_prove"}
+  } else {query_v_sak_prove_und <- "SELECT TOP (0) * FROM v_sak_prove_und"}
 
 
 
