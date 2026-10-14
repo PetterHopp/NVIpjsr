@@ -20,9 +20,8 @@ copy_PJS_codes_2_text <- function(filename = "PJS_codes_2_text.csv",
   checks <- checkmate::makeAssertCollection()
   # Perform checks
   ## filename
-  checkmate::assert(checkmate::check_character(filename,
-                                               min.chars = 1,
-                                               len = 1),
+  checkmate::assert(checkmate::check_string(filename,
+                                            min.chars = 1),
                     checkmate::check_list(filename, min.len = 1),
                     combine = "or",
                     add = checks)
