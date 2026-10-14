@@ -81,7 +81,7 @@ standardize_eos_data <- function(data,
   checks <- checkmate::makeAssertCollection()
   # Perform checks
   checkmate::assert_data_frame(data, add = checks)
-  checkmate::assert_character(dbsource, len = 1, min.chars = 1, add = checks)
+  checkmate::assert_string(dbsource, min.chars = 1, add = checks)
   checkmate::assert_data_frame(standards, null.ok = TRUE, add = checks)
   checkmate::assert_flag(standardize_colnames, add = checks)
   checkmate::assert_flag(breed_to_species, add = checks)

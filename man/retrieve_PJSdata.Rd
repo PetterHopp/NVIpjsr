@@ -16,7 +16,7 @@ retrieve_PJSdata(
 One year or a vector giving the first and last years that should be selected.
     Defaults to \code{NULL}.}
 
-\item{selection_parameters}{[\code{character(1)}]\cr
+\item{selection_parameters}{[\code{character(1)} | \code{list}]\cr
 Either the path and file name for an R script that can be sourced and that
     sets the selection parameters or a named list with the selection parameters
     (i.e. of the same format as the output of
