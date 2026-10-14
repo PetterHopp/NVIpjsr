@@ -13,7 +13,11 @@ the input should be the same wether there is one ore several columns for which t
 
 ## Other changes:
 
--
+- Minor improvements of help for several functions.
+
+- `which` is used instead of `subset` to make the code more robust.
+
+- Uses `assert_string` and `assert_flag` in arguent checking when appropriate.
 
 
 ## BREAKING CHANGES:
