@@ -15,18 +15,18 @@ Authors@R:
            comment = c(ORCID = "0000-0001-7887-6887")),
     person(given = "Norwegian Veterinary Institute",
            role = "cph"))
-Description: Tools for retrieving, standardising, wrangling, preparing and reporting 
-    PJS data and EOS data. NVIpjsr was created by separating out PJS-functions from 
-    NVIdb. Further development of and creation of new PJS-functions will take place within 
-    NVIpjsr.
+Description: Tools for retrieving, standardising, wrangling, preparing and 
+    reporting PJS data and EOS data. NVIpjsr was created by separating out 
+    PJS-functions from NVIdb. Further development of and creation of new 
+    functions to handle PJSdata are done within NVIpjsr.
 License: BSD_3_clause + file LICENSE
 URL: https://github.com/NorwegianVeterinaryInstitute/NVIpjsr
 BugReports: https://github.com/NorwegianVeterinaryInstitute/NVIpjsr/issues
-Depends: 
-    R (>= 4.1.0)
 Encoding: UTF-8
 Language: en-GB
-Roxygen: list(markdown = FALSE)
+LazyData: true
+Depends: 
+    R (>= 4.1.0)
 Imports: 
     checkmate (>= 2.1.0),
     data.table,
@@ -57,5 +57,5 @@ VignetteBuilder:
     knitr,
     R.rsp
 Config/testthat/edition: 3
-LazyData: true
+Roxygen: list(markdown = FALSE)
 Config/roxygen2/version: 8.0.0
