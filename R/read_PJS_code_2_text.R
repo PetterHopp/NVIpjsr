@@ -15,9 +15,8 @@ read_PJS_codes_2_text <- function(filename = "PJS_codes_2_text.csv",
   # # Perform checks
   # checks <- assert_read_functions(filename = filename, from_path = from_path, add = checks)
   ## filename
-  checkmate::assert(checkmate::check_character(filename,
-                                               min.chars = 1, len = 1,
-                                               any.missing = FALSE),
+  checkmate::assert(checkmate::check_string(filename,
+                                            min.chars = 1),
                     checkmate::check_list(filename,
                                           min.len = 1,
                                           any.missing = FALSE),
