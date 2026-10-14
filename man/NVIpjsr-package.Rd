@@ -6,7 +6,7 @@
 \alias{NVIpjsr-package}
 \title{NVIpjsr: Tools to facilitate working with PJS data}
 \description{
-Tools for retrieving, standardising, wrangling, preparing and reporting PJS data and EOS data. NVIpjsr was created by separating out PJS-functions from NVIdb. Further development of and creation of new PJS-functions will take place within NVIpjsr.
+Tools for retrieving, standardising, wrangling, preparing and reporting PJS data and EOS data. NVIpjsr was created by separating out PJS-functions from NVIdb. Further development of and creation of new functions to handle PJSdata are done within NVIpjsr.
 }
 \seealso{
 Useful links:
