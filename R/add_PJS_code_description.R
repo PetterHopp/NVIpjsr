@@ -361,7 +361,8 @@ add_PJS_code_description <- function(data,
       code_2_description <- code_2_description |>
         dplyr::add_count(dplyr::across(c("type", "kode")), name = "antall")
 
-      code_2_description <- subset(code_2_description, code_2_description$antall == 1)
+      # code_2_description <- subset(code_2_description, code_2_description$antall == 1)
+      code_2_description <- code_2_description[which(code_2_description$antall == 1), ]
       code_2_description$antall <- NULL
 
       # Transforms code_colname in data to lower case.

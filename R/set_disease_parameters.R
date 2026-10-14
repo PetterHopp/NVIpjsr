@@ -154,7 +154,7 @@ NULL
 #' @param hensikt2delete [\code{character}]\cr
 #' "hensiktkoder" for which saker should be excluded.
 #'     If sub-codes should be included, end the code with \%. Defaults to \code{NULL}.
-#' @param utbrudd2select [\code{character(1)}]\cr
+#' @param utbrudd2select [\code{character}]\cr
 #' "utbruddsID". Defaults to \code{NULL}.
 #' @param metode2select [\code{character}]\cr
 #' Specific "metodekoder" for the "analytt" in question. Defaults to \code{NULL}.
@@ -167,11 +167,11 @@ NULL
 #' @param art2select [\code{character}]\cr
 #' "artkoder". If sub-codes should be included, end the code with \%.  \code{NA} can be
 #'     combined with another "artkode". Defaults to \code{NULL}.
-#' @param include_missing_art [\code{character(1)}]\cr
+#' @param include_missing_art [\code{character}]\cr
 #' Should missing art be included. Must be one of c("never", "always", "for_selected_hensikt").
 #'     If \code{NULL}, it is set to "always" when \code{art2select} includes \code{NA}, else it is set to "never".
 #'     Defaults to \code{NULL}.
-#' @param selection_parameters [\code{character(1)}]\cr
+#' @param selection_parameters [\code{character(1)}] | [\code{list(1)}]\cr
 #' Either the path and file name for an R script that can be sourced and that
 #'     sets the selection parameters or a named list with the selection parameters
 #'     (i.e. equal to the output of this function). Defaults to \code{NULL}.
@@ -179,7 +179,7 @@ NULL
 #' Function to build the selection statement, see \code{\link{retrieve_PJSdata}}.
 #'     Defaults to \code{NULL}.
 #' @param select_statement [\code{character(1)}]\cr
-#' A written select statement, see \code{\link{retrieve_PJSdata}}.
+#' A select statement written as SQL code, see \code{\link{retrieve_PJSdata}}.
 #'     Defaults to \code{NULL}.
 #' @param \dots Other arguments to be passed to \code{set_disease_parameters}.
 #'

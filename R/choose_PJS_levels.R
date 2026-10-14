@@ -17,7 +17,7 @@
 #'     As standard, only unique (distinct) rows are output. This can
 #'     be changed by specifying \code{unique = FALSE}.
 #'
-#' @param data  [\code{data.frame}] \cr
+#' @param data [\code{data.frame}] \cr
 #' Data from PJS.
 #' @param levels [\code{character}]\cr
 #' PJS-levels from which the columns in the data should be chosen. Valid values
