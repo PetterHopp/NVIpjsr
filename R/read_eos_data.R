@@ -51,7 +51,7 @@ read_eos_data <- function(eos_table,
                           encoding = "UTF-8",
                           ...) {
 
-  # PREPARE ARGUMENTS BEFORE ARGUMENT CHECKING
+  # PREPARE ARGUMENTS BEFORE ARGUMENT CHECKING ----
   # Removing ending "/" and "\\" from pathnames
   from_path <- sub("/+$|\\\\+$", "", from_path)
   # Change any character year to numeric
@@ -80,14 +80,12 @@ read_eos_data <- function(eos_table,
                               all.missing = FALSE,
                               null.ok = TRUE,
                               add = checks)
-
   ## encoding
   checkmate::assert_subset(encoding, choices = c("UTF-8", "latin1"), add = checks)
-
   # Report check-results
   checkmate::reportAssertions(checks)
 
-
+# IMPORT EOS DATA ----
   # Import of data from csv-files retrieved from EOS
   # EOS inneholder data fra siste og foregående år og antas å være i kontinuerlig endring
   eos_data <- data.table::fread(file = file.path(from_path, paste0(eos_table, ".csv")),
@@ -111,19 +109,26 @@ read_eos_data <- function(eos_table,
                                              data.table = FALSE,
                                              ...)
 
-    # Fjerner år fa historikktabellen som også ligger i driftstabellen. Setter deretter sammen tabellene
+    # Removes data from historic table that also is in the current table. This
+    # may occur, in particular at the time of moving data to the historic tables.
+    # This is done by taking all years from the current table and all previous
+    # years from the historic table. Thereafter the tables are combined.
     first_year_in_eos_data <- min(substr(eos_data$saksnr, 1, 4))
     colnames(eos_data_historikk) <- tolower(column_names)
-    eos_data_historikk <- subset(eos_data_historikk, substr(eos_data_historikk$saksnr, 1, 4) < first_year_in_eos_data)
+    # eos_data_historikk <- subset(eos_data_historikk, substr(eos_data_historikk$saksnr, 1, 4) < first_year_in_eos_data)
+    eos_data_historikk <- eos_data_historikk[which(substr(eos_data_historikk$saksnr, 1, 4) < first_year_in_eos_data), ]
     eos_data <- rbind(eos_data, eos_data_historikk)
   }
 
+# Performs selection for year -----
   if (!is.null(year)) {
-    eos_data <- subset(eos_data, substr(eos_data$saksnr, 1, 4) %in% year)
+    # eos_data <- subset(eos_data, substr(eos_data$saksnr, 1, 4) %in% year)
+    eos_data <- eos_data[which(substr(eos_data$saksnr, 1, 4) %in% year), ]
   }
 
+# Is this necessary?
   colnames(eos_data) <- column_names
+
+# RETURN DATA ----
   return(eos_data)
 }
-
-#
