@@ -209,14 +209,39 @@ build_query_single_disease <- function(period,
 
   # Build extra part if hensikt or utbrudd are present
   if (!is.null(hensikt) | !is.null(utbrudd)) {
-  # Combine sql snippets into query for v_sak_prove_und
-  query_v_sak_prove_und <- paste("SELECT * FROM v_sak_prove_und",
-                                 "WHERE", sql_snippet_year, "AND",
-                                 "(",
-                                 sql_snippet_hensikt,
-                                 sql_snippet_utbrudd,
-                                 ")")
+    # Combine sql snippets into query for v_sak_prove_und
+    query_v_sak_prove_und <- paste("SELECT * FROM v_sak_prove_und",
+                                   "WHERE", sql_snippet_year, "AND",
+                                   "(",
+                                   sql_snippet_hensikt,
+                                   sql_snippet_utbrudd,
+                                   ")")
   } else {query_v_sak_prove_und <- "SELECT TOP (0) * FROM v_sak_prove_und"}
+
+
+
+  # BUILD QUERY FOR v2_sak_m res ----
+  # Extract all samples
+  #  1 with relevant metode and missing analytt
+  #    Thereby, data on all metods used for these cases are available.
+  #    Saker also found using v_sak_prove_res, will be deleted from the result
+  #    of this query.
+
+  # Build sql snippets that will be building blocks for the sql query
+  # Use already created sql snippets for year, hensikt, and utbrudd
+
+  # Build extra part if hensikt or utbrudd are present
+  if (!is.null(metode)) {
+    sql_snippet_metode <- build_sql_select_code(values = metode, varname = "metodekode")
+    # Combine sql snippets into query for v2_sak_m_res
+    query_v2_sak_m_res <- paste("SELECT * FROM v2_sak_m_res",
+                                   "WHERE", sql_snippet_year, "AND",
+                                            "konkl_analyttkode IS NULL AND",
+                                            "analyttkode_funn IS NULL AND",
+                                   "(",
+                                   sql_snippet_metode,
+                                   ")")
+  } else {query_v2_sak_m_res <- "SELECT TOP (0) * FROM v2_sak_m_res"}
 
 
 
@@ -252,6 +277,7 @@ build_query_single_disease <- function(period,
   select_statement <- list("v_sak_prove_konkl" = query_v_sak_prove_konkl,
                            "v_sak_prove_res" = query_v_sak_prove_res,
                            "v_sak_prove_und" = query_v_sak_prove_und,
+                           "v2_sak_m_res" = query_v2_sak_m_res,
                            "v_sakskonklusjon" = query_sakskonklusjon)
 
 
