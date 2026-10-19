@@ -113,7 +113,7 @@ build_query_single_disease <- function(period,
     year <- as.numeric(format(period, "%Y"))
   } else {
     year <- period
-    }
+  }
 
   # BUILD QUERY FOR v_sak_prove_konkl ----
   # Extract all samples
@@ -235,14 +235,14 @@ build_query_single_disease <- function(period,
     sql_snippet_metode <- build_sql_select_code(values = metode, varname = "metodekode")
     # Combine sql snippets into query for v2_sak_m_res
     query_v2_sak_m_res <- paste("SELECT * FROM v2_sak_m_res",
-                                   "WHERE", sql_snippet_year, "AND",
+                                "WHERE", sql_snippet_year, "AND",
                                 "analyttkode_funn IS NULL AND",
                                 "konkl_analyttkode IS NULL AND",
                                 "konklusjonkode IS NOT NULL AND",
                                 "kjennelse_resultat IS NOT NULL AND",
                                 "(",
-                                   sql_snippet_metode,
-                                   ")")
+                                sql_snippet_metode,
+                                ")")
   } else {query_v2_sak_m_res <- "SELECT TOP (0) * FROM v2_sak_m_res"}
 
 
