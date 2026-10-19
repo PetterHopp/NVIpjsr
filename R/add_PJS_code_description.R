@@ -237,7 +237,9 @@ add_PJS_code_description <- function(data,
     }
     PJS_types_selected <- as.data.frame(code_colname) |>
       dplyr::left_join(code_description_colname, by = "code_colname")
-    PJS_types_selected <- subset(PJS_types_selected, !is.na(PJS_types_selected$type))
+    # PJS_types_selected <- subset(PJS_types_selected, !is.na(PJS_types_selected$type))
+    # PJS_types_selected <- PJS_types_selected[which(!is.na(PJS_types_selected$type)), ]
+    PJS_types_selected <- PJS_types_selected[!is.na(PJS_types_selected$type), ]
   }
 
   # ARGUMENT CHECKING ----
