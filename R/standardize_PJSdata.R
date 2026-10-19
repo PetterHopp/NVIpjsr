@@ -54,12 +54,12 @@ standardize_PJSdata <- function(PJSdata, dbsource = "v2_sak_m_res") {
 
 
   # PERFORM STANDARDIZATION ----
-  # Remove unnecessary columns
+  # Standardize column names
+  PJSdata <- NVIdb::standardize_columns(data = PJSdata, dbsource = dbsource, property = "colnames")
+  # Remove unnecessary columns, must be done after column names are standardised
   PJSdata$konkl_provenr <- NULL
   PJSdata$vet_distriktnr <- NULL
 
-  # Standardize column names
-  PJSdata <- NVIdb::standardize_columns(data = PJSdata, dbsource = dbsource, property = "colnames")
 
   # Change to numeric for ID-numbers and counts
   if ("verdi_mengde" %in% colnames(PJSdata)) {
