@@ -239,7 +239,6 @@ build_query_single_disease <- function(period,
                                 "analyttkode_funn IS NULL AND",
                                 "konkl_analyttkode IS NULL AND",
                                 "konklusjonkode IS NOT NULL AND",
-                                "kjennelse_resultat IS NOT NULL AND",
                                 "(",
                                 sql_snippet_metode,
                                 ")")
