@@ -12,6 +12,8 @@
 - Input for the argument `values_2_select` in `select_PJSdata_for_value` is changed so that
 the input should be the same wether there is one ore several columns for which the rows should be selected.
 
+- `standardize_PJSdata` now removes the column "konkl_provenr" correctly from PJSdata source data.
+
 
 ## Other changes:
 
