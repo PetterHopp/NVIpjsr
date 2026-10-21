@@ -65,8 +65,9 @@
 #'     Specific utbruddsid(er) that should be selected. Defaults to \code{NULL}.
 #' @template build_query_db
 #'
-#' @return A list with select-statements for "v_sak_prove_konkl",
-#'     "v_sak_prove_res", and "v_sakskonklusjon".
+#' @return A list with select-statements for "v_sak_prove_res",
+#'     "v_sak_prove_konkl", "v_sak_prove_und", "v2_sak_m_res",
+#'     and "v_sakskonklusjon".
 #'
 #' @author Petter Hopp Petter.Hopp@@vetinst.no
 #' @export

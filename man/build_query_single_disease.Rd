@@ -37,8 +37,9 @@ The database for which the query is built. Defaults to "PJS" that currently
 is the only valid value.}
 }
 \value{
-A list with select-statements for "v_sak_prove_konkl",
-    "v_sak_prove_res", and "v_sakskonklusjon".
+A list with select-statements for "v_sak_prove_res",
+    "v_sak_prove_konkl", "v_sak_prove_und", "v2_sak_m_res",
+    and "v_sakskonklusjon".
 }
 \description{
 Builds the query for selecting all data for one infectious
