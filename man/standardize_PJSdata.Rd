@@ -29,12 +29,12 @@ Standardizing PJS-data. This standardizing should always be performed.
 \details{
 The function performs the following standardizing of data extracted from PJS:
 \itemize{
-  \item The unnecessary columns konkl_provenr and vet_distriktnr are removed.
   \item The column names are standardized using
     \ifelse{html}{\code{\link[NVIdb:standardize_columns]{NVIdb::standardize_columns}}}{\code{NVIdb::standardize_columns}}.
+  \item The unnecessary columns konkl_provenr and vet_distriktnr are removed.
   \item Numeric variables are transformed to numbers.
   \item Date variables are transformed to date format.
-  \item Creates uttatt2 as uttatt and if uttatt is missing is set to mottatt - 1.
+  \item Creates uttatt2 == uttatt. If uttatt is missing, uttatt2 == (mottatt - 1).
   \item Character variables are trimmed for leading and trailing spaces.
   \item The variables saksnr and, if possible, fagnr are generated.
   \item Test data, i.e. saker with ansvarlig_seksjon in c("14", "99") are deleted.
