@@ -106,7 +106,7 @@ select_PJSdata_for_value <- function(data,
     value_2_check_end <- paste0("-", value_2_check, "$")
     value_2_check <- unique(c(value_2_check_start, value_2_check_middle, value_2_check_end))
   } else {
-    ktr$combined_codes <- ktr[, code_column]
+    ktr[, "combined_codes"] <- ktr[, code_column]
     ktr[is.na(ktr$combined_codes), "combined_codes"] <- "NA"
     # transform value_2_check to regular expressions
     value_2_check <- paste0("^", value_2_check, "$")
