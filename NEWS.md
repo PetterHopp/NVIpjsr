@@ -6,6 +6,8 @@
 
 - created `build_query_single_disease` for retrieving all data for one disease/agent from PJS.
 
+- `select_PJSdata_for_value` can now output the information on whether a row is selected or not in an additional column.
+
 
 ## Bug fixes:
 
