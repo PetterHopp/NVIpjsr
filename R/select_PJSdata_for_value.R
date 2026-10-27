@@ -133,10 +133,10 @@ select_PJSdata_for_value <- function(data,
     data <- data[, column_names]
   }
  if (class(keep_selected) == "character") {
-      column_names <- c(colnames(data), c("combined_codes", "select"))
+      column_names <- c(colnames(data), c("select"))
     data <- merge(x = ktr, y = data, by = c(index, code_column), all.x = TRUE, all.y = FALSE, sort = TRUE)
     data <- data[, column_names]
-    colnames(data)[which(colnames(data) == "selected")] <- keep_selected
+    colnames(data)[which(colnames(data) == "select")] <- keep_selected
   }
 
     if (nrow(data) > 0) {
