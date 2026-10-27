@@ -17,15 +17,23 @@
 #'    set \code{keep_selected = FALSE} when there are more than one column in
 #'    \code{code_column}, as this may give unpredictable results.
 #'
+#' If you give a character value to \code{keep_selected}, the value of whether
+#'    a row was selected or not is output in an extra column with the name of
+#'    the character argument to \code{keep_selected}. All rows are then kept in
+#'    the data. This may be useful when more control of the inclusion and
+#'    exclusion is needed.
+#'
 #' @param data [\code{data.frame}]\cr
 #' PJS data from which a subset should be selected.
 #' @param code_column [\code{character}]\cr
 #' Vector with the column names for the variables that is used in the selection.
 #' @param value_2_check [\code{character}]\cr
 #' Vector with the values that should be selected, see details and examples.
-#' @param keep_selected [\code{logical(1)}]\cr
-#' If \code{TRUE}, the selected rows are included, if \code{FALSE}, the selected columns
-#'     are excluded. Defaults to \code{TRUE}.
+#' @param keep_selected [\code{logical(1)}] | [\code{character(1)}]\cr
+#' If \code{TRUE}, the selected rows are included, if \code{FALSE}, the selected
+#'     columns are excluded, if a character, all rows are included with an
+#'     additional column given the name of the character string. Defaults to
+#'     \code{TRUE}.
 #'
 #' @return A \code{data.frame}.
 #'
@@ -59,7 +67,10 @@ select_PJSdata_for_value <- function(data,
   checkmate::assert_data_frame(data, add = checks)
   checkmate::assert_subset(code_column, choices = colnames(data), add = checks)
   checkmate::assert_character(value_2_check, min.len = 1, add = checks)
-  checkmate::assert_flag(keep_selected, add = checks)
+  checkmate::assert(checkmate::check_flag(keep_selected),
+                    checkmate::check_names(keep_selected, type = "strict"),
+                    combine = "or",
+                    add = checks)
   # Report check-results
   checkmate::reportAssertions(checks)
 
@@ -101,7 +112,7 @@ select_PJSdata_for_value <- function(data,
     value_2_check <- paste0("^", value_2_check, "$")
     value_2_check <- gsub(pattern = "%$", replacement = "[[:digit:]]*", x = value_2_check, fixed = TRUE)
     value_2_check <- gsub(pattern = "%-", replacement = "[[:digit:]]*-", x = value_2_check, fixed = TRUE)
-    }
+  }
 
 
   # Find records deviating from detected code values
@@ -109,22 +120,26 @@ select_PJSdata_for_value <- function(data,
     dplyr::rowwise() |>
     dplyr::mutate(select = max(unlist(lapply(value_2_check, grep, x = combined_codes)), 0))
 
-  # if (!is.null(include_missing_for) & length(code_column == 1)) {
-  #   ktr[which(is.na(ktr[, "combined_codes"])), "select"] <- 1
-  # }
+ if (class(keep_selected) == "logical") {
+    ktr$select <- as.logical(ktr$select)
+    if (isFALSE(keep_selected)) {ktr$select <- !ktr$select}
 
-  ktr$select <- as.logical(ktr$select)
-  if (isFALSE(keep_selected)) {ktr$select <- !ktr$select}
+    # ktr <- subset(ktr, ktr$select == TRUE)
+    ktr <- ktr[which(ktr$select == TRUE), ]
+    ktr[, c("combined_codes", "select")] <- c(NULL, NULL)
 
-  # ktr <- subset(ktr, ktr$select == TRUE)
-  ktr <- ktr[which(ktr$select == TRUE), ]
-  ktr[, c("combined_codes", "select")] <- c(NULL, NULL)
+    column_names <- colnames(data)
+    data <- merge(x = ktr, y = data, by = c(index, code_column), all.x = TRUE, all.y = FALSE, sort = TRUE)
+    data <- data[, column_names]
+  }
+ if (class(keep_selected) == "character") {
+      column_names <- c(colnames(data), c("combined_codes", "select"))
+    data <- merge(x = ktr, y = data, by = c(index, code_column), all.x = TRUE, all.y = FALSE, sort = TRUE)
+    data <- data[, column_names]
+    colnames(data)[which(colnames(data) == "selected")] <- keep_selected
+  }
 
-  column_names <- colnames(data)
-  data <- merge(x = ktr, y = data, by = c(index, code_column), all.x = TRUE, all.y = FALSE, sort = TRUE)
-  data <- data[, column_names]
-
-  if (nrow(data) > 0) {
+    if (nrow(data) > 0) {
     data <- data[order(data$sPfv_sort_order), ]
     data$sPfv_sort_order <- NULL
   }

@@ -21,9 +21,11 @@ Vector with the column names for the variables that is used in the selection.}
 \item{value_2_check}{[\code{character}]\cr
 Vector with the values that should be selected, see details and examples.}
 
-\item{keep_selected}{[\code{logical(1)}]\cr
-If \code{TRUE}, the selected rows are included, if \code{FALSE}, the selected columns
-    are excluded. Defaults to \code{TRUE}.}
+\item{keep_selected}{[\code{logical(1)}] | [\code{character(1)}]\cr
+If \code{TRUE}, the selected rows are included, if \code{FALSE}, the selected
+    columns are excluded, if a character, all rows are included with an
+    additional column given the name of the character string. Defaults to
+    \code{TRUE}.}
 }
 \value{
 A \code{data.frame}.
@@ -48,6 +50,12 @@ The function selects according to different values. The default
    = FALSE}, the selected rows are excluded from the data. Do not
    set \code{keep_selected = FALSE} when there are more than one column in
    \code{code_column}, as this may give unpredictable results.
+
+If you give a character value to \code{keep_selected}, the value of whether
+   a row was selected or not is output in an extra column with the name of
+   the character argument to \code{keep_selected}. All rows are then kept in
+   the data. This may be useful when more control of the inclusion and
+   exclusion is needed.
 }
 \examples{
 \dontrun{
